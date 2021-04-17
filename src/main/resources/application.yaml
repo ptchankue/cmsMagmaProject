@@ -5,3 +5,15 @@ management:
     web:
       exposure:
         include: '*'
+spring:
+  jpa:
+    database-platform: za.co.magma.cmsproject.utils.SQLDialect
+    hibernate.ddl-auto: update
+
+
+  datasource:
+    url: jdbc:sqlite:sqlitesample.db
+    driver-class-name: org.sqlite.JDBC
+
+#    username: admin
+#    password: admin
