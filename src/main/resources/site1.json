@@ -1,6 +1,25 @@
 {
   "name": "Microsoft Community",
-  "header": "",
+  "header": {
+    "menu": [
+      {
+        "name": "Home",
+        "link": "/",
+        "subMenus": []
+      },
+      {
+        "name": "About Us",
+        "link": "/about-us",
+        "subMenus": [
+          {
+            "name": "Ministry",
+            "link": "/ministry",
+            "subMenus": []
+          }
+        ]
+      }
+    ]
+  },
   "footer": [
     "about", "contact us"
   ]
