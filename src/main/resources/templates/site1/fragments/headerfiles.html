@@ -1,0 +1,1223 @@
+<head xmlns:th="http://www.w3.org/1999/xhtml"
+      th:fragment="headerfiles">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <meta name="GENERATOR" content="Microsoft SharePoint">
+    <meta http-equiv="Expires" content="0">
+    <meta name="msapplication-TileImage" content="/_layouts/15/images/SharePointMetroAppTile.png}">
+    <meta name="msapplication-TileColor" content="#0072C6">
+    <title>
+        Department of Tourism
+    </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/corev15.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/controls15.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/shortpoint-engine-ltr.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/Style_HideLeftNav.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/fixedwidth.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/site1/css/sp13tourism.css}">
+    <script id="twitter-wjs" th:src="@{/site1/js/widgets.js.download}"></script>
+    <script async=""
+            th:src="@{/site1/js/analytics.js.download}"></script>
+    <script async="" th:src="@{/site1/js/analytics.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/initstrings.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/init.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/shortpoint.master.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/googleanalytics.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/resources.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/nintexworkflowglobal.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/ScriptResource.axd}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/blank.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/ScriptResource(1).axd}"></script>
+    <script type="text/javascript">RegisterSod("require.js", "\u002f_layouts\u002f15\u002frequire.js?rev=4UhLIF\u00252FezOvmGnh\u00252Fs0LLpA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("strings.js", "\u002f_layouts\u002f15\u002f1033\u002fstrings.js?rev=RSQ8elnU1HEiGIL\u00252BoL\u00252FC4A\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sp.res.resx", "\u002f_layouts\u002f15\u002f1033\u002fsp.res.js?rev=MbB92HT8biYuFa\u00252B1vTMilA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sp.runtime.js", "\u002f_layouts\u002f15\u002fsp.runtime.js?rev=1EbIevdS5YCKqIvpgGnR8g\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.runtime.js", "sp.res.resx");</script>
+    <script type="text/javascript">RegisterSod("sp.js", "\u002f_layouts\u002f15\u002fsp.js?rev=pG4V\u00252BBzRoJxIYjMJTqT2HQ\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.js", "sp.runtime.js");
+    RegisterSodDep("sp.js", "sp.ui.dialog.js");
+    RegisterSodDep("sp.js", "sp.res.resx");</script>
+    <script type="text/javascript">RegisterSod("sp.init.js", "\u002f_layouts\u002f15\u002fsp.init.js?rev=6PU\u00252BqomUmv4Vq8TztHZl6Q\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sp.ui.dialog.js", "\u002f_layouts\u002f15\u002fsp.ui.dialog.js?rev=OJnOSLH2ps5FnUOl993yIA\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.ui.dialog.js", "sp.init.js");
+    RegisterSodDep("sp.ui.dialog.js", "sp.res.resx");</script>
+    <script type="text/javascript">RegisterSod("core.js", "\u002f_layouts\u002f15\u002fcore.js?rev=7oTt\u00252BuTZ3ZSuD7Ssy92MOw\u00253D\u00253DTAG0");
+    RegisterSodDep("core.js", "strings.js");</script>
+    <script type="text/javascript">RegisterSod("menu.js", "\u002f_layouts\u002f15\u002fmenu.js?rev=1lNuHNUN\u00252FXygMsgP7VsGxw\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("mQuery.js", "\u002f_layouts\u002f15\u002fmquery.js?rev=xk4QYQO2qY9QDij1tGQ1\u00252FA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("callout.js", "\u002f_layouts\u002f15\u002fcallout.js?rev=qhfasbR6kTmVw4\u00252F\u00252Fvoj3DQ\u00253D\u00253DTAG0");
+    RegisterSodDep("callout.js", "strings.js");
+    RegisterSodDep("callout.js", "mQuery.js");
+    RegisterSodDep("callout.js", "core.js");</script>
+    <script type="text/javascript">RegisterSod("sp.core.js", "\u002f_layouts\u002f15\u002fsp.core.js?rev=cbVAhmpvWepMSuMIjzngcg\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.core.js", "strings.js");
+    RegisterSodDep("sp.core.js", "sp.init.js");
+    RegisterSodDep("sp.core.js", "core.js");</script>
+    <script type="text/javascript">RegisterSod("sharedhovercard.strings.js", "\u002f_layouts\u002f15\u002f1033\u002fsharedhovercard.strings.js?rev=sLsS\u00252FNPqFzOSO42e3s6lgw\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sharedhovercard.js", "\u002f_layouts\u002f15\u002fsharedhovercard.js?rev=uB89up9szoXj8bAMKPkPSg\u00253D\u00253DTAG0");
+    RegisterSodDep("sharedhovercard.js", "sharedhovercard.strings.js");</script>
+    <script type="text/javascript">RegisterSod("clienttemplates.js", "\u002f_layouts\u002f15\u002fclienttemplates.js?rev=GcMlDb\u00252FdQiJn6o3laIL7QA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sharing.js", "\u002f_layouts\u002f15\u002fsharing.js?rev=krbGRMgmsb88uVyRV1\u00252BMSA\u00253D\u00253DTAG0");
+    RegisterSodDep("sharing.js", "strings.js");
+    RegisterSodDep("sharing.js", "mQuery.js");
+    RegisterSodDep("sharing.js", "clienttemplates.js");
+    RegisterSodDep("sharing.js", "core.js");</script>
+    <script type="text/javascript">RegisterSod("suitelinks.js", "\u002f_layouts\u002f15\u002fsuitelinks.js?rev=8kfCBf\u00252FiiXFq7sis97V1cw\u00253D\u00253DTAG0");
+    RegisterSodDep("suitelinks.js", "strings.js");
+    RegisterSodDep("suitelinks.js", "core.js");</script>
+    <script type="text/javascript">RegisterSod("clientrenderer.js", "\u002f_layouts\u002f15\u002fclientrenderer.js?rev=98OSmSm3OjxnunitSfT8Tg\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("srch.resources.resx", "\u002f_layouts\u002f15\u002f1033\u002fsrch.resources.js?rev=YFZFsHKXct9hchZcv\u00252BUURA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("search.clientcontrols.js", "\u002f_layouts\u002f15\u002fsearch.clientcontrols.js?rev=ySSBJw7MKFQAcaEUT\u00252BI5BA\u00253D\u00253DTAG0");
+    RegisterSodDep("search.clientcontrols.js", "sp.init.js");
+    RegisterSodDep("search.clientcontrols.js", "clientrenderer.js");
+    RegisterSodDep("search.clientcontrols.js", "srch.resources.resx");</script>
+    <script type="text/javascript">RegisterSod("sp.search.js", "\u002f_layouts\u002f15\u002fsp.search.js?rev=HAx1PXh3dmISREk3Xv5ClQ\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.search.js", "sp.init.js");
+    RegisterSodDep("sp.search.js", "sp.runtime.js");</script>
+    <script type="text/javascript">RegisterSod("ajaxtoolkit.js", "\u002f_layouts\u002f15\u002fajaxtoolkit.js?rev=D\u00252BopWJT1QLPe7G8RdEG71A\u00253D\u00253DTAG0");
+    RegisterSodDep("ajaxtoolkit.js", "search.clientcontrols.js");</script>
+    <script type="text/javascript">RegisterSod("cui.js", "\u002f_layouts\u002f15\u002fcui.js?rev=BQqiappWE5veAnsNSofihg\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("inplview", "\u002f_layouts\u002f15\u002finplview.js?rev=Qv71ekEKmfxZpnQCsYR96w\u00253D\u00253DTAG0");
+    RegisterSodDep("inplview", "strings.js");
+    RegisterSodDep("inplview", "core.js");
+    RegisterSodDep("inplview", "clienttemplates.js");
+    RegisterSodDep("inplview", "sp.js");</script>
+    <script type="text/javascript">RegisterSod("ribbon", "\u002f_layouts\u002f15\u002fsp.ribbon.js?rev=ZZqyIi0FJl\u00252FBLGfKKMCZWA\u00253D\u00253DTAG0");
+    RegisterSodDep("ribbon", "strings.js");
+    RegisterSodDep("ribbon", "core.js");
+    RegisterSodDep("ribbon", "sp.core.js");
+    RegisterSodDep("ribbon", "sp.js");
+    RegisterSodDep("ribbon", "cui.js");
+    RegisterSodDep("ribbon", "sp.res.resx");
+    RegisterSodDep("ribbon", "sp.runtime.js");
+    RegisterSodDep("ribbon", "inplview");</script>
+    <script type="text/javascript">RegisterSod("sp.ui.policy.resources.resx", "\u002f_layouts\u002f15\u002fScriptResx.ashx?culture=en\u00252Dus\u0026name=SP\u00252EUI\u00252EPolicy\u00252EResources\u0026rev=m2Nvtm13DRgodCVi\u00252BsRukw\u00253D\u00253D");</script>
+    <script type="text/javascript">RegisterSod("mdn.js", "\u002f_layouts\u002f15\u002fmdn.js?rev=8NNwivaC8jSLGWcNFulEiA\u00253D\u00253DTAG0");
+    RegisterSodDep("mdn.js", "sp.init.js");
+    RegisterSodDep("mdn.js", "core.js");
+    RegisterSodDep("mdn.js", "sp.runtime.js");
+    RegisterSodDep("mdn.js", "sp.js");
+    RegisterSodDep("mdn.js", "cui.js");
+    RegisterSodDep("mdn.js", "ribbon");
+    RegisterSodDep("mdn.js", "sp.ui.policy.resources.resx");</script>
+    <script type="text/javascript">RegisterSod("userprofile", "\u002f_layouts\u002f15\u002fsp.userprofiles.js?rev=cx6U8sP\u00252ByP0OFLjk6ekyIg\u00253D\u00253DTAG0");
+    RegisterSodDep("userprofile", "sp.runtime.js");</script>
+    <script type="text/javascript">RegisterSod("followingcommon.js", "\u002f_layouts\u002f15\u002ffollowingcommon.js?rev=HbyZmBBDu7bWylXkijn3cQ\u00253D\u00253DTAG0");
+    RegisterSodDep("followingcommon.js", "strings.js");
+    RegisterSodDep("followingcommon.js", "sp.js");
+    RegisterSodDep("followingcommon.js", "userprofile");
+    RegisterSodDep("followingcommon.js", "core.js");
+    RegisterSodDep("followingcommon.js", "mQuery.js");</script>
+    <script type="text/javascript">RegisterSod("profilebrowserscriptres.resx", "\u002f_layouts\u002f15\u002f1033\u002fprofilebrowserscriptres.js?rev=qwf69WaVc1mYlJLXqmZmVA\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("sp.ui.mysitecommon.js", "\u002f_layouts\u002f15\u002fsp.ui.mysitecommon.js?rev=B3G7mvfS2G164fwKZCYEnw\u00253D\u00253DTAG0");
+    RegisterSodDep("sp.ui.mysitecommon.js", "sp.init.js");
+    RegisterSodDep("sp.ui.mysitecommon.js", "sp.runtime.js");
+    RegisterSodDep("sp.ui.mysitecommon.js", "userprofile");
+    RegisterSodDep("sp.ui.mysitecommon.js", "profilebrowserscriptres.resx");</script>
+    <script type="text/javascript">RegisterSod("browserScript", "\u002f_layouts\u002f15\u002fie55up.js?rev=wJrByAu0C7wi9fGf2UGS4w\u00253D\u00253DTAG0");
+    RegisterSodDep("browserScript", "strings.js");</script>
+    <script type="text/javascript">RegisterSod("datepicker.js", "\u002f_layouts\u002f15\u002fdatepicker.js?rev=V2CIzAYC7R4P\u00252Fxuxhi9oDg\u00253D\u00253DTAG0");
+    RegisterSodDep("datepicker.js", "strings.js");</script>
+    <script type="text/javascript">RegisterSod("sp.publishing.resources.resx", "\u002f_layouts\u002f15\u002f1033\u002fsp.publishing.resources.js?rev=SQNHJuCUXo6FN9qFpo56Cw\u00253D\u00253DTAG0");</script>
+    <script type="text/javascript">RegisterSod("mediaplayer.js", "\u002f_layouts\u002f15\u002fmediaplayer.js?rev=uCN5DuTTkELFKUPAp7mILg\u00253D\u00253DTAG0");
+    RegisterSodDep("mediaplayer.js", "sp.publishing.resources.resx");</script>
+    <script type="text/javascript">RegisterSod("dragdrop.js", "\u002f_layouts\u002f15\u002fdragdrop.js?rev=nM2gzTFQKoC3CFtrsrJpZw\u00253D\u00253DTAG0");
+    RegisterSodDep("dragdrop.js", "strings.js");</script>
+    <script type="text/javascript">RegisterSod("quicklaunch.js", "\u002f_layouts\u002f15\u002fquicklaunch.js?rev=8qUf\u00252F9\u00252BEhLGMkFpmGlMF2w\u00253D\u00253DTAG0");
+    RegisterSodDep("quicklaunch.js", "strings.js");
+    RegisterSodDep("quicklaunch.js", "dragdrop.js");</script>
+    <link type="text/xml" rel="alternate" href="https://www.tourism.gov.za/_vti_bin/spsdisco.aspx">
+
+    <link rel="canonical" href="http://www.tourism.gov.za/Pages/home.aspx">
+    <meta name="msvalidate.01" content="...">
+
+    <meta name="google-site-verification" content="">
+    <meta name="keywords" content="Department of Tourism">
+    <meta name="description" content="Department of Tourism">
+    <link rel="shortcut icon" th:href="@{/site1/img/favicon.ico}" type="image/vnd.microsoft.icon" id="favicon">
+    <link rel="stylesheet" th:href="@{/site1/css/w3.css}">
+    <script type="text/javascript" th:src="@{/site1/js/all.js.download}">//<![CDATA[
+
+
+    //]]></script>
+    <!--[CDATA[ [if IE 9] ]]-->
+    <style type="text/css">/
+    /
+    <
+    !
+    [CDATA[
+    .ms-core-animation-transparent {
+        opacity: 0;
+    }
+
+    .ms-isBot .ms-core-animation-transparent {
+        opacity: 1;
+    }
+
+    /
+    /
+    ]
+    ]
+    >
+
+
+    /
+    /
+    ]
+    ]
+    ></style>
+    <!--[CDATA[ [endif] ]]-->        <!--[if lte IE 8]>
+    <style type="text/css">/
+    /<![CDATA[
+    .ms-core-animation-transparent,
+    .ms-core-animation-transparent img
+    {
+       -ms-filter:"alpha(opacity=0)";
+    }
+    .ms-isBot .ms-core-animation-transparent,
+    .ms-isBot .ms-core-animation-transparent img
+    {
+       -ms-filter:"";
+    }
+    //]]></style>
+    <![endif]-->
+    <script type="text/javascript">//<![CDATA[
+
+    var g_pageLoadAnimationParams = {elementSlideIn: "sideNavBox", elementSlideInPhase2: "contentBox"};
+
+
+    //]]></script>
+    <script type="text/javascript">//<![CDATA[
+    var _fV4UI = true;
+
+
+    //]]></script>
+    <script>//<![CDATA[
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-42151706-1', 'tourism.gov.za');
+    ga('send', 'pageview');
+
+
+    //]]></script>
+    <script type="text/javascript" th:src="@{/site1/js/strings.js.download}"></script>
+    <script type="text/javascript" th:src="@{/site1/js/sp.init.js.download}"></script>
+    <style> .shortpoint-imageframe {
+        border-width: 1px !important;
+        border-radius: 0px;
+    }
+
+    .shortpoint-imageframe-solid {
+        background-color: #0072c6;
+    } </style>
+    <div class="shortpoint_hide-ribbon-check"></div>
+    <style type="text/css" data-shortpoint-generated="102"
+           class="shortpoint-dynamic-stylesheet">.shortpoint-brand-success-light-color {
+        color: #DFF0D8 !important;
+    }
+
+    .shortpoint-brand-success-light-border {
+        border-color: #DFF0D8 !important;
+    }
+
+    .shortpoint-brand-success-light-bg {
+        background-color: #DFF0D8 !important;
+    }
+
+    .shortpoint-brand-success-color {
+        color: #5cb85c !important;
+    }
+
+    .shortpoint-brand-success-border {
+        border-color: #5cb85c !important;
+    }
+
+    .shortpoint-brand-success-bg {
+        background-color: #5cb85c !important;
+    }
+
+    .shortpoint-brand-success-dark-color {
+        color: #1E581F !important;
+    }
+
+    .shortpoint-brand-success-dark-border {
+        border-color: #1E581F !important;
+    }
+
+    .shortpoint-brand-success-dark-bg {
+        background-color: #1E581F !important;
+    }
+
+    .shortpoint-brand-info-light-color {
+        color: #D9EDF7 !important;
+    }
+
+    .shortpoint-brand-info-light-border {
+        border-color: #D9EDF7 !important;
+    }
+
+    .shortpoint-brand-info-light-bg {
+        background-color: #D9EDF7 !important;
+    }
+
+    .shortpoint-brand-info-color {
+        color: #57b5e3 !important;
+    }
+
+    .shortpoint-brand-info-border {
+        border-color: #57b5e3 !important;
+    }
+
+    .shortpoint-brand-info-bg {
+        background-color: #57b5e3 !important;
+    }
+
+    .shortpoint-brand-info-dark-color {
+        color: #135271 !important;
+    }
+
+    .shortpoint-brand-info-dark-border {
+        border-color: #135271 !important;
+    }
+
+    .shortpoint-brand-info-dark-bg {
+        background-color: #135271 !important;
+    }
+
+    .shortpoint-brand-danger-light-color {
+        color: #F2DEDE !important;
+    }
+
+    .shortpoint-brand-danger-light-border {
+        border-color: #F2DEDE !important;
+    }
+
+    .shortpoint-brand-danger-light-bg {
+        background-color: #F2DEDE !important;
+    }
+
+    .shortpoint-brand-danger-color {
+        color: #d9534f !important;
+    }
+
+    .shortpoint-brand-danger-border {
+        border-color: #d9534f !important;
+    }
+
+    .shortpoint-brand-danger-bg {
+        background-color: #d9534f !important;
+    }
+
+    .shortpoint-brand-danger-dark-color {
+        color: #8B2624 !important;
+    }
+
+    .shortpoint-brand-danger-dark-border {
+        border-color: #8B2624 !important;
+    }
+
+    .shortpoint-brand-danger-dark-bg {
+        background-color: #8B2624 !important;
+    }
+
+    .shortpoint-brand-warning-light-color {
+        color: #FCF8E3 !important;
+    }
+
+    .shortpoint-brand-warning-light-border {
+        border-color: #FCF8E3 !important;
+    }
+
+    .shortpoint-brand-warning-light-bg {
+        background-color: #FCF8E3 !important;
+    }
+
+    .shortpoint-brand-warning-color {
+        color: #fcb322 !important;
+    }
+
+    .shortpoint-brand-warning-border {
+        border-color: #fcb322 !important;
+    }
+
+    .shortpoint-brand-warning-bg {
+        background-color: #fcb322 !important;
+    }
+
+    .shortpoint-brand-warning-dark-color {
+        color: #6C4F1D !important;
+    }
+
+    .shortpoint-brand-warning-dark-border {
+        border-color: #6C4F1D !important;
+    }
+
+    .shortpoint-brand-warning-dark-bg {
+        background-color: #6C4F1D !important;
+    }
+
+    .shortpoint-brand-primary-color {
+        color: #0072c6 !important;
+    }
+
+    .shortpoint-brand-primary-border {
+        border-color: #0072c6 !important;
+    }
+
+    .shortpoint-brand-primary-bg {
+        background-color: #0072c6 !important;
+    }
+
+    .shortpoint-brand-border-color {
+        color: #e1e1e1 !important;
+    }
+
+    .shortpoint-brand-border-border {
+        border-color: #e1e1e1 !important;
+    }
+
+    .shortpoint-brand-border-bg {
+        background-color: #e1e1e1 !important;
+    }
+
+    .shortpoint-brand-gray-light-color {
+        color: #F5F5F5 !important;
+    }
+
+    .shortpoint-brand-gray-light-border {
+        border-color: #F5F5F5 !important;
+    }
+
+    .shortpoint-brand-gray-light-bg {
+        background-color: #F5F5F5 !important;
+    }
+
+    .shortpoint-brand-gray-color {
+        color: #333333 !important;
+    }
+
+    .shortpoint-brand-gray-border {
+        border-color: #333333 !important;
+    }
+
+    .shortpoint-brand-gray-bg {
+        background-color: #333333 !important;
+    }
+
+    .shortpoint-brand-gray-dark-color {
+        color: #151515 !important;
+    }
+
+    .shortpoint-brand-gray-dark-border {
+        border-color: #151515 !important;
+    }
+
+    .shortpoint-brand-gray-dark-bg {
+        background-color: #151515 !important;
+    }
+
+    .shortpoint-brand-red-color {
+        color: #E74C3C !important;
+    }
+
+    .shortpoint-brand-red-border {
+        border-color: #E74C3C !important;
+    }
+
+    .shortpoint-brand-red-bg {
+        background-color: #E74C3C !important;
+    }
+
+    .shortpoint-brand-red-dark-color {
+        color: #C0392B !important;
+    }
+
+    .shortpoint-brand-red-dark-border {
+        border-color: #C0392B !important;
+    }
+
+    .shortpoint-brand-red-dark-bg {
+        background-color: #C0392B !important;
+    }
+
+    .shortpoint-brand-orange-color {
+        color: #E67E22 !important;
+    }
+
+    .shortpoint-brand-orange-border {
+        border-color: #E67E22 !important;
+    }
+
+    .shortpoint-brand-orange-bg {
+        background-color: #E67E22 !important;
+    }
+
+    .shortpoint-brand-orange-dark-color {
+        color: #D35400 !important;
+    }
+
+    .shortpoint-brand-orange-dark-border {
+        border-color: #D35400 !important;
+    }
+
+    .shortpoint-brand-orange-dark-bg {
+        background-color: #D35400 !important;
+    }
+
+    .shortpoint-brand-yellow-color {
+        color: #F1C40F !important;
+    }
+
+    .shortpoint-brand-yellow-border {
+        border-color: #F1C40F !important;
+    }
+
+    .shortpoint-brand-yellow-bg {
+        background-color: #F1C40F !important;
+    }
+
+    .shortpoint-brand-yellow-dark-color {
+        color: #F39C12 !important;
+    }
+
+    .shortpoint-brand-yellow-dark-border {
+        border-color: #F39C12 !important;
+    }
+
+    .shortpoint-brand-yellow-dark-bg {
+        background-color: #F39C12 !important;
+    }
+
+    .shortpoint-brand-green-color {
+        color: #2ECC71 !important;
+    }
+
+    .shortpoint-brand-green-border {
+        border-color: #2ECC71 !important;
+    }
+
+    .shortpoint-brand-green-bg {
+        background-color: #2ECC71 !important;
+    }
+
+    .shortpoint-brand-green-dark-color {
+        color: #27AE60 !important;
+    }
+
+    .shortpoint-brand-green-dark-border {
+        border-color: #27AE60 !important;
+    }
+
+    .shortpoint-brand-green-dark-bg {
+        background-color: #27AE60 !important;
+    }
+
+    .shortpoint-brand-blue-color {
+        color: #3498DB !important;
+    }
+
+    .shortpoint-brand-blue-border {
+        border-color: #3498DB !important;
+    }
+
+    .shortpoint-brand-blue-bg {
+        background-color: #3498DB !important;
+    }
+
+    .shortpoint-brand-blue-dark-color {
+        color: #2980B9 !important;
+    }
+
+    .shortpoint-brand-blue-dark-border {
+        border-color: #2980B9 !important;
+    }
+
+    .shortpoint-brand-blue-dark-bg {
+        background-color: #2980B9 !important;
+    }
+
+    .shortpoint-brand-pink-color {
+        color: #FF86A5 !important;
+    }
+
+    .shortpoint-brand-pink-border {
+        border-color: #FF86A5 !important;
+    }
+
+    .shortpoint-brand-pink-bg {
+        background-color: #FF86A5 !important;
+    }
+
+    .shortpoint-brand-pink-dark-color {
+        color: #E73C68 !important;
+    }
+
+    .shortpoint-brand-pink-dark-border {
+        border-color: #E73C68 !important;
+    }
+
+    .shortpoint-brand-pink-dark-bg {
+        background-color: #E73C68 !important;
+    }
+
+    .shortpoint-brand-violet-color {
+        color: #9B59B6 !important;
+    }
+
+    .shortpoint-brand-violet-border {
+        border-color: #9B59B6 !important;
+    }
+
+    .shortpoint-brand-violet-bg {
+        background-color: #9B59B6 !important;
+    }
+
+    .shortpoint-brand-violet-dark-color {
+        color: #8E44AD !important;
+    }
+
+    .shortpoint-brand-violet-dark-border {
+        border-color: #8E44AD !important;
+    }
+
+    .shortpoint-brand-violet-dark-bg {
+        background-color: #8E44AD !important;
+    }
+
+    .shortpoint-brand-turquoise-color {
+        color: #1ABC9C !important;
+    }
+
+    .shortpoint-brand-turquoise-border {
+        border-color: #1ABC9C !important;
+    }
+
+    .shortpoint-brand-turquoise-bg {
+        background-color: #1ABC9C !important;
+    }
+
+    .shortpoint-brand-turquoise-dark-color {
+        color: #16A085 !important;
+    }
+
+    .shortpoint-brand-turquoise-dark-border {
+        border-color: #16A085 !important;
+    }
+
+    .shortpoint-brand-turquoise-dark-bg {
+        background-color: #16A085 !important;
+    }
+
+    .shortpoint-brand-night-color {
+        color: #34495E !important;
+    }
+
+    .shortpoint-brand-night-border {
+        border-color: #34495E !important;
+    }
+
+    .shortpoint-brand-night-bg {
+        background-color: #34495E !important;
+    }
+
+    .shortpoint-brand-night-dark-color {
+        color: #2C3E50 !important;
+    }
+
+    .shortpoint-brand-night-dark-border {
+        border-color: #2C3E50 !important;
+    }
+
+    .shortpoint-brand-night-dark-bg {
+        background-color: #2C3E50 !important;
+    }
+
+    .shortpoint-brand-cloud-color {
+        color: #ECF0F1 !important;
+    }
+
+    .shortpoint-brand-cloud-border {
+        border-color: #ECF0F1 !important;
+    }
+
+    .shortpoint-brand-cloud-bg {
+        background-color: #ECF0F1 !important;
+    }
+
+    .shortpoint-brand-cloud-dark-color {
+        color: #BDC3C7 !important;
+    }
+
+    .shortpoint-brand-cloud-dark-border {
+        border-color: #BDC3C7 !important;
+    }
+
+    .shortpoint-brand-cloud-dark-bg {
+        background-color: #BDC3C7 !important;
+    }
+
+    .shortpoint-brand-white-light-color {
+        color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-white-light-border {
+        border-color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-white-light-bg {
+        background-color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-white-color {
+        color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-white-border {
+        border-color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-white-bg {
+        background-color: #FFFFFF !important;
+    }
+
+    .shortpoint-brand-black-color {
+        color: #222222 !important;
+    }
+
+    .shortpoint-brand-black-border {
+        border-color: #222222 !important;
+    }
+
+    .shortpoint-brand-black-bg {
+        background-color: #222222 !important;
+    }
+
+    .shortpoint-brand-secondary-color {
+        color: #00485b !important;
+    }
+
+    .shortpoint-brand-secondary-border {
+        border-color: #00485b !important;
+    }
+
+    .shortpoint-brand-secondary-bg {
+        background-color: #00485b !important;
+    }
+
+    .shortpoint-brand-highlight-color {
+        color: rgba(205, 230, 247, 0.5) !important;
+    }
+
+    .shortpoint-brand-highlight-border {
+        border-color: rgba(205, 230, 247, 0.5) !important;
+    }
+
+    .shortpoint-brand-highlight-bg {
+        background-color: rgba(205, 230, 247, 0.5) !important;
+    }
+
+    .shortpoint-brand-alternate-1-color {
+        color: #288054 !important;
+    }
+
+    .shortpoint-brand-alternate-1-border {
+        border-color: #288054 !important;
+    }
+
+    .shortpoint-brand-alternate-1-bg {
+        background-color: #288054 !important;
+    }
+
+    .shortpoint-brand-alternate-2-color {
+        color: #767956 !important;
+    }
+
+    .shortpoint-brand-alternate-2-border {
+        border-color: #767956 !important;
+    }
+
+    .shortpoint-brand-alternate-2-bg {
+        background-color: #767956 !important;
+    }
+
+    .shortpoint-brand-alternate-3-color {
+        color: #ed0033 !important;
+    }
+
+    .shortpoint-brand-alternate-3-border {
+        border-color: #ed0033 !important;
+    }
+
+    .shortpoint-brand-alternate-3-bg {
+        background-color: #ed0033 !important;
+    }
+
+    .shortpoint-brand-theme-darker-color {
+        color: #004578 !important;
+    }
+
+    .shortpoint-brand-theme-darker-border {
+        border-color: #004578 !important;
+    }
+
+    .shortpoint-brand-theme-darker-bg {
+        background-color: #004578 !important;
+    }
+
+    .shortpoint-brand-theme-dark-color {
+        color: #005a9e !important;
+    }
+
+    .shortpoint-brand-theme-dark-border {
+        border-color: #005a9e !important;
+    }
+
+    .shortpoint-brand-theme-dark-bg {
+        background-color: #005a9e !important;
+    }
+
+    .shortpoint-brand-theme-dark-alt-color {
+        color: #106ebe !important;
+    }
+
+    .shortpoint-brand-theme-dark-alt-border {
+        border-color: #106ebe !important;
+    }
+
+    .shortpoint-brand-theme-dark-alt-bg {
+        background-color: #106ebe !important;
+    }
+
+    .shortpoint-brand-theme-primary-color {
+        color: #0078d4 !important;
+    }
+
+    .shortpoint-brand-theme-primary-border {
+        border-color: #0078d4 !important;
+    }
+
+    .shortpoint-brand-theme-primary-bg {
+        background-color: #0078d4 !important;
+    }
+
+    .shortpoint-brand-theme-secondary-color {
+        color: #2b88d8 !important;
+    }
+
+    .shortpoint-brand-theme-secondary-border {
+        border-color: #2b88d8 !important;
+    }
+
+    .shortpoint-brand-theme-secondary-bg {
+        background-color: #2b88d8 !important;
+    }
+
+    .shortpoint-brand-theme-tertiary-color {
+        color: #71afe5 !important;
+    }
+
+    .shortpoint-brand-theme-tertiary-border {
+        border-color: #71afe5 !important;
+    }
+
+    .shortpoint-brand-theme-tertiary-bg {
+        background-color: #71afe5 !important;
+    }
+
+    .shortpoint-brand-theme-light-color {
+        color: #c7e0f4 !important;
+    }
+
+    .shortpoint-brand-theme-light-border {
+        border-color: #c7e0f4 !important;
+    }
+
+    .shortpoint-brand-theme-light-bg {
+        background-color: #c7e0f4 !important;
+    }
+
+    .shortpoint-brand-theme-lighter-color {
+        color: #deecf9 !important;
+    }
+
+    .shortpoint-brand-theme-lighter-border {
+        border-color: #deecf9 !important;
+    }
+
+    .shortpoint-brand-theme-lighter-bg {
+        background-color: #deecf9 !important;
+    }
+
+    .shortpoint-brand-theme-lighter-alt-color {
+        color: #eff6fc !important;
+    }
+
+    .shortpoint-brand-theme-lighter-alt-border {
+        border-color: #eff6fc !important;
+    }
+
+    .shortpoint-brand-theme-lighter-alt-bg {
+        background-color: #eff6fc !important;
+    }
+
+    .shortpoint-brand-neutral-dark-color {
+        color: #212121 !important;
+    }
+
+    .shortpoint-brand-neutral-dark-border {
+        border-color: #212121 !important;
+    }
+
+    .shortpoint-brand-neutral-dark-bg {
+        background-color: #212121 !important;
+    }
+
+    .shortpoint-brand-neutral-primary-color {
+        color: #333333 !important;
+    }
+
+    .shortpoint-brand-neutral-primary-border {
+        border-color: #333333 !important;
+    }
+
+    .shortpoint-brand-neutral-primary-bg {
+        background-color: #333333 !important;
+    }
+
+    .shortpoint-brand-neutral-secondary-color {
+        color: #666666 !important;
+    }
+
+    .shortpoint-brand-neutral-secondary-border {
+        border-color: #666666 !important;
+    }
+
+    .shortpoint-brand-neutral-secondary-bg {
+        background-color: #666666 !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-color {
+        color: #a6a6a6 !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-border {
+        border-color: #a6a6a6 !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-bg {
+        background-color: #a6a6a6 !important;
+    }
+
+    .shortpoint-brand-neutral-primary-alt-color {
+        color: #3c3c3c !important;
+    }
+
+    .shortpoint-brand-neutral-primary-alt-border {
+        border-color: #3c3c3c !important;
+    }
+
+    .shortpoint-brand-neutral-primary-alt-bg {
+        background-color: #3c3c3c !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-alt-color {
+        color: #c8c8c8 !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-alt-border {
+        border-color: #c8c8c8 !important;
+    }
+
+    .shortpoint-brand-neutral-tertiary-alt-bg {
+        background-color: #c8c8c8 !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-color {
+        color: #d0d0d0 !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-border {
+        border-color: #d0d0d0 !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-bg {
+        background-color: #d0d0d0 !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-alt-color {
+        color: #dadada !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-alt-border {
+        border-color: #dadada !important;
+    }
+
+    .shortpoint-brand-neutral-quaternary-alt-bg {
+        background-color: #dadada !important;
+    }
+
+    .shortpoint-brand-neutral-light-color {
+        color: #eaeaea !important;
+    }
+
+    .shortpoint-brand-neutral-light-border {
+        border-color: #eaeaea !important;
+    }
+
+    .shortpoint-brand-neutral-light-bg {
+        background-color: #eaeaea !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-color {
+        color: #f4f4f4 !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-border {
+        border-color: #f4f4f4 !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-bg {
+        background-color: #f4f4f4 !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-alt-color {
+        color: #ffffff !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-alt-border {
+        border-color: #ffffff !important;
+    }
+
+    .shortpoint-brand-neutral-lighter-alt-bg {
+        background-color: #ffffff !important;
+    }
+
+    .shortpoint-brand-primary-light-color {
+        color: #46b8ff !important;
+    }
+
+    .shortpoint-brand-primary-light-border {
+        border-color: #46b8ff !important;
+    }
+
+    .shortpoint-brand-primary-light-bg {
+        background-color: #46b8ff !important;
+    }
+
+    .shortpoint-brand-primary-dark-color {
+        color: #002c80 !important;
+    }
+
+    .shortpoint-brand-primary-dark-border {
+        border-color: #002c80 !important;
+    }
+
+    .shortpoint-brand-primary-dark-bg {
+        background-color: #002c80 !important;
+    }
+
+    .shortpoint-brand-border-light-color {
+        color: #e8e8e8 !important;
+    }
+
+    .shortpoint-brand-border-light-border {
+        border-color: #e8e8e8 !important;
+    }
+
+    .shortpoint-brand-border-light-bg {
+        background-color: #e8e8e8 !important;
+    }
+
+    .shortpoint-brand-border-dark-color {
+        color: #9b9b9b !important;
+    }
+
+    .shortpoint-brand-border-dark-border {
+        border-color: #9b9b9b !important;
+    }
+
+    .shortpoint-brand-border-dark-bg {
+        background-color: #9b9b9b !important;
+    }
+
+    .shortpoint-brand-red-light-color {
+        color: #ff9282 !important;
+    }
+
+    .shortpoint-brand-red-light-border {
+        border-color: #ff9282 !important;
+    }
+
+    .shortpoint-brand-red-light-bg {
+        background-color: #ff9282 !important;
+    }
+
+    .shortpoint-brand-orange-light-color {
+        color: #ffc468 !important;
+    }
+
+    .shortpoint-brand-orange-light-border {
+        border-color: #ffc468 !important;
+    }
+
+    .shortpoint-brand-orange-light-bg {
+        background-color: #ffc468 !important;
+    }
+
+    .shortpoint-brand-yellow-light-color {
+        color: #ffff55 !important;
+    }
+
+    .shortpoint-brand-yellow-light-border {
+        border-color: #ffff55 !important;
+    }
+
+    .shortpoint-brand-yellow-light-bg {
+        background-color: #ffff55 !important;
+    }
+
+    .shortpoint-brand-green-light-color {
+        color: #74ffb7 !important;
+    }
+
+    .shortpoint-brand-green-light-border {
+        border-color: #74ffb7 !important;
+    }
+
+    .shortpoint-brand-green-light-bg {
+        background-color: #74ffb7 !important;
+    }
+
+    .shortpoint-brand-blue-light-color {
+        color: #7adeff !important;
+    }
+
+    .shortpoint-brand-blue-light-border {
+        border-color: #7adeff !important;
+    }
+
+    .shortpoint-brand-blue-light-bg {
+        background-color: #7adeff !important;
+    }
+
+    .shortpoint-brand-pink-light-color {
+        color: #ffcceb !important;
+    }
+
+    .shortpoint-brand-pink-light-border {
+        border-color: #ffcceb !important;
+    }
+
+    .shortpoint-brand-pink-light-bg {
+        background-color: #ffcceb !important;
+    }
+
+    .shortpoint-brand-violet-light-color {
+        color: #e19ffc !important;
+    }
+
+    .shortpoint-brand-violet-light-border {
+        border-color: #e19ffc !important;
+    }
+
+    .shortpoint-brand-violet-light-bg {
+        background-color: #e19ffc !important;
+    }
+
+    .shortpoint-brand-turquoise-light-color {
+        color: #60ffe2 !important;
+    }
+
+    .shortpoint-brand-turquoise-light-border {
+        border-color: #60ffe2 !important;
+    }
+
+    .shortpoint-brand-turquoise-light-bg {
+        background-color: #60ffe2 !important;
+    }
+
+    .shortpoint-brand-night-light-color {
+        color: #7a8fa4 !important;
+    }
+
+    .shortpoint-brand-night-light-border {
+        border-color: #7a8fa4 !important;
+    }
+
+    .shortpoint-brand-night-light-bg {
+        background-color: #7a8fa4 !important;
+    }
+
+    .shortpoint-brand-cloud-light-color {
+        color: #f3f7f8 !important;
+    }
+
+    .shortpoint-brand-cloud-light-border {
+        border-color: #f3f7f8 !important;
+    }
+
+    .shortpoint-brand-cloud-light-bg {
+        background-color: #f3f7f8 !important;
+    }
+
+    .shortpoint-brand-white-dark-color {
+        color: #b9b9b9 !important;
+    }
+
+    .shortpoint-brand-white-dark-border {
+        border-color: #b9b9b9 !important;
+    }
+
+    .shortpoint-brand-white-dark-bg {
+        background-color: #b9b9b9 !important;
+    }
+
+    .shortpoint-brand-black-light-color {
+        color: #686868 !important;
+    }
+
+    .shortpoint-brand-black-light-border {
+        border-color: #686868 !important;
+    }
+
+    .shortpoint-brand-black-light-bg {
+        background-color: #686868 !important;
+    }
+
+    .shortpoint-brand-black-dark-color {
+        color: #000000 !important;
+    }
+
+    .shortpoint-brand-black-dark-border {
+        border-color: #000000 !important;
+    }
+
+    .shortpoint-brand-black-dark-bg {
+        background-color: #000000 !important;
+    }</style>
+    <style type="text/css" data-shortpoint-generated="true">.shortpoint-corners {
+        border-radius: 0px !important;
+    }
+
+    .shortpoint-border-size {
+        border-width: 1px !important;
+    }
+
+    .shortpoint-corners {
+        border-radius: 0px !important;
+    }
+
+    .shortpoint-border-size {
+        border-width: 1px !important;
+    }</style>
+</head>

@@ -10,4 +10,17 @@ public class ExampleController {
     String myExample1() {
         return "hello";
     }
+
+    @RequestMapping("/tourism")
+    String myTest() {
+
+//        return "site1/Department of Tourism";
+        return "site1/index";
+    }
+
+    @RequestMapping("/ms")
+    String testMicrosoft() {
+
+        return "xtests/Microsoft Community";
+    }
 }

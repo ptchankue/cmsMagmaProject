@@ -1,0 +1,1160 @@
+﻿/*** Default setup ***/
+#s4-workspace{
+	/* background-color of the workspace */
+	background-color: white;
+	overflow-x:hidden;
+	
+}
+#contentBox{
+	min-width: auto;
+	margin-left: -12px; 
+	margin-right:0px; /* make content take full page width */
+}
+
+#s4-bodyContainer{
+	/* defines 960px by using 80em = 80 * 16px (Default Font Size) */
+	width: 945px;
+	/*width: 58.750rem;*/
+	margin: 0 auto;
+	/* background color of the content */
+	background-color: white;
+}
+/*** Fix for the dialogs ***/
+.ms-dialog #s4-workspace{
+	background-color: white;
+}
+.ms-dialog #s4-bodyContainer{
+	margin: 0px;
+	width: auto;
+}
+.ms-dlgContent #s4-bodyContainer{
+	width: auto;
+}
+/*** clear fix ***/
+.clearfix{
+	clear: both;
+}
+.ms-dialog .myelement {
+    display: none;
+}
+.center
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:945px;
+
+}
+.black
+{
+	background-color:black;
+	height: 96px;
+}
+/*Titlerow hidden*/
+/*End Titlerow*/
+/**********************************************************
+FONT AND 
+*********************************************************/
+
+.ms-bodyareacell td, .ms-bodyareacell p, .ms-bodyareacell div, .ms-bodyareacell span,
+.ms-bodyareacell p, .ms-bodyareacell a,.ms-bodyareacell a:active, .ms-bodyareacell a:hover,
+.ms-bodyareacell a:link, .ms-bodyareacell a:visited,.ms-bodyareacell td,.ms-bodyareacell div,
+.ms-bodyareacell font
+
+{
+ font-size:12px;
+ font-family: Arial;
+ letter-spacing: normal;
+ color:black;
+ }
+
+.ms-bodyareacell h3 a, .ms-bodyareacell h3 span, .ms-bodyareacell h3 div,.ms-bodyareacell h3 p,
+.ms-bodyareacell h3 font
+ {
+ font-size:15px;
+ color:black;
+ }
+
+#aspnetForm{
+	margin-top:0px;
+}
+/* ********************************************************************************
+	Header
+************************************************************************************/
+
+/*.header-holder {
+	width:100%;
+	height:194px;
+	background-color:#000000;
+	background-image:URL('/Images/nav_back.gif');
+	background-repeat:repeat-x;
+	background-position:bottom;
+	z-index:10;
+}*/
+
+.header{
+	
+	background-image:URL('/Style Library/Images/topbanner.gif');
+	background-repeat:no-repeat;
+    width:945px;
+	height:116px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+
+}
+.header-logo {
+	padding-top: 20px;
+	padding-left: 15px;
+	border: none;
+}
+
+/***********************************************
+Top Navigation header
+***********************************************/
+.nav
+{
+width: 945px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.nav2
+{
+width: 940px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.navback
+{
+
+background-color:#ffffff;
+
+}
+
+.scroll_image
+{
+width: 945px;
+height:372px;
+margin-left:auto;
+margin-right:auto;
+}
+.search
+{
+height: 24px;
+float:right;
+padding-top:5px;
+
+}
+a {outline : none;}
+/* Custom Search
+************************************************************************************ */
+
+.ribbon-search-holder {
+	float:left;
+	vertical-align:middle;
+	margin:0px 0px 5px 30px;
+}
+
+.ribbon-search-text {
+	border:1px #cccccc solid;
+	width:180px;
+	height:20px;
+	color:#cccccc;
+	padding-left:4px;
+	vertical-align:middle;
+	line-height:22px;
+}
+
+.ribbon-search-button {
+	width:30px;
+	height:20px;
+	color:#ffffff;
+	background-color:#b5985a;
+	text-align:center;
+	font-weight:bold;
+	cursor:pointer;
+	margin-left:2px;
+    margin-top:3px;
+}
+div.ms-srch-hover-action > a[clicktype='ActionViewLibrary'] {
+   display:none;
+}
+
+/***********************************************
+Breadcrump
+***********************************************/
+.breadcrumb{
+	
+}
+
+.breadcrumb a:visited {
+	padding-top:2px;
+}
+
+.breadcrumb a:link {
+	padding-left:10px;
+	padding-top:2px;
+}
+/*PageTitle
+.ms-core-pageTitle{
+	visibility:hidden;
+	height:0px;
+	min-height:0px;
+}
+.ms-core-pageTitle{Display:none !Important;}
+
+
+.ms-core-listMenu-horizontalBox li.static > a{
+display: none !important;
+}
+.ms-core-listMenu-horizontalBox li.static > ul a{
+display: block !important;
+}*/
+#DeltaPlaceHolderPageTitleInTitleArea{
+display:none;
+}
+.main-crumb {
+	background-color: #b5985a;
+	width: 945px;
+	margin-left:auto;
+	margin-right:auto;
+	height:24px;
+	padding-top: 10px;
+	color:#000000;
+	font-weight:bold;
+	font-size: 10px !important;
+}
+
+.main-crumb A , .main-crumb a:visited , .main-crumb a:link {
+	color:#000000 !important;
+}
+/*#ctl00_ctl57_ctl01_Image1{
+width:5px;
+height:5px;
+}*/
+
+/*************************************************
+	Top Nav
+*************************************************/
+.top-nav-horizontal-breadcrumb {
+    width:945px;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	background-color:#ffffff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+		font-size:13px;
+	color:#000000;
+}
+
+.top-nav-horizontal-breadcrumb a:hover,.top-nav-horizontal-breadcrumb a:link, .top-nav-horizontal-breadcrumb a:visited
+{
+	
+color: #000000;
+	
+}
+
+.ms-breadcrumb-top {
+	background-color:#ffffff;
+	color:#000000;
+	padding-top:10px;
+}
+
+
+.ms-core-listMenu-horizontalBox li.static > .ms-core-listMenu-item {
+	background-color: #ffffff;
+    padding: 0px 8px 10px 7px;
+	/*padding: 0px 4px 10px 2px;*/
+	width: auto;
+	text-align:center;
+	color: #000000;
+	margin-right:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight:bold;
+}
+
+.ms-core-listMenu-horizontalBox li.static > .ms-core-listMenu-item:hover {
+	background-color:#ffffff;
+	color:#000000;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
+
+.ms-core-listMenu-horizontalBox a.ms-core-listMenu-item.ms-core-listMenu-selected {
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+
+}
+
+ul.static {
+	-webkit-padding-start:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	/*.ms-core li.static > .menu-item*/
+	padding-left: 18px;
+	padding-right: 16px;
+
+
+}
+
+.ms-listMenu-editLink {
+	margin-top:8px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+
+}
+
+.ms-core-navigation
+{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	
+}
+
+/*.ms-core-listMenu-horizontalBox .menu-item, .ms-core-listMenu-horizontalBox .menu-item .additional-background, .ms-core-listMenu-horizontalBox .menu-item .additional-background .menu-item-text {
+ display:block; 
+ }*/
+
+/* Dynamic Menu
+************************************************ */
+ul.dynamic {
+	background-color:#ffffff !important;
+	color:#000000;
+	min-width:190px;
+	/*width: auto !important;  /* !important needed to override inline SharePoint style */
+	font-size: 12px;
+	white-space: nowrap;
+	word-wrap: normal;
+	display: inline-table;
+	border: none;
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
+	
+}
+ul.dynamic li:first-child {
+  border-top: 0
+}
+ul.dynamic ul{
+	background-color:#EEECE1;
+	color:#ffffff;
+	min-width:190px;
+}
+
+ul.dynamic {
+	padding: 0px 4px 10px 2px;
+	list-style-type: none;	
+}
+
+li.dynamic {
+	padding: 2px 0px 5px 5px;
+	list-style-type: none;	
+}
+
+li.dynamic:hover {
+	background-color:#D9D9D9;
+	list-style-type: none;
+}
+
+ul.dynamic a:link, ul.dynamic a:hover, ul.dynamic a:visited {
+	color:#000000;
+}
+
+.ms-core-listMenu-horizontalBox a.ms-core-listMenu-item:hover {
+	color:#000000;
+}
+
+.ms-core-listMenu-horizontalBox .dynamic-children.additional-background {
+    background-image: url('/Style Library/Images/nav_arrow.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding-right: 15px;
+}
+.ms-core-listMenu-horizontalBox .dynamic .dynamic-children.additional-background {
+	background-image: url('/Style Library/Images/nav_arrow.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+	cursor: pointer;
+    padding-right: 15px;
+    display: block;
+
+}
+
+/************************************************
+hide home
+**********************************************/
+/*.ms-core-pageTitle{Display:none !Important;}
+
+
+.ms-core-listMenu-horizontalBox li.static > a{
+display: none !important;
+}
+.ms-core-listMenu-horizontalBox li.static > ul a{
+display: block !important;
+}*/
+
+
+/****************************************************
+FOOTER
+***************************************************/
+/*.ms-formtoolbar{
+    display:none;
+}*/
+#ctl00_ctl41_g_c9d886fd_f970_4249_bfe6_c2a77d253785_ctl00_ctl10_ctl00_InitContentType{
+	display:none;
+}
+#onetidinfoblock1, #onetidinfoblock2{
+	display:none;
+}
+.footer
+{
+	padding-top: 5px;
+	padding-bottom: 20px;
+	vertical-align:bottom;
+	clear:both;
+	left:0 !important;
+	margin-top: 10px;
+	background-color:#000000;
+	height:240px;
+	width:100%;
+	float:none;
+	overflow:hidden;
+	z-index:200;
+}
+.footercontainer{
+	position:relative;
+    width:100%;
+    height:20px;
+}
+img{  
+	border-style: none;
+}
+.footer-center-top {
+    background-image: url(/images/top_arrow.png);
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0 auto;
+    height: 23px;
+    position: absolute;
+    top: -6px; /* Position element */
+    
+}
+.footer-center-top a img {
+    display : block;
+    margin : auto;
+}
+.footer-center {
+	width:945px;
+	margin-left:auto;
+	margin-right:auto;
+	height:154px;
+	padding:20px 20px 10px 20px;
+}
+.footer-main-links {
+	width:100%;
+	height: 123px;
+	line-height:200%;
+	margin:15px 10px 0px 10px;
+	color:#FFFFFF;
+}
+.footer-main-links a:link, .footer-main-links a:visited, .footer-main-links a:hover, .footer-main-links a:active {
+	COLOR: #FFFFFF;
+	text-decoration: none;
+}
+
+
+.footer-main-links td {
+	height:14px !Important;
+}
+
+.footer-headings {
+	color:#B59859;
+	font-weight:bold;
+	}
+.footer-headings a:link, .footer-headings a:visited, .footer-headings a:hover, .footer-headings a:active  {
+	COLOR: #FFFFFF;
+	text-decoration: none;
+}
+
+/* ************************************************************************************
+	Browser Support
+************************************************************************************ */
+
+.browser-div {
+	height:100%;
+	width:100%;
+	top:0px;
+	/*background-image:URL('/images/browsersupport/Trans.png');*/
+	background-repeat:repeat;
+	visibility:collapse;
+	margin-top:auto;
+	margin-bottom:auto;
+	position:absolute;
+	z-index:100000;
+	
+
+}
+
+.browser-table {
+	width:800px;
+	background-color:#f5f5f5;
+	margin:auto;
+	border:8px #dddddd solid;
+	padding:15px;
+	
+}
+
+.browser-heading {
+	font-size:16px;
+	font-weight:bold;
+	color:#ff0000;
+	padding-bottom:10px;
+}
+
+.browser-message {
+	font-size:14px;
+	font-weight:bold;
+}
+
+.browser-images td {
+	text-align:center;
+}
+
+/******************************************************
+NIVO SLIDER
+*****************************************************/
+
+/*
+ * jQuery Nivo Slider v3.1
+ * http://nivo.dev7studios.com
+ *
+ * Copyright 2012, Dev7studios
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+ 
+/* The Nivo Slider styles */
+.nivoSlider {
+	/*position:relative;*/
+	width:945px;
+	height:247px;
+	overflow: hidden;
+}
+.nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+	max-width: none;
+}
+.nivo-main-image {
+	display: block !important;
+	position: relative !important; 
+	width: 100% !important;
+}
+
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:6;
+	display:none;
+}
+/* The slices and boxes in the Slider */
+.nivo-slice {
+	display:block;
+	position:absolute;
+	z-index:5;
+	height:100%;
+	top:0;
+}
+.nivo-box {
+	display:block;
+	position:absolute;
+	z-index:5;
+	overflow:hidden;
+}
+.nivo-box img { display:block; }
+
+/* Caption styles */
+.nivo-caption {
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	background:#000;
+	color:#fff;
+	width:100%;
+	z-index:8;
+	padding: 5px 10px;
+	opacity: 0.8;
+	overflow: hidden;
+	display: none;
+	-moz-opacity: 0.8;
+	filter:alpha(opacity=8);
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.nivo-caption p {
+	padding:5px;
+	margin:0;
+}
+.nivo-caption a {
+	display:inline !important;
+}
+.nivo-html-caption {
+    display:none;
+}
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+	position:absolute;
+	top:30%;
+	z-index:9;
+	cursor:pointer;
+}
+.nivo-prevNav {
+	left:0px;
+}
+.nivo-nextNav {
+	right:0px;
+}
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+	text-align:center;
+	padding: 15px 0;
+}
+.nivo-controlNav a {
+	cursor:pointer;
+}
+.nivo-controlNav a.active {
+	font-weight:bold;
+}
+
+/*
+Skin Name: Nivo Slider Default Theme
+Skin URI: http://nivo.dev7studios.com
+Description: The default skin for the Nivo Slider.
+Version: 1.3
+Author: Gilbert Pellegrom
+Author URI: http://dev7studios.com
+Supports Thumbs: true
+*/
+
+.theme-default .nivoSlider {
+	position:relative;
+	/*background:#fff url(../../Nivo-Slider/Themes/default/loading.gif) no-repeat 50% 50%;*/
+    margin-bottom:11px;
+   
+}
+.theme-default .nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+	display:none;
+}
+.theme-default .nivoSlider a {
+	border:0;
+	display:block;
+}
+
+.theme-default .nivo-controlNav {
+	text-align: right;
+	padding:0px 10px;
+	position:relative;
+	top:-40px;
+	z-index:50;
+}
+
+.nivo-controlNav a {
+	text-align:center;
+}
+
+.theme-default .nivo-controlNav a {
+	display:inline-block;
+	
+	width:22px;
+	height:22px;
+	background:url(../../Nivo-Slider/Themes/default/bullets.png) no-repeat;
+	text-indent:-9999px;
+	border:0;
+	margin: 0 2px;
+}
+.theme-default .nivo-controlNav a.active {
+	background-position:0 -22px;
+}
+.theme-default .nivo-directionNav a {
+	display:block;
+	width:30px;
+	height:90px;
+	top:171px;
+	background:url(../../Nivo-Slider/Themes/default/arrows.png) no-repeat;
+	text-indent:-9999px;
+	border:0;
+}
+.theme-default:hover .nivo-directionNav a { opacity: 1; }
+.theme-default a.nivo-nextNav {
+	background-position:-34px 0;
+	right:-31px;
+}
+.theme-default a.nivo-prevNav {
+	left:-31px;
+}
+
+.theme-default .nivo-caption {
+    font-family: Helvetica, Arial, sans-serif;
+}
+.theme-default .nivo-caption a {
+    color:#fff;
+    border-bottom:1px dotted #fff;
+}
+.theme-default .nivo-caption a:hover {
+    color:#fff;
+}
+.theme-default .nivo-controlNav.nivo-thumbs-enabled {
+	width: 100%;
+}
+.theme-default .nivo-controlNav.nivo-thumbs-enabled a {
+	width: auto;
+	height: auto;
+	background: none;
+	margin-bottom: 5px;
+}
+.theme-default .nivo-controlNav.nivo-thumbs-enabled img {
+	display: block;
+	width: 120px;
+	height: auto;
+}
+
+
+/* ************************************************************************************
+	Banner
+************************************************************************************ */
+
+.banner {
+	margin-left:auto;
+	margin-right:auto;
+	z-index:-1;
+	width:945px;
+	height:235px;
+	overflow:visible;
+
+	
+}
+.banner_nav
+{
+	background-image:url('/Style Library/Images/banner_nav.png') !important;
+	background-repeat:no-repeat;
+	position:relative;
+	float:right;
+
+}
+/*.banner_nav p { position: absolute; left: 0; top: 0; padding: 10px; border: 1px solid #FFF; width: 218px; color: #FFF; margin: 5px; }*/
+
+#text1{
+    position:absolute;
+    font-size: 24px;
+    font-weight: bold;
+    right: 70px;
+    top: -10px;
+}
+#text2{
+     position:absolute;
+    font-size: 24px;
+    font-weight: bold;
+    right: 70px;
+    top: 48px;
+}
+#text3{
+    position:absolute;
+    font-size: 24px;
+    font-weight: bold;
+    right: 70px;
+    top: 105px;
+}
+#text4{
+     position:absolute;
+    font-size: 24px;
+    font-weight: bold;
+    right: 70px;
+    top: 164px;
+}
+#text1 A , #text1 a:visited, #text1 a:link {
+	color:#b5985a !important;
+	text-decoration:none;
+}
+#text2 A , #text2 a:visited, #text2 a:link {
+	color:#b5985a !important;
+		text-decoration:none;
+}
+#text3 A , #text3 a:visited, #text3 a:link {
+	color:#b5985a !important;
+		text-decoration:none;
+}
+#text4 A , #text4 a:visited, #text4 a:link {
+	color:#b5985a !important;
+		text-decoration:none;
+}
+/*.subbanner{
+	background-image:url('/images/looknfeel/banner.jpg')!important;
+	
+} 
+*/
+/***************************************************
+SLIDER
+**************************************************/
+.slider-wrapper{
+	width:945px;
+	height:235px;
+	float:left;
+	  
+}/***********************************************************************************
+ Custom left Nav
+************************************************************************************/
+#ctl00_PlaceHolderLeftNavBar_PlaceHolderQuickLaunchBottom_idNavLinkViewAll{
+	display:none;
+}
+.ms-core-listMenu-verticalBox{
+	margin-left:-5px;
+	
+
+}
+.ms-core-listMenu-verticalBox ul{
+	padding-left: 0px;	
+	color: #B5985A; 
+ } 
+/*.ms-core-listMenu-item, .ms-core-listMenu-item:link, .ms-core-listMenu-item:visited, .ms-tv-item:link, .ms-tv-item:visited, .ms-tv-header:link, .ms-tv-header:visited{ 
+	color:black; 
+	font-size:12px;
+} */
+.ms-core-listMenu-verticalBox ul li {
+	border-bottom:1px solid #fff; color:#fff;
+ } 
+.ms-core-listMenu-verticalBox ul li{
+	border-top:#B5985A !important; 
+} 
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item{
+	font-weight:bold;
+}
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item{
+	
+}
+/*.ms-core-listMenu-verticalBox ul li:hover, .ms-core-listMenu-verticalBox .ms-core-listMenu-item:hover{
+ 	
+}*/
+/**/
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-root > li > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox > .ms-core-listMenu-root > li > .ms-core-listMenuEdit, .ms-core-listMenu-heading, .ms-tv-header{
+	font-weight:bold;
+	color: #B5985A;
+}
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-root > li > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox > .ms-core-listMenu-root > li > .ms-core-listMenuEdit, .ms-core-listMenu-heading, .ms-tv-header{
+	color: #B5985A;
+}
+.ms-core-listMenu-heading{
+	
+	color: #B5985A;
+}
+/*Removes the padding on the left*/
+.ms-core-listMenu-verticalBox li.static > ul.static > li.static > .ms-core-listMenu-item{
+	padding-left:0px;
+}
+.ms-core-listMenu-verticalBox > .ms-core-listMenu-item, .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item{
+padding: 10px 0px;
+
+}
+/*End Custom Left Nav*/
+/*********************************************************************************************
+Content Area
+*********************************************************************************************/
+
+/*.ms-core-sideNavBox-removeLeftMargin { display: none; }  hide only quick links */
+/*hide only quick links */
+
+#contentRow{
+	padding-left:5px;
+
+}
+.ms-rtestate-field {
+    padding: 10px 10px 10px 10px;
+    text-align: justify;
+}
+/*.ms-core-listMenu-horizontalBox .ms-core-listMenu-selected:link, .ms-core-listMenu-horizontalBox .ms-core-listMenu-selected:visited, .ms-core-listMenu-horizontalBox .ms-core-listMenu-selected, .ms-tv-selected:link{
+	color:#ffffff !important;
+	text-transform:uppercase;
+	font-size:11px;
+	font-weight:normal;
+	padding-top: 12px;
+	padding-left: 27px;
+	padding-right: 16px;
+}
+*/
+/********************************************************************
+PAGE LAYOUT
+******************************************************************/
+.cell-margin {margin-top: 10px;margin-bottom: 10px;}
+       .tableCol-75 {padding-right: 15px; Width: 75% !Important;}
+       .tableCol-25 {Width: 25% !Important;}
+       .tableCol-50 {Width: 50% !Important;}
+       .ms-table .tableCol-50:first-child {padding-right: 15px;}
+       .tableCol-33 {padding-left: 15px;Width: 33% !Important;}
+       .ms-table .tableCol-33:first-child {padding-left: 0px;}
+       
+.ms-PartSpacingVertical
+{
+    margin-bottom: 0px;
+}
+
+.ms-PartSpacingHorizontal
+{
+   margin-right: 20px;
+}
+.ms-webpartPage-root { border-spacing:0px !important; }
+
+.ms-WPBorder{
+   border: 2px solid #dddddd;
+}
+.ms-webpart-titleText.ms-webpart-titleText, .ms-webpart-titleText > a {  
+font-weight: bold; 
+color: white;
+
+}
+.ms-webpart-titleText.ms-webpart-titleText a:link, .ms-webpart-titleText.ms-webpart-titleText a:visited, .ms-webpart-titleText.ms-webpart-titleText a:hover, .ms-webpart-titleText.ms-webpart-titleText a:active, .ms-webpart-titleText a:link > a {   
+color: white;
+text-decoration:none!important;
+
+}
+
+
+.ms-webpart-chrome-title{
+	background-color: #000000; 
+	font-size: 12px;   
+	padding: 5px 5px;
+
+}
+a, .ms-link:visited, a:visited{
+	color:#000000;
+}
+
+/*.ms-webpart-titleText.ms-webpart-titleText, .ms-webpart-titleText > a {
+    background-color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 5px 5px;
+}*/
+/**************************************************************************************
+PAGE LAYOUT
+*************************************************************************************/
+.TopZone{
+	width:100%;
+	
+}
+.LeftColumnZone{
+	width:33%;
+	
+}
+/*.MiddleColumnZone{
+	width:33%;
+}*/
+.RightColumnZone{
+	width:33%;
+}
+.BottomDownZone{
+	width:100%;
+}
+/**************************************************************************************
+PAGE LAYOUT for TourPage
+*************************************************************************************/
+.TopheadZone{
+	width:100%;
+	
+}
+.LeftZoneCol{
+	width:33%;
+	
+}
+/*.MiddleColumnZone{
+	width:33%;
+}*/
+.RightZoneCol{
+	width:16%;
+}
+.DownBottomZone{
+	width:100%;
+}
+
+/*********************************************
+    VIEW MORE
+ ********************************************/
+.view-more { 
+    text-align: right; width: 70px; 
+
+}
+.view-more a { 
+    color: #FFFFFF; 
+
+}
+.view-more a:hover { 
+    text-decoration: underline; 
+
+}
+.NewsImage{
+	width: 83px; 
+	height: 20px;
+	margin-top: 5px;
+	padding-top: 5px;
+	margin-right: 20px;
+	
+}
+/* ************************************************************************************
+	CQWP Styling
+************************************************************************************ */
+.band {
+	background-color:rgb(181, 152, 90) !important;
+    padding: 10px 0px 10px 10px;
+}
+
+.link-item A:visited {
+	color:black !important;
+	font-weight:normal !important;
+}
+
+.link-item A:link {
+	color:black !important;
+	font-weight:normal !important;
+}
+
+.s4-breadcrumb-anchor {
+	display:none !important;
+}
+
+.article-header {
+
+
+}
+
+.article-header .by-line {
+	text-align:left !important;
+	font-weight:bold;
+	color:black;
+	font-family:Calibri;
+	font-size:10pt;
+	padding: 5px 5px 5px 5px;
+}
+
+.article-header .by-line-row {
+	background-color:#eeece1;
+}
+
+.article-header .date-line {
+	font-weight:normal !important;
+	color:black;
+	font-family:Calibri;
+	font-size:10pt;
+	vertical-align:bottom;
+	padding: 0px 2px 2px 5px;
+}
+
+.CQWP-Odd, .CQWP-Even {
+	border-style:none none solid none;
+	border-width:1px; border-color:#e5e5e5;
+	padding-top:7px;	
+	padding-bottom:0px; padding-left:10px;
+	color:#333; width: 100%;
+	font-family:Calibri; font-size:13px
+}
+.CQWP-Odd {background-color:#eeece1;}
+.CQWP-Even {background-color:#fff;}
+.CQWP-Odd a:link, .CQWP-Odd a:visited, .CQWP-Even a:link, .CQWP-Even a:visited {
+	padding-left:25px;
+}
+
+.CQWP-Odd-Cal, .CQWP-Even-Cal {
+	border-style:none none solid none;
+	border-width:1px; border-color:#e5e5e5;	
+	padding-bottom:0px; padding-left:1px;
+	color:#333; width: 100%;
+	font-family:Calibri; font-size:11pt;
+}
+.CQWP-Odd-Cal {background-color:#eeece1 !important;}
+.CQWP-Even-Cal {background-color:#fff !important;}
+
+
+/*Calendar XSLT Styles*/
+.eventstitle a:link  {font-size:13px; font-weight:bold; color:black;text-decoration:underline;}
+.eventstitle a:visited  {font-size:13px; font-weight:bold; color:black;text-decoration:underline;}
+.eventstitle  {font-size:13px; font-weight:bold; color:black;text-decoration:underline;}
+.xslCal .left{width:90px; position:relative; left:-11px; float:left;}
+/*.xslCal .right span{display:block;}*/
+.xslCal .month{text-transform:capitalize; background:rgb(181, 152, 90); color:#fff; padding:3px 0 3px 8px; display:block; }
+.xslCal .day{font-size:61px !important; width:86px !important; display:block !important; line-height:70px !important; text-align:right !important;}
+.xslCal .title{color:black; display:block; font-size:13px; padding-top:0px; text-decoration:underline; text-align:left !important;}
+.xslCal .location{color:black; font-size:14px; font-family:Calibri;}
+.xslCal .branch{color:black; font-size:14px; font-family:Calibri;}
+.xslCal .eventtype{color:black; font-size:14px; font-family:Calibri;}
+.xslCal .time{color:black; font-size:14px; font-family:Calibri;}
+
+
+DIV.welcome {
+	padding-top:0px !important;
+	padding-right:0px !important;
+	padding-bottom:0px !important;
+}
+
+.welcome-content {
+	margin-top:0px !important;
+}
+
+TABLE.ms-listviewtable > TBODY > TR > TD.ms-stylebox {
+	border-color:black !important;
+	background:rgb(181, 152, 90); 
+}
+
+.ms-rte-wpbox {
+	color: black !important;
+}
+.ms-stylebody A:link {
+	color: black !important;
+	text-decoration:underline;
+}
+.twitter-timeline twitter-timeline-rendered, #twitter-widget-0{width:100% !important;}
+
+#_invisibleIfEmpty{padding-right:3px;}
+
+#HillbillyTabs{
+    margin-bottom:5px;
+    margin-left:4px;
+}
+/*********************************************
+Countdown timer
+*********************************************/
+#counter{
+	height:20px; 
+	text-transform: uppercase; 
+	background-color:#aa0000;
+	font-style:normal;
+	font-weight:bold;
+	font-size:12px;
+	color:White; 
+	text-align:center;
+	padding:20px;
+}
+#SearchBox {
+	color:#444; 
+	background-color:rgba( 255,255,255,0.85 );
+	
+}
+#navImg {
+	DISPLAY: none
+	}  
+.ms-srch-sb>input {
+	width: 150px;
+	}
