@@ -17,3 +17,6 @@
 "person_id": 1
 }'`
 
+`curl localhost:9082/api/graph/routes?from=yaounde&to=bafoussam
+`
+
