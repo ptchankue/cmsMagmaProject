@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,22 @@
 <body>
 <h1>Spring boot</h1>
 <h3>Thymeleaf</h3>
+<h3>Create customer</h3>
+
+<!--<form th:action="@{/addPerson}" th:object="${person}" method="post">-->
+<form th:action="@{/hello}" th:object="${person}" method="post">
+
+    <div>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" placeholder="Vuyo" />
+    </div>
+    <div>
+        <label>Message:</label>
+        <input type="text" th:field="*{message}" placeholder="The message" />
+    </div>
+
+    <input type="submit" value="Submit"/>
+</form>
+
 </body>
 </html>

@@ -57,5 +57,13 @@ public class Person {
     public void setMessage(String message) {
         this.message = message;
     }
- 
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

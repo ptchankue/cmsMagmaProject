@@ -2,14 +2,23 @@ package za.co.magma.cmsproject.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import za.co.magma.cmsproject.domain.Person;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ExampleController {
-    @RequestMapping("/hello")
-    String myExample1() {
+    @GetMapping("/hello")
+    String viewHelloPage(Model model) {
+        model.addAttribute("person", new Person());
+        return "hello";
+    }
+
+    @PostMapping("/hello")
+    String addHelloPage(@ModelAttribute("person") Person person) {
+        System.out.println(person);
         return "hello";
     }
 
@@ -41,9 +50,16 @@ public class ExampleController {
 
         return "xtests/rental";
     }
-    @RequestMapping("/{templateName}")
-    String testGeneric(@PathVariable String templateName) {
+    @RequestMapping("/tmp/{templateName}")
+    String testGeneric(@PathVariable String templateName, Model model) {
 
+        Map<String, Map<String, String>> map = new HashMap<>();
+        Map<String, String> w3cc = new HashMap<>();
+        w3cc.put("title", "My Car");
+
+        map.put("w3css", w3cc);
+
+        model.addAttribute("values", map.get(templateName));
         String temp = "xtests/" + templateName;
         return temp;
     }

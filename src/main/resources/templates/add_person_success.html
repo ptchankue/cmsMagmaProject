@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration Success</title>
+    <style type="text/css">
+        span {
+            display: inline-block;
+            width: 200px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h2>Person created!</h2>
+    <span>Id:</span><span th:text="${user.id}"></span><br/>
+    <span>Name:</span><span th:text="${user.name}"></span><br/>
+    <span>Message:</span><span th:text="${user.message}"></span><br/>
+</div>
+</body>
+</html>
