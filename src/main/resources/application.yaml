@@ -17,3 +17,5 @@ spring:
 
 #    username: admin
 #    password: admin
+  freemarker:
+    suffix: .ftl

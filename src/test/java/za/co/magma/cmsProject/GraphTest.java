@@ -21,7 +21,7 @@ public class GraphTest {
 
     @Test
     public void testDFS_Success() {
-        graph.printEdges();
+//        graph.printEdges();
 
         String s = "yaounde";
         String d = "bafang";

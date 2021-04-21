@@ -39,6 +39,12 @@ public class ExampleController {
         return "site1/index";
     }
 
+    @RequestMapping("/welcome")
+    public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
+        model.addAttribute("name", name);
+        return "welcome";
+    }
+
     @RequestMapping("/ms")
     String testMicrosoft() {
 
