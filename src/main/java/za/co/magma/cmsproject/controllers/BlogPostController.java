@@ -34,4 +34,18 @@ public class BlogPostController {
 		BlogPost blogPost = new BlogPost();		
 		model.addAttribute("blogPost", blogPost);
 	}
+
+	@GetMapping("/blogposts")
+	public String addBlogPost(Model model) {
+
+		setDefaultBlogPost(model);
+		return "admin/add_post";
+	}
+
+	@PostMapping("/blogposts")
+	public String addPostBlogPost(Model model, BlogPost blogPost) {
+
+		System.out.println(blogPost + " to be added...");
+		return "admin/add_post";
+	}
 }
