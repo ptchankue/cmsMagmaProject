@@ -20,3 +20,33 @@
 `curl localhost:9082/api/graph/routes?from=yaounde&to=bafoussam
 `
 
+`curl --location --request POST 'localhost:9082/api/blogpost' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"title": "Paramilitary",
+"body": "TolProduct Product "
+}'`
+
+
+## CMS design
+
+
+    Site:
+        Header
+            Menu
+        Content:
+            - HomePage
+                - Slides
+            - ContactPage
+            - GenericPage
+        Footer
+            Menu (Links)
+    
+A website has a template, pages
+
+    Template:
+        - id
+        - 
+
+
+CMS Walrus

@@ -1,18 +1,20 @@
 package za.co.magma.cmsproject.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class BlogPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	private String title;
 	private String body;	
-	private Integer person_id;
+//	private Long person_id;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created_at;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updated_at;
 
 	public String getBody() {
 		return body;
@@ -27,20 +29,32 @@ public class BlogPost {
 		this.title = title;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getPerson_id() {
-		return person_id;
+	public Date getCreated_at() {
+		return created_at;
 	}
 
-	public void setPerson_id(Integer person_id) {
-		this.person_id = person_id;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
+	}
+	@PrePersist
+	private void onCreate(){
+		this.created_at = new Date();
 	}
 
 	@Override
@@ -49,7 +63,8 @@ public class BlogPost {
 				"id=" + id +
 				", title='" + title + '\'' +
 				", body='" + body + '\'' +
-				", person_id=" + person_id +
+				", created_at=" + created_at +
+				", updated_at=" + updated_at +
 				'}';
 	}
 }

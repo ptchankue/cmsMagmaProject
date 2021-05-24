@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -36,8 +37,29 @@ public class APIController {
         return personRepository.findAll();
     }
 
+    @GetMapping("/person/{id}")
+    public Person getPeopleById(@PathVariable Long id) {
+        return personRepository.findById(id)
+            .orElse(null);
+    }
+
+    /**
+     * curl localhost:9082/api/person/email?email=ptchankue@gmail.com -v
+     * @param email
+     * @return
+     */
+    @GetMapping("/person/email")
+    public ResponseEntity getPersonByEmailAddress(@RequestParam String email) {
+        Person p = personRepository.findByEmailAddress(email);
+        System.out.println(p);
+        return (null!= p) ?
+            ResponseEntity.status(HttpStatus.OK).body(p):
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(p);
+    }
+
     @PostMapping("/person")
     public Person createAccount(@Valid @RequestBody Person person) {
+        System.out.println(person);
         return personRepository.save(person);
     }
 
