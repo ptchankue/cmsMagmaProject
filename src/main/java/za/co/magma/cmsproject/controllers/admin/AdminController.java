@@ -18,7 +18,7 @@ public class AdminController {
     private BlogPostRepository blogPostRepository;
 
     private LoginForm loginForm;
-    Map<String, String> params;
+    private Map<String, String> params;
 
     private Map<String, String> setGlobalVariables(){
         params = new HashMap<>();
@@ -48,10 +48,12 @@ public class AdminController {
 
     @GetMapping("/login")
     public String login(Model model) {
+        params = setGlobalVariables();
         loginForm = (loginForm == null) ? new LoginForm() : loginForm;
 
         params.put("pageTitle", "MyCMS - Login");
         model.addAttribute("loginForm", loginForm);
+        model.addAttribute("parameters", params);
         return "admin/login";
     }
     @PostMapping("/login")
@@ -74,11 +76,15 @@ public class AdminController {
             // pass user date here
             return "redirect:/admin/home";
         }
+        model.addAttribute("parameters", params);
         return "admin/login";
     }
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("pageTitle", "MyCMS - Register");
+        params = setGlobalVariables();
+        params.put("pageTitle", "MyCMS - Register");
+        model.addAttribute("parameters", params);
+
         return "admin/register";
     }
 
@@ -100,5 +106,21 @@ public class AdminController {
         model.addAttribute("pageTitle", "MyCMS - Generic");
         model.addAttribute("parameters", params);
         return "admin/admin";
+    }
+
+    /**
+     *  Just to understand how to make this generic enough
+     * @param model
+     * @return
+     */
+    @GetMapping("/test/site")
+    public String viewSite(Model model) {
+        params = setGlobalVariables();
+
+        params.put("pageTitle", "CMS1");
+        params.put("theme", "cms1");
+
+        model.addAttribute("parameters", params);
+        return params.get("theme") + "/index";
     }
 }

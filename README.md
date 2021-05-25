@@ -28,6 +28,11 @@
 }'`
 
 
+create site: generates HomePage, ContactPage
+
+pages can be used to create Links
+
+
 ## CMS design
 
 
