@@ -16,7 +16,7 @@ public class Site {
     private String host;
     private String language;
     private String template="default";
-    private Map<String, String> colors;
+    private String colors; // key=v;...
 
     private Date created;
     private Date updated;
@@ -93,11 +93,11 @@ public class Site {
         this.template = template;
     }
 
-    public Map<String, String> getColors() {
+    public String getColors() {
         return colors;
     }
 
-    public void setColors(Map<String, String> colors) {
+    public void setColors(String colors) {
         this.colors = colors;
     }
 

@@ -32,6 +32,8 @@ create site: generates HomePage, ContactPage
 
 pages can be used to create Links
 
+http://localhost:9082/admin/site/1?page=2
+
 ```
 <li th:each="menu: ${parameters['headerMenu']}"
     th:class="(${menu.page.id} == ${parameters['page'].id}) ? 'active' : '' ">
@@ -43,7 +45,7 @@ pages can be used to create Links
 
 primary color: #ffc107
 
-seconday color: #08162
+secondary color: #08162
 
 ## CMS design
 

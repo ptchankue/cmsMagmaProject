@@ -78,11 +78,11 @@
                     </div>
                     <div class="col-lg-7 order-1 order-lg-2 p-0">
                         <ul class="footer-menu">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="solutions.html">Solutions</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li th:each="menu: ${parameters['footerMenu']}"
+                                th:class="(${menu.page.id} == ${parameters['page'].id}) ? 'active' : '' ">
+                                <a th:href="@{|/site/${parameters['site'].id}/view?page=${menu.page.id}|}"
+                                   th:text="${menu.title}">About us</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

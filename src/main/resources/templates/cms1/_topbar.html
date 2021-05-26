@@ -48,7 +48,7 @@
                 <ul>
                     <li th:each="menu: ${parameters['headerMenu']}"
                         th:class="(${menu.page.id} == ${parameters['page'].id}) ? 'active' : '' ">
-                        <a th:href="@{|/admin/site/${parameters['site'].id}?page=${menu.page.id}|}"
+                        <a th:href="@{|/site/${parameters['site'].id}/view?page=${menu.page.id}|}"
                            th:text="${menu.title}">About us</a>
                     </li>
                 </ul>

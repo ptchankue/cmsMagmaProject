@@ -16,6 +16,10 @@ WHERE NOT EXISTS (SELECT id FROM PAGE WHERE site_id=1 AND url='home');
 INSERT INTO PAGE(id, title, body, site_id, online, url)
 SELECT 2, 'Contact', 'xxx', 1, true, 'contact'
 WHERE NOT EXISTS (SELECT id FROM PAGE WHERE site_id=1 AND url='contact');
+
+INSERT INTO PAGE(id, title, body, site_id, online, url)
+SELECT 3, 'About Us', 'xxx', 1, true, 'about_us'
+WHERE NOT EXISTS (SELECT id FROM PAGE WHERE site_id=1 AND url='about_us');
 -- Menu
 INSERT INTO LINK(title, header, footer, page_id)
 SELECT 'Home', true, true, 1
@@ -24,3 +28,7 @@ WHERE NOT EXISTS (SELECT id FROM LINK WHERE page_id=1);
 INSERT INTO LINK(title, header, footer, page_id)
 SELECT 'Contact', true, true, 2
 WHERE NOT EXISTS (SELECT id FROM LINK WHERE page_id=2);
+
+INSERT INTO LINK(title, header, footer, page_id)
+SELECT 'About Us', true, true, 3
+WHERE NOT EXISTS (SELECT id FROM LINK WHERE page_id=3);

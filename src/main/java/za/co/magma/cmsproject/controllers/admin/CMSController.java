@@ -68,8 +68,10 @@ public class CMSController {
     List<Page> pageList = pageRepository.findBySite(site);
     System.out.println("Site: "+site.getName() +". Pages count: " + pageList.size());
 
-    List<Link> headerMenu = getHeaderMenu(pageList);
+    List<Link> headerMenu = getMenu(pageList, "header");
+    List<Link> footerMenu = getMenu(pageList, "footer");
     params.put("headerMenu", headerMenu);
+    params.put("footerMenu", footerMenu);
 
     if (page.isPresent()) {
       Page p = pageRepository.findById(page.get())
@@ -90,15 +92,18 @@ public class CMSController {
     return params.get("theme") + "/page";
   }
 
-  private List<Link> getHeaderMenu(List<Page> pageList) {
-    List<Link> headerMenu = new ArrayList<>();
+  private List<Link> getMenu(List<Page> pageList, String position) {
+    List<Link> menu = new ArrayList<>();
     for(Page p: pageList){
       Link link = linkRepository.findByPage(p);
-      if(null != link && link.isHeader()){
-        headerMenu.add(link);
-        System.out.println("\t"+link.getTitle()+", page="+link.getPage().getId());
+      if(null != link && link.isHeader() && "header".equalsIgnoreCase(position)){
+        menu.add(link);
+        System.out.println("\t"+link.getTitle()+", page="+link.getPage().getId()+", pos="+position);
+      } else  if(null != link && link.isHeader() && "footer".equalsIgnoreCase(position)){
+        menu.add(link);
+        System.out.println("\t"+link.getTitle()+", page="+link.getPage().getId()+", pos="+position);
       }
     }
-    return headerMenu;
+    return menu;
   }
 }
