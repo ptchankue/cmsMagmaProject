@@ -1,0 +1,58 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="topbar">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <header class="header-section clearfix">
+        <div class="header-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-navbar">
+            <!-- Logo -->
+            <a href="index.html" class="site-logo">
+                <img th:src="@{|/${parameters['theme']}/img/logo.png|}" alt="">
+            </a>
+            <div class="header-right">
+                <div class="header-info-box">
+                    <div class="hib-icon">
+                        <img th:src="@{|/${parameters['theme']}/img/icons/phone.png|}" alt="" >
+                    </div>
+                    <div class="hib-text">
+                        <h6 th:text="@{|${parameters['phone']}|}">+546 990221 123</h6>
+                        <p th:text="@{|${parameters['email']}|}">contact@industryalinc.com</p>
+                    </div>
+                </div>
+                <div class="header-info-box">
+                    <div class="hib-icon">
+                        <img th:src="@{|/${parameters['theme']}/img/icons/map-marker.png|}" alt="" >
+                    </div>
+                    <div class="hib-text">
+                        <h6>Main Str, no 23</h6>
+                        <p>NY, New York PK 23589</p>
+                    </div>
+                </div>
+                <button class="search-switch"><i class="fa fa-search"></i></button>
+            </div>
+            <!-- Menu -->
+            <nav class="site-nav-menu">
+                <ul>
+                    <li th:each="menu: ${parameters['headerMenu']}"
+                        th:class="(${menu.page.id} == ${parameters['page'].id}) ? 'active' : '' ">
+                        <a th:href="@{|/admin/site/${parameters['site'].id}?page=${menu.page.id}|}"
+                           th:text="${menu.title}">About us</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>

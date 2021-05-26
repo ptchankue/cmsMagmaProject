@@ -5,9 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.magma.cmsproject.domain.BlogPost;
+import za.co.magma.cmsproject.domain.Page;
 import za.co.magma.cmsproject.domain.Person;
+import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.repository.BlogPostRepository;
+import za.co.magma.cmsproject.repository.PageRepository;
 import za.co.magma.cmsproject.repository.PersonRepository;
+import za.co.magma.cmsproject.repository.SiteRepository;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -24,6 +28,12 @@ public class APIController {
 
     @Autowired
     private BlogPostRepository blogPostRepository;
+
+    @Autowired
+    private SiteRepository siteRepository;
+
+    @Autowired
+    private PageRepository pageRepository;
 
     @RequestMapping("/hello")
     public ResponseEntity myHelloAPI() {
@@ -73,5 +83,22 @@ public class APIController {
         return blogPostRepository.save(blogPost);
     }
 
+    @GetMapping("/blogpost")
+    public List<BlogPost> getAllPosts() {
+        return blogPostRepository.findAll();
+    }
+
+    @GetMapping("/pages")
+    public List<Page> getAllPagesBySite(@RequestParam(value = "siteId", required = false)
+                                                Optional<Long> siteId) {
+        if(siteId.isPresent()){
+            System.out.println("Site="+siteId.get());
+            Site site = siteRepository.findById(siteId.get()).orElse(null);
+
+            return pageRepository.findBySite(site);
+        }
+        System.out.println("Get all pages");
+        return pageRepository.findAll();
+    }
 
 }

@@ -32,6 +32,18 @@ create site: generates HomePage, ContactPage
 
 pages can be used to create Links
 
+```
+<li th:each="menu: ${parameters['headerMenu']}"
+    th:class="(${menu.page.id} == ${parameters['page'].id}) ? 'active' : '' ">
+    <a th:href="@{|/admin/site/${parameters['site'].id}?page=${menu.page.id}|}"
+       th:text="${menu.title}">About us</a>
+</li>
+```
+
+
+primary color: #ffc107
+
+seconday color: #08162
 
 ## CMS design
 

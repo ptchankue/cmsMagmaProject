@@ -8,12 +8,14 @@ management:
 spring:
   jpa:
     database-platform: za.co.magma.cmsproject.utils.SQLDialect
-    hibernate.ddl-auto: update
+    hibernate:
+      ddl-auto: update
 
 
   datasource:
     url: jdbc:sqlite:sqlitesample.db
     driver-class-name: org.sqlite.JDBC
+    initialization-mode: always
 
 #    username: admin
 #    password: admin

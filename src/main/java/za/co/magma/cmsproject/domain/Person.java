@@ -12,13 +12,25 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+
     @Column(nullable = false, unique = true)
     private String emailAddress;
+    private String phone;
+    @Column(name = "aboutme")
+    private String aboutMe;
+
     @ColumnDefault("false")
     private boolean administrator;
     private Date dateOfBirth;
+
+    private String company;
+    private String companyAddress; // SNAKE_CASE: company_address
+    private String position;
+
     private Date lastLoggedIn;
     private String password;
 
@@ -94,6 +106,46 @@ public class Person {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -102,8 +154,13 @@ public class Person {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", emailAddress='" + emailAddress + '\'' +
+            ", phone='" + phone + '\'' +
+            ", aboutMe='" + aboutMe + '\'' +
             ", administrator=" + administrator +
             ", dateOfBirth=" + dateOfBirth +
+            ", company='" + company + '\'' +
+            ", companyAddress='" + companyAddress + '\'' +
+            ", position='" + position + '\'' +
             ", lastLoggedIn=" + lastLoggedIn +
             '}';
     }

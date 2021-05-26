@@ -56,7 +56,8 @@
                                 <img th:src="@{|/${parameters['theme']}/img/icons/phone.png|}" alt="" class="">
                             </div>
                             <div class="fib-text">
-                                <p>+546 990221 123<br>contact@industryalinc.com</p>
+                                <p th:text="@{|${parameters['phone']}|}">+546 990221 123</p>
+                                <p th:text="@{|${parameters['email']}|}">+546 990221 123</p>
                             </div>
                         </div>
                         <form class="footer-search">

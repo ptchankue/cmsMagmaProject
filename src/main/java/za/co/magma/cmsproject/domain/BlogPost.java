@@ -9,8 +9,12 @@ public class BlogPost {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
-	private String body;	
-//	private Long person_id;
+	private String body;
+
+	@JoinColumn
+	@ManyToOne
+	private Person createdBy;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created_at;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -52,9 +56,23 @@ public class BlogPost {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
+
+	public Person getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Person createdBy) {
+		this.createdBy = createdBy;
+	}
+
 	@PrePersist
 	private void onCreate(){
 		this.created_at = new Date();
+	}
+
+	@PreUpdate
+	private void onUpdate(){
+		this.updated_at = new Date();
 	}
 
 	@Override
@@ -63,6 +81,7 @@ public class BlogPost {
 				"id=" + id +
 				", title='" + title + '\'' +
 				", body='" + body + '\'' +
+				", createdBy=" + createdBy +
 				", created_at=" + created_at +
 				", updated_at=" + updated_at +
 				'}';

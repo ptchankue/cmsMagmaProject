@@ -1,9 +1,6 @@
 package za.co.magma.cmsproject.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Link {
@@ -21,6 +18,10 @@ public class Link {
     // Page to be opened by this link, external?
     // internal: id=202, external: http://google.com
     private String pageUrl;
+
+    @JoinColumn
+    @OneToOne
+    private Page page;
 
     public Long getId() {
         return id;
@@ -76,5 +77,13 @@ public class Link {
 
     public void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
+    }
+
+    public Page getPage() {
+        return page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
     }
 }
