@@ -101,4 +101,11 @@ public class APIController {
         return pageRepository.findAll();
     }
 
+    @GetMapping("/sites/{id}/pages")
+    public List<Page> getSitesPages(@PathVariable(value = "id") long siteId) {
+        System.out.println("Site="+siteId);
+        Site site = siteRepository.findById(siteId).orElse(null);
+        return pageRepository.findBySite(site);
+    }
+
 }

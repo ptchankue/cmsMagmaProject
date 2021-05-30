@@ -15,6 +15,7 @@ import za.co.magma.cmsproject.repository.SiteRepository;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -34,6 +35,7 @@ public class CMSController {
 
   private Map<String, Object> params;
   private CMSUtils cmsUtils = new CMSUtils();
+  private Site _site;
 
   private Map<String, Object> setGlobalVariables() {
     params = new HashMap<>();
@@ -43,6 +45,10 @@ public class CMSController {
     params.put("pageTitle", "");
     params.put("name", "Valerie Luna");
     params.put("theme", "cms1");
+
+    // Get site colors
+
+    // Update in _styles, rename previous styles and create new one if there are different
 
     return params;
   }
@@ -70,8 +76,15 @@ public class CMSController {
 
     List<Link> headerMenu = getMenu(pageList, "header");
     List<Link> footerMenu = getMenu(pageList, "footer");
+    // Get menus
     params.put("headerMenu", headerMenu);
     params.put("footerMenu", footerMenu);
+    // Colors
+    try {
+      cmsUtils.updateCSSColors(site.getColors());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     if (page.isPresent()) {
       Page p = pageRepository.findById(page.get())
@@ -85,8 +98,6 @@ public class CMSController {
       params.put("body", p.getBody());
       params.put("page", p);
     }
-
-    // Get menus
 
     model.addAttribute("parameters", params);
     return params.get("theme") + "/page";

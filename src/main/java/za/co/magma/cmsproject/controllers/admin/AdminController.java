@@ -1,17 +1,16 @@
 package za.co.magma.cmsproject.controllers.admin;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import za.co.magma.cmsproject.domain.Link;
 import za.co.magma.cmsproject.domain.Page;
+import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
-import za.co.magma.cmsproject.repository.BlogPostRepository;
-import za.co.magma.cmsproject.repository.LinkRepository;
-import za.co.magma.cmsproject.repository.PageRepository;
-import za.co.magma.cmsproject.repository.SiteRepository;
+import za.co.magma.cmsproject.repository.*;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
 import javax.validation.Valid;
@@ -30,11 +29,15 @@ public class AdminController {
   private PageRepository pageRepository;
 
   @Autowired
+  private PageSectionRepository pageSectionRepository;
+
+  @Autowired
   private LinkRepository linkRepository;
 
   private LoginForm loginForm;
   private Map<String, Object> params;
   private CMSUtils cmsUtils = new CMSUtils();
+  private static Logger logger = Logger.getLogger(AdminController.class);
 
   private Map<String, Object> setGlobalVariables() {
     params = new HashMap<>();
@@ -43,13 +46,19 @@ public class AdminController {
     params.put("notifications", "4");
     params.put("pageTitle", "");
     params.put("name", "Valerie Luna");
+
     params.put("theme", "cms1");
+    params.put("phone", "+27 11 222 3333");
+    params.put("email", "contact@industryalinc.com");
+
+    params.put("sites", siteRepository.findAll());
 
     return params;
   }
 
   @RequestMapping("/home")
   public String home(Model model) {
+    logger.info("adminHome");
 
     Map<String, Map<String, String>> map = new HashMap<>();
     Map<String, String> w3cc = new HashMap<>();
@@ -60,6 +69,7 @@ public class AdminController {
 
     params.put("pageTitle", "MyCMS - Dashboard");
     model.addAttribute("parameters", params);
+    model.addAttribute("sites", siteRepository.findAll());
 
     return "admin/index";
   }
@@ -143,14 +153,71 @@ public class AdminController {
     if(null!=site){
       // Check if all needed variables exists
     }
-    params.put("pageTitle", "CMS1");
+    params.put("pageTitle", "CMS Admin Pages");
     params.put("theme", "cms1");
     params.put("slider", "true");
-
-    params.put("phone", "+27 11 222 3333");
-    params.put("email", "contact@industryalinc.com");
 
     model.addAttribute("parameters", params);
     return params.get("theme") + "/index";
   }
+
+  @GetMapping("/site")
+  public String viewADMINSite(@RequestParam("id") long id,  Model model) {
+    logger.info("viewADMINSite id=" + id);
+    params = setGlobalVariables();
+
+    Site site = siteRepository.findById(id).orElse(null);
+    System.out.println(">> SITE NAME: " + site!=null?site.getName():"No site loaded");
+    if(null!=site){
+      // Check if all needed variables exists
+      List<Page> pageList = pageRepository.findBySite(site);
+      params.put("pages", pageList);
+      params.put("site", site);
+
+    }
+    params.put("pageTitle", "CMS Admin Pages");
+    params.put("theme", "cms1");
+    params.put("slider", "true");
+
+    model.addAttribute("parameters", params);
+    return "admin/admin_pages";
+  }
+
+  @GetMapping("/edit/page")
+  public String viewADMINEditPage(@RequestParam("id") long id,  Model model) {
+    logger.info("viewADMINEditPage id=" + id);
+    params = setGlobalVariables();
+
+    Page page = pageRepository.findById(id).orElse(null);
+    if(null!=page){
+      // Check if all needed variables exists
+      params.put("page", page);
+      // GEt sections
+      List<PageSection> pageSectionList = pageSectionRepository.findByPage(page);
+      params.put("sections", pageSectionList);
+
+    }
+    params.put("pageTitle", "CMS Admin Edit Page");
+
+    model.addAttribute("parameters", params);
+    return "admin/admin_edit_page";
+  }
+
+  @GetMapping("/edit/section")
+  public String viewADMINEditSection(@RequestParam("id") long id,  Model model) {
+    logger.info("viewADMINEditSection id=" + id);
+    params = setGlobalVariables();
+
+    PageSection pageSection = pageSectionRepository.findById(id).orElse(null);
+    if(null!=pageSection){
+      // Check if all needed variables exists
+      params.put("section", pageSection);
+
+    }
+    params.put("pageTitle", "CMS Admin Edit Section");
+
+    model.addAttribute("parameters", params);
+    return "admin/admin_edit_section";
+  }
+
 }

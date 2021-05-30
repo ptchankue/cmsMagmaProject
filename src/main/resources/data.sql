@@ -20,6 +20,35 @@ WHERE NOT EXISTS (SELECT id FROM PAGE WHERE site_id=1 AND url='contact');
 INSERT INTO PAGE(id, title, body, site_id, online, url)
 SELECT 3, 'About Us', 'xxx', 1, true, 'about_us'
 WHERE NOT EXISTS (SELECT id FROM PAGE WHERE site_id=1 AND url='about_us');
+-- Page Sections
+--home page
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 1, 'Home_Services', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND title='Home_Services');
+
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 2, 'Home_Features', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=2);
+
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 3, 'Home_Clients', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=3);
+
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 4, 'Home_Testimonials', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=4);
+
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 5, 'Home_Call_To_Action', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=5);
+
+INSERT INTO PAGE_SECTION(id, title, html, page_id)
+SELECT 6, 'Home_Video', '<section></section>', 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=6);
+-- about us page
+
+-- contact page
+
 -- Menu
 INSERT INTO LINK(title, header, footer, page_id)
 SELECT 'Home', true, true, 1

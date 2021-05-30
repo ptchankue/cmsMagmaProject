@@ -43,10 +43,18 @@ http://localhost:9082/admin/site/1?page=2
 ```
 
 
-primary color: #ffc107
+    primary color: #ffc107
+    
+    secondary color: #08162
 
-secondary color: #08162
 
+    sections:
+    
+        left: image, right: title, content
+        
+        top: title, middle: content, bottom: cards
+    
+    
 ## CMS design
 
 
