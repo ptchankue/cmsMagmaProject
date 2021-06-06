@@ -18,6 +18,8 @@ public class Site {
     private String template="default";
     private String colors; // key=v;...
 
+    private int maximumNumberOfDocumentPerPage;
+
     private Date created;
     private Date updated;
 

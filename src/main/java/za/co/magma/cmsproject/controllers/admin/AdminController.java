@@ -10,6 +10,7 @@ import za.co.magma.cmsproject.domain.Page;
 import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
+import za.co.magma.cmsproject.domain.forms.SectionForm;
 import za.co.magma.cmsproject.repository.*;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
@@ -204,7 +205,8 @@ public class AdminController {
   }
 
   @GetMapping("/edit/section")
-  public String viewADMINEditSection(@RequestParam("id") long id,  Model model) {
+  public String viewADMINEditSection(@RequestParam("id") long id,
+                                     @RequestParam("template") String template, Model model) {
     logger.info("viewADMINEditSection id=" + id);
     params = setGlobalVariables();
 
@@ -212,6 +214,25 @@ public class AdminController {
     if(null!=pageSection){
       // Check if all needed variables exists
       params.put("section", pageSection);
+      params.put("template", template);
+//      logger.info(pageSection);
+
+      List<SectionForm> sectionFormList = new ArrayList<>();
+      sectionFormList.add(new SectionForm("Online", "checkbox", ""));
+
+      Map<String, Object> vars = new HashMap<>();
+      vars.put("title", "");
+
+      if(id==7){
+        String theme="top_area{imgTop:/cms1/img/page-top-bg/1.jpg<>textTitle:About us<>textBody:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor.<>textHello:Contact us}";
+        vars = cmsUtils.getSectionVariables(theme);
+        params.put("formFields", vars);
+        params.put("theme", theme);
+      }
+
+      model.addAttribute("section", pageSection);
+      model.addAttribute("formFields", vars);
+      model.addAttribute("variables", vars);
 
     }
     params.put("pageTitle", "CMS Admin Edit Section");
@@ -219,5 +240,33 @@ public class AdminController {
     model.addAttribute("parameters", params);
     return "admin/admin_edit_section";
   }
+
+  @PostMapping("/edit/section")
+  public String postADMINEditSection(@ModelAttribute @Valid PageSection section,Model model) {
+    logger.info("postADMINEditSection: " + section);
+    params = setGlobalVariables();
+    params.put("section", section);
+
+    PageSection pageSection = pageSectionRepository.findById(section.getId()).orElse(null);
+    if(null!=pageSection){
+      // Check if all needed variables exists
+      if(!section.equals(pageSection)){
+        section.setUpdated(new Date());
+
+        System.out.println("initial object has changed, update here");
+      }
+    }
+
+    params.put("pageTitle", "CMS Admin Edit Section");
+    params.put("template", section.getTemplate());
+
+    model.addAttribute("parameters", params);
+    model.addAttribute("sectionForm", section);
+
+    return "redirect:/admin/edit/section?id="+section.getId()+"&template="+section.getTemplate();
+
+//    return "admin/admin_edit_section";
+  }
+
 
 }

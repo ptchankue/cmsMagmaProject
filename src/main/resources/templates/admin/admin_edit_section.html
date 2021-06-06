@@ -27,7 +27,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800" th:text="|Edit section ${parameters['section']?.id} - ${parameters['section']?.title}|">
+          <h1 class="h3 mb-0 text-gray-800" th:text="|Edit section: ${parameters['section']?.id} - ${parameters['section']?.title}|">
             Dashboard
           </h1>
           <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -35,48 +35,63 @@
         </div>
 
         <!-- Content Row -->
-
         <div class="row">
-
-          <form>
+          <form th:action="@{/admin/edit/section}" method="post" th:object="${section}" enctype="multipart/form-data">
             <div>
               <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#sectionModal">
                 Choose section template
               </a>
-
+              <label th:text="${parameters['page']?.template}"></label>
             </div>
-            <div class="mb-3"><label for="exampleFormControlInput1">Title</label>
-              <input class="form-control" id="exampleFormControlInput1" type="text"
-                     th:value="${parameters['page']?.title}"
-                     placeholder="name@example.com">
+            <div class="mb-3">
+              <input class="form-control" id="id" type="hidden"
+                     th:field="*{id}" th:name="title">
             </div>
-
+            <div class="mb-3"><label for="title">Title</label>
+              <input class="form-control" id="title" type="text"
+                     th:field="*{title}" th:name="title">
+            </div>
             <div class="mb-0">
-              <label for="exampleFormControlTextarea1">Body</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"
-                        th:text="${parameters['page']?.body}"></textarea>
-            </div>
-            <div class="input-group input-group-joined" style="width: 16.5rem;">
-              <span class="input-group-text">
-                  <i data-feather="calendar"></i>
-              </span>
-              <input class="form-control ps-0" id="litepickerRangePlugin" placeholder="Select date range..." />
-            </div>
-            <a class="card card-icon lift lift-sm mb-4" href="#">
-              <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                  <div class="h5 card-title mb-0">Section</div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right flex-shrink-0 ms-4"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </div>
-              </div>
-            </a>
+              <label for="html">HTML</label>
+              <textarea class="form-control" id="html" rows="10" cols="100"
+                        th:field="*{html}" th:name="html"></textarea>
 
+            </div>
+            <div class="mb-0">
+              <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#viewModal">
+                View 2
+              </a>
+
+              <a class="btn btn-primary" onclick="openModal()">
+                View 3
+              </a>
+            </div>
+            <div class="mb-0" th:each="item: ${parameters['formFields']}">
+              <label th:text="${item.value.title}">HTML</label>
+              <input class="form-control" th:id="${item.key}" th:type="${item.value.type}"
+                     th:value="${item.value.text}" th:onchange="changeSectionItem(this)">
+            </div>
+            <input class="form-control" type="hidden" id="theme"
+                   th:value="${parameters['theme']}">
+            <div class="mb-0">
+              <label for="online">Online?</label>
+              <input type="checkbox" name="" id="online" th:field="*{online}" th:name="online"/>
+            </div>
+            <div class="mb-0">
+              <label for="page">Page</label>
+              <input type="text" id="page" th:field="*{page}" th:name="page" />
+            </div>
+<!--            <div class="mb-0">-->
+<!--              <label for="updated">Updated at</label>-->
+<!--              <input type="datetime-local" id="updated" th:field="*{updated}" th:name="updated"/>-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
+
       </div>
     </div>
     <!-- End of Main Content -->
-
     <!-- Footer -->
     <!--/*/ <th:block th:include="admin/_footer :: footer"></th:block>/*/-->
     <!-- End of Footer -->
@@ -92,7 +107,8 @@
 
 <!--/*/ <th:block th:include="admin/_scripts :: scripts"></th:block>/*/-->
 
-<!-- Logout Modal-->
+<!-- Section Template Modal-->
+
 <div class="modal fade" id="sectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -124,6 +140,97 @@
   </div>
 </div>
 
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modelTitle">Preview your section</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="preview_area"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div id="viewModal" class="w3-modal">-->
+<!--  <div class="w3-modal-content w3-animate-zoom w3-padding-large">-->
+<!--    <div class="w3-container w3-white w3-center">-->
+<!--      <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-button w3-xlarge w3-right w3-transparent"></i>-->
+<!--      <h2 class="w3-wide">PREVIEW</h2>-->
+<!--      <p>Join our mailing list to receive updates on available dates and special offers.</p>-->
+<!--      <p id="preview_area"></p>-->
+<!--      <button type="button" class="w3-button w3-padding-large w3-green w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<script>
+    function openModal() {
+        console.log('openModal called!');
+        console.log($('#theme').val());
+        // set content
+        var div = document.getElementById('preview_area');
+        var htm = document.getElementById('html').value; // html code in textarea
+
+        div.innerHTML = htm;
+
+        $('#viewModal').modal('show');
+    }
+    $('#preview_area').html($("#html").val());
+
+    function changeSectionItem(elem) {
+      var textTemplate = $('#theme').val();
+      // look for text between 'item:' and '<>' or '}'
+      var tag = elem.getAttribute('id') + ':';
+      var value = elem.getAttribute('value');
+      console.log(tag + ' --> ' + value)
+      var value2 = $('#' + elem.getAttribute('id')).val();
+      var newText = tag + value2;
+      var startText = textTemplate.substring(textTemplate.lastIndexOf(tag));
+      // check if not last item in the template
+      if (startText.indexOf('<>') === -1) {
+        var endText = startText.substring(0, startText.indexOf('}'));
+      } else {
+        var endText = startText.substring(0, startText.indexOf('<>'));
+      }
+      console.log('endText: ' + endText);
+      var result = textTemplate.replace(endText, newText);
+      // update preview field
+      var payload = {
+        "template": result
+      }
+      console.log('textTemplate: ' + textTemplate);
+
+      $("#theme").text(result);
+
+      console.log('result: ' + result);
+      var content = getHtml(payload);
+      console.log(content);
+
+      $("#html").text(content);
+    }
+
+    function getHtml(payload) {
+      $.ajax({
+        type: "POST",
+        url: "/api/admin/section/generate",
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function( data ) {
+          console.log( data.html );
+          return data.html;
+        },
+        dataType: "json"
+      });
+    }
+</script>
 </body>
 
 </html>

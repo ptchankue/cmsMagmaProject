@@ -3,10 +3,18 @@ package za.co.magma.cmsproject.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import za.co.magma.cmsproject.domain.Person;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+
+import static za.co.magma.cmsproject.constants.Constants.UPLOAD_FOLDER;
 
 @Controller
 public class ExampleController {
@@ -22,6 +30,41 @@ public class ExampleController {
         return "hello";
     }
 
+    @GetMapping("/upload")
+    String uploadFile(Model model) {
+        return "upload";
+    }
+
+    @PostMapping("/upload")
+    String uploadFilePost(Model model, @RequestParam("files") MultipartFile file,
+                          RedirectAttributes redirectAttributes) {
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:upload";
+        }
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOAD_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            redirectAttributes.addFlashAttribute("message",
+                "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("files", file);
+        System.out.println(file);
+        return "redirect:upload";
+    }
+
+    @GetMapping("/tinymce")
+    String tinyMCEExample(Model model) {
+        model.addAttribute("person", new Person());
+        return "tinymce";
+    }
     @RequestMapping("/tourism")
     String myTest(Model model) {
 

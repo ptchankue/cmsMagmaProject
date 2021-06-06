@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiny MCE integration</title>
+
+
+</head>
+<body>
+<h1>Tiny MCE integration</h1>
+<!--<form th:action="@{/addPerson}" th:object="${person}" method="post">-->
+<form th:action="@{/hello}" th:object="${person}" method="post">
+
+    <div>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" placeholder="Vuyo" />
+    </div>
+    <div>
+        <label>Message:</label>
+        <textarea id="myTextarea">
+
+        </textarea>
+    </div>
+
+    <input type="submit" value="Submit"/>
+</form>
+
+<script th:src="@{/js/tinymce/js/tinymce/tinymce.min.js}"></script>
+
+<script type="text/javascript">
+tinymce.init({
+    selector: '#myTextarea',
+    height: 300,
+    theme: 'modern',
+    plugins: [
+      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen',
+      'insertdatetime media nonbreaking save table contextmenu directionality',
+      'emoticons template paste textcolor colorpicker textpattern imagetools'
+    ],
+    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    toolbar2: 'print preview media | forecolor backcolor emoticons',
+    image_advtab: true
+});
+</script>
+</body>
+</html>

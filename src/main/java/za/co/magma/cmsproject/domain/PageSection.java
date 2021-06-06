@@ -2,6 +2,7 @@ package za.co.magma.cmsproject.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class PageSection {
@@ -10,7 +11,10 @@ public class PageSection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    private String template; // cta[text:""<->button:"Contact Us"]
     private String html;
+    @Column(columnDefinition = "int default 0")
+    private int position;
     @Column(columnDefinition = "boolean default true")
     private boolean online;
     @JoinColumn
@@ -34,6 +38,14 @@ public class PageSection {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public String getHtml() {
@@ -76,6 +88,14 @@ public class PageSection {
         this.online = online;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @PrePersist
     private void onCreate(){
         this.created = new Date();
@@ -87,11 +107,26 @@ public class PageSection {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageSection that = (PageSection) o;
+        return online == that.online && id.equals(that.id) && title.equals(that.title) && Objects.equals(template, that.template) && html.equals(that.html) && page.equals(that.page) && Objects.equals(created, that.created) && Objects.equals(updated, that.updated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, template, html, online, page, created, updated);
+    }
+
+    @Override
     public String toString() {
         return "PageSection{" +
             "id=" + id +
             ", title='" + title + '\'' +
+            ", template='" + template + '\'' +
             ", html='" + html + '\'' +
+            ", position=" + position +
             ", online=" + online +
             ", page=" + page +
             ", created=" + created +

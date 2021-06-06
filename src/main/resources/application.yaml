@@ -11,6 +11,10 @@ spring:
     hibernate:
       ddl-auto: update
 
+  http:
+    multipart:
+      max-file-size: 10MB
+
 
   datasource:
     url: jdbc:sqlite:sqlitesample.db

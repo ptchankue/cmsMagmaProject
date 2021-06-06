@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.magma.cmsproject.domain.BlogPost;
-import za.co.magma.cmsproject.domain.Page;
-import za.co.magma.cmsproject.domain.Person;
-import za.co.magma.cmsproject.domain.Site;
+import za.co.magma.cmsproject.domain.*;
 import za.co.magma.cmsproject.repository.BlogPostRepository;
 import za.co.magma.cmsproject.repository.PageRepository;
 import za.co.magma.cmsproject.repository.PersonRepository;
 import za.co.magma.cmsproject.repository.SiteRepository;
+import za.co.magma.cmsproject.utils.CMSUtils;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -106,6 +104,15 @@ public class APIController {
         System.out.println("Site="+siteId);
         Site site = siteRepository.findById(siteId).orElse(null);
         return pageRepository.findBySite(site);
+    }
+
+    @PostMapping("/admin/section/generate")
+    public ResponseEntity<ConvertTemplateOutput> getHtmlOfSection(@RequestBody ConvertTemplateInput input) {
+        CMSUtils cmsUtils = new CMSUtils();
+        Map<String, Object> tempVariables = cmsUtils.getSectionVariables(input.getTemplate());
+        ConvertTemplateOutput output = new ConvertTemplateOutput();
+        output.setHtml(cmsUtils.generateHtml(cmsUtils.getTemplateIdFromTemplate(input.getTemplate()), tempVariables));
+        return ResponseEntity.status(HttpStatus.CREATED).body(output);
     }
 
 }

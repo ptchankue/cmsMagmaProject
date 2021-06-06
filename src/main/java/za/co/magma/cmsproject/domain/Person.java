@@ -25,6 +25,9 @@ public class Person {
 
     @ColumnDefault("false")
     private boolean administrator;
+    @ColumnDefault("false")
+    private boolean superAdministrator;
+
     private Date dateOfBirth;
 
     private String company;
@@ -32,6 +35,8 @@ public class Person {
     private String position;
 
     private Date lastLoggedIn;
+
+    private Date passwordUpdateDate;
     private String password;
 
     public Long getId() {

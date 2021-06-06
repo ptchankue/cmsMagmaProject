@@ -54,7 +54,15 @@ http://localhost:9082/admin/site/1?page=2
         
         top: title, middle: content, bottom: cards
     
+    cta[text:""<>button:"Contact Us"]
     
+    about[img:"/cms1/img/about.jpg"<>title:"We produce or supply Goods & Services"<>text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. Donec consequat arcu et commodo interdum. Vivamus posuere lorem lacus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. "<>sign-img:"/cms1/img/sign.png"<>sign-name:"Michael Smith"<>sing-title:"CEO Industrial Inc"]
+
+https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+
+Drag and drop: https://www.cssscript.com/drag-drop-dragonflyjs/
+
+
 ## CMS design
 
 

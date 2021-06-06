@@ -9,9 +9,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import za.co.magma.cmsproject.domain.forms.SectionForm;
 
 
 import static za.co.magma.cmsproject.constants.Constants.*;
@@ -96,4 +101,56 @@ public class CMSUtils {
     }
   }
 
+  public String getTemplateIdFromTemplate(String template){
+    template = template.trim();
+    String variableString= StringUtils.substringBetween(template,"{", "}");
+    System.out.println(variableString);
+    return template.replace(variableString, "").replace("{}", "");
+  }
+  public Map<String, Object> getSectionVariables(String template){
+    // cta{text:""<>button:"Contact Us"}
+    // validate template
+    Map<String, Object> resp = new HashMap<>();
+
+    template = template.trim();
+    String variableString= StringUtils.substringBetween(template,"{", "}");
+    String tempId=getTemplateIdFromTemplate(template);
+    System.out.println("Template ID: " + tempId);
+    //if(SESSION_TEMPLATES.)
+    String[] vars = variableString.split(VARIABLE_SEPARATOR);
+    for(String v: vars){
+      String[] l = v.split(":");
+      if(l.length==2){
+        SectionForm sectionForm = new SectionForm();
+        sectionForm.setText(l[1].trim());
+        sectionForm.setType(l[0].trim().startsWith("text")?"text":"file");
+        sectionForm.setTitle(l[0].trim());
+
+        resp.put(l[0].trim(), sectionForm);
+        System.out.println(l[0]+" --> "+resp.get(l[0]));
+
+      }
+    }
+    return resp;
+  }
+  public String generateHtml(String tempId, Map<String, Object> variablesMap){
+    String fileName="templates/admin/sections/"+ tempId +".html";
+    String content="";
+    try {
+      content = IOUtils.toString(getFileFromResourceAsStream(fileName), StandardCharsets.UTF_8.name());
+
+//      System.out.println(content);
+
+      for(Map.Entry<String, Object>e:variablesMap.entrySet()){
+        String reg="@"+e.getKey()+"@";
+        SectionForm sectionForm = (SectionForm) e.getValue();
+        content = content.replaceAll(reg, sectionForm.getText());
+      }
+//      System.out.println(content);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return content;
+  }
 }

@@ -46,7 +46,9 @@ INSERT INTO PAGE_SECTION(id, title, html, page_id)
 SELECT 6, 'Home_Video', '<section></section>', 1
 WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=1 AND id=6);
 -- about us page
-
+INSERT INTO PAGE_SECTION(id, title, html, page_id, position)
+SELECT 7, 'About_Top', '<section></section>', 3, 1
+WHERE NOT EXISTS (SELECT id FROM PAGE_SECTION WHERE page_id=3 AND id=7);
 -- contact page
 
 -- Menu
