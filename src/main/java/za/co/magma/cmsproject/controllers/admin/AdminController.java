@@ -11,6 +11,7 @@ import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
 import za.co.magma.cmsproject.domain.forms.SectionForm;
+import za.co.magma.cmsproject.domain.sections.SectionGeneric;
 import za.co.magma.cmsproject.repository.*;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
@@ -206,7 +207,7 @@ public class AdminController {
 
   @GetMapping("/edit/section")
   public String viewADMINEditSection(@RequestParam("id") long id,
-                                     @RequestParam("template") String template, Model model) {
+                                     @RequestParam(value = "template", required = false) String template, Model model) {
     logger.info("viewADMINEditSection id=" + id);
     params = setGlobalVariables();
 
@@ -223,10 +224,10 @@ public class AdminController {
       Map<String, Object> vars = new HashMap<>();
       vars.put("title", "");
 
-      if(id==7){
+      if(id == 7){
+        SectionGeneric sectionGeneric = new SectionGeneric(pageSection);
         String theme="top_area{imgTop:/cms1/img/page-top-bg/1.jpg<>textTitle:About us<>textBody:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor.<>textHello:Contact us}";
-        vars = cmsUtils.getSectionVariables(theme);
-        params.put("formFields", vars);
+        params.put("formFields", sectionGeneric.getFields());
         params.put("theme", theme);
       }
 

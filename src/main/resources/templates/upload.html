@@ -2,9 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Upload from spring boot</title>
+
+    <link rel="stylesheet" th:href="@{/css/w3.css}">
+
+    <script th:src="@{/admin/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
+<body class="w3-container">
 <h1>Spring boot</h1>
 <h3>Upload file</h3>
 
@@ -18,8 +23,17 @@
         <input type="file" name="files" />
     </div>
 
+    <textarea id="text1" onchange="update()"></textarea>
     <input type="submit" value="Submit"/>
 </form>
 
+<p id="area"></p>
+
+<script>
+    function update(){
+        // $('#area').text($('#text1'));
+        $('#area').text($('#text1').val())
+    }
+</script>
 </body>
 </html>
