@@ -14,7 +14,7 @@ import za.co.magma.cmsproject.repository.PageRepository;
 import za.co.magma.cmsproject.repository.SiteRepository;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.*;
 

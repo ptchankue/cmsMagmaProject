@@ -15,7 +15,7 @@ import za.co.magma.cmsproject.domain.sections.SectionGeneric;
 import za.co.magma.cmsproject.repository.*;
 import za.co.magma.cmsproject.utils.CMSUtils;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.*;
 
 @Controller

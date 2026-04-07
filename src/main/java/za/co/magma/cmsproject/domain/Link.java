@@ -1,6 +1,6 @@
 package za.co.magma.cmsproject.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class Link {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
 import za.co.magma.cmsproject.repository.BlogPostRepository;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 

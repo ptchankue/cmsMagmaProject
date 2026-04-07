@@ -1,0 +1,37 @@
+services:
+  web:
+    build: .
+    ports:
+      - "9082:9082"
+#    depends_on:
+#      - db
+    environment:
+      # Override any backend configuration that might interfere
+      SERVER_PORT: 9082
+      SPRING_APPLICATION_NAME: frontend
+      # Database connection for Docker
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: mydb
+      DB_USER: user
+      DB_PASSWORD: password
+    # Keep container running even if Maven command completes
+    stdin_open: true
+    tty: true
+
+#  db:
+#    image: postgres:13
+#    container_name: postgres-db
+#    environment:
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: mydb
+#    # Don't expose port to host - only accessible within Docker network
+#    # ports:
+#    #   - "5432:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#
+#volumes:
+#  postgres_data:
+
