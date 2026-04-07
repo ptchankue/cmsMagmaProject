@@ -4,7 +4,7 @@
       class="shortpoint-cssanimations shortpoint-borderimage shortpoint-cssgradients shortpoint-hsla shortpoint-mediaqueries shortpoint-rgba shortpoint-csstransforms shortpoint-csstransforms3d shortpoint-csstransitions shortpoint-no-touchevents sp-branding-runtime sp-platform-sp-2016 sp-package-sharepoint-2016 sp-product-sp-on-premise sp-no-sp-edit-mode sp-path-name-home sp-no-is-lightbox sp-no-sp-branding-page-type shortpoint-mobile-menu-off"
       data-sp-site-type="root" data-sp-homepage="true" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <head th:include="site1/fragments/headerfiles :: headerfiles"></head>
+    <head th:include="themes/site1/fragments/headerfiles :: headerfiles"></head>
 
 <body onhashchange="if (typeof(_spBodyOnHashChange) != &#39;undefined&#39;) _spBodyOnHashChange();" class="new-imp">
 <form method="post" action="https://www.tourism.gov.za/Pages/home.aspx" onsubmit="javascript:return WebForm_OnSubmit();"
@@ -496,7 +496,7 @@
             </nav>
             <!--Custom Header and other Ribbon stuff-->
 
-            <header th:include="site1/header :: header"></header>
+            <header th:include="themes/site1/header :: header"></header>
 
             <!--Breadcrump-->
             <div class="main-crumb s4-notdlg">
@@ -519,7 +519,7 @@
             <!-- Lakshmi, this is the new slider code, comment it out if you have to go back to the old code above. Benjie -->
             <!--Banner SlideShow-->
 
-            <div th:include="site1/slides :: sliders"></div>
+            <div th:include="themes/site1/slides :: sliders"></div>
 
             <script>//<![CDATA[
             var myIndex = 0;
@@ -1528,7 +1528,7 @@ activity with potential to increasing GDP growth.</span></span></p>
             </div>
             <div class="clearfix">
 
-                <footer th:include="site1/footer :: footer"></footer>
+                <footer th:include="themes/site1/footer :: footer"></footer>
 
             </div>
         </div>

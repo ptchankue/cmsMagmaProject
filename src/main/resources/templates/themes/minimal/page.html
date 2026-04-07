@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="${parameters.page != null ? parameters.page.title : 'Page'}">Page</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 1.5rem auto; padding: 0 1rem; line-height: 1.55; color: #0f172a; }
+    </style>
+</head>
+<body>
+<main th:utext="${parameters['body']}">Body</main>
+<p class="small text-muted" style="margin-top:2rem;" th:if="${parameters.site != null}">
+    <span th:text="${parameters.site.name}">Site</span> — minimal theme (<code>templates/themes/minimal/</code>)
+</p>
+</body>
+</html>

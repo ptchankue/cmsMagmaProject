@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:include="themes/government/_head :: head" th:with="parameters=${parameters}"></th:block>/*/-->
+<body class="gov-body">
+<a href="#content" class="gov-skip">Skip to main content</a>
+<!--/*/ <th:block th:include="themes/government/_header :: header" th:with="parameters=${parameters}"></th:block>/*/-->
+<div th:if="${parameters['page'] != null and parameters['page'].url == 'home'}">
+    <!--/*/ <th:block th:include="themes/government/_hero :: hero" th:with="parameters=${parameters}"></th:block>/*/-->
+</div>
+
+<main id="content" class="gov-main gov-prose">
+    <article class="gov-panel">
+        <div th:utext="${parameters['body']}">Page body</div>
+    </article>
+</main>
+
+<!--/*/ <th:block th:include="themes/government/_footer :: footer" th:with="parameters=${parameters}"></th:block>/*/-->
+</body>
+</html>

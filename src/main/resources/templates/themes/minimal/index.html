@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="${parameters.pageTitle != null ? parameters.pageTitle : 'Home'}">Home</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.55; color: #0f172a; }
+    </style>
+</head>
+<body>
+<h1 th:text="${parameters.site != null ? parameters.site.name : 'Site'}">Site</h1>
+<p class="text-muted">Minimal theme — content-focused pages only (no cms1 chrome). Edit <code>templates/themes/minimal/index.html</code>.</p>
+<div th:if="${parameters['body'] != null}" th:utext="${parameters['body']}"></div>
+</body>
+</html>

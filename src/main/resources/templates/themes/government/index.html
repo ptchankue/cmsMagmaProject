@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:include="themes/government/_head :: head" th:with="parameters=${parameters}"></th:block>/*/-->
+<body class="gov-body">
+<a href="#content" class="gov-skip">Skip to main content</a>
+<!--/*/ <th:block th:include="themes/government/_header :: header" th:with="parameters=${parameters}"></th:block>/*/-->
+<!--/*/ <th:block th:include="themes/government/_hero :: hero" th:with="parameters=${parameters}"></th:block>/*/-->
+
+<main id="content" class="gov-main">
+    <section class="gov-panel">
+        <h3>Quick access</h3>
+        <p class="gov-muted-text" style="margin-top:0;">
+            Common entry points styled like departmental portals (multi-column footer, masthead, banner strip).
+        </p>
+        <div class="gov-grid" th:if="${parameters['quickLinks'] != null}">
+            <a th:each="q : ${parameters['quickLinks']}" class="gov-card" th:href="${q['href']}">
+                <p class="gov-card-title" th:text="${q['title']}">Title</p>
+                <p class="gov-card-desc" th:text="${q['desc']}">Description</p>
+            </a>
+        </div>
+        <div class="gov-grid" th:unless="${parameters['quickLinks'] != null}">
+            <a class="gov-card" href="#"><p class="gov-card-title">Online services</p><p class="gov-card-desc">Applications, status checks, and forms.</p></a>
+            <a class="gov-card" href="#"><p class="gov-card-title">Publications</p><p class="gov-card-desc">Policies, annual reports, and guides.</p></a>
+            <a class="gov-card" href="#"><p class="gov-card-title">News &amp; notices</p><p class="gov-card-desc">Press releases and public consultations.</p></a>
+            <a class="gov-card" href="#"><p class="gov-card-title">Contact</p><p class="gov-card-desc">Hotlines, regional offices, and feedback.</p></a>
+        </div>
+    </section>
+
+    <section class="gov-panel" th:if="${continents != null}">
+        <h3>Demo data (continents)</h3>
+        <p class="gov-muted-text" style="margin-top:0;font-size:0.9rem;">Same sample list as <code>/tourism</code> — shows how to bind arbitrary model attributes.</p>
+        <ul style="columns:2;margin:0;padding-left:1.25rem;">
+            <li th:each="c : ${continents}" th:text="${c}">Region</li>
+        </ul>
+    </section>
+</main>
+
+<!--/*/ <th:block th:include="themes/government/_footer :: footer" th:with="parameters=${parameters}"></th:block>/*/-->
+</body>
+</html>

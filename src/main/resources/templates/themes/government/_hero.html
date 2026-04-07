@@ -1,0 +1,11 @@
+<section xmlns:th="http://www.thymeleaf.org" th:fragment="hero" class="gov-hero">
+    <div class="gov-hero-inner">
+        <h2 th:text="${parameters['heroTitle'] != null ? parameters['heroTitle'] : 'Serving citizens'}">Headline</h2>
+        <p th:text="${parameters['heroLead'] != null ? parameters['heroLead'] : 'Access programmes, documents, and departmental news from one structured portal — similar in spirit to large national tourism and departmental sites.'}">
+            Lead text
+        </p>
+        <a class="gov-btn"
+           th:href="${parameters['heroCtaHref'] != null ? parameters['heroCtaHref'] : '#content'}"
+           th:text="${parameters['heroCtaText'] != null ? parameters['heroCtaText'] : 'Explore services'}">CTA</a>
+    </div>
+</section>

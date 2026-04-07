@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<!--/*/ <th:block th:include="cms1/_head :: head" th:with="parameters=${parameters}"></th:block>/*/-->
+<!--/*/ <th:block th:include="themes/cms1/_head :: head" th:with="parameters=${parameters}"></th:block>/*/-->
 
 <body>
 
 	<!-- Header section  -->
-	<!--/*/ <th:block th:include="cms1/_topbar :: topbar" th:with="parameters=${parameters}"></th:block>/*/-->
+	<!--/*/ <th:block th:include="themes/cms1/_topbar :: topbar" th:with="parameters=${parameters}"></th:block>/*/-->
 	<!-- Header section end  -->
 	<div th:if="${parameters['page']['url']} == 'home'">
 		<!-- Hero section  -->
-		<!--/*/ <th:block th:include="cms1/_slider :: slider" th:with="parameters=${parameters}"></th:block>/*/-->
+		<!--/*/ <th:block th:include="themes/cms1/_slider :: slider" th:with="parameters=${parameters}"></th:block>/*/-->
 		<!-- Hero section end  -->
 	</div>
 
@@ -20,7 +20,7 @@
 	<!-- Page section end  -->
 
 	<!-- Footer section -->
-	<!--/*/ <th:block th:include="cms1/_footer :: footer" th:with="parameters=${parameters}"></th:block>/*/-->
+	<!--/*/ <th:block th:include="themes/cms1/_footer :: footer" th:with="parameters=${parameters}"></th:block>/*/-->
 	<!-- Footer section end -->
 
 	</body>

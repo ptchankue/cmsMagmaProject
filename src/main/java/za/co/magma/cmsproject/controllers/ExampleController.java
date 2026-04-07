@@ -5,13 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import za.co.magma.cmsproject.cms.CmsTemplateCatalog;
 import za.co.magma.cmsproject.domain.Person;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static za.co.magma.cmsproject.utils.Constants.UPLOAD_FOLDER;
@@ -66,20 +69,70 @@ public class ExampleController {
         return "tinymce";
     }
     @RequestMapping("/tourism")
-    String myTest(Model model) {
+    String tourismGovernmentLayout(Model model) {
+        addGovernmentPortalModel(model, true);
+        return CmsTemplateCatalog.themeView("government", "index");
+    }
 
-        String[] continents = {
-                "Africa", "Antarctica", "Asia", "Australia",
-                "Europe", "North America", "Sourth America"
-        };
-//        return "site1/Department of Tourism";
-        String[] menus = {
+    /**
+     * Same government theme as {@code /tourism}, with generic department labelling.
+     */
+    @GetMapping("/government")
+    String governmentPortal(Model model) {
+        addGovernmentPortalModel(model, false);
+        return CmsTemplateCatalog.themeView("government", "index");
+    }
 
-        };
-
+    /** Original heavy tourism snapshot (SharePoint-style markup) — kept for reference. */
+    @GetMapping("/tourism/classic")
+    String tourismClassicSnapshot(Model model) {
+        String[] continents = DEMO_CONTINENTS;
         model.addAttribute("continents", continents);
+        return CmsTemplateCatalog.themeView("site1", "index");
+    }
 
-        return "site1/index";
+    private static final String[] DEMO_CONTINENTS = {
+        "Africa", "Antarctica", "Asia", "Australia",
+        "Europe", "North America", "South America"
+    };
+
+    private void addGovernmentPortalModel(Model model, boolean tourismBranding) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("theme", "government");
+        if (tourismBranding) {
+            params.put("pageTitle", "National Department of Tourism · Portal");
+            params.put("departmentName", "National Department of Tourism");
+            params.put("tagline", "Official portal layout — structured access to information, services, and sector programmes.");
+            params.put("kicker", "Republic of South Africa · Tourism sector");
+            params.put("heroTitle", "Welcome to the Department of Tourism");
+            params.put("heroLead",
+                "This page uses the new government theme: utility bar, crest masthead, banner, quick-access cards, and multi-column footer — "
+                    + "in the same spirit as large departmental sites, without the legacy SharePoint HTML weight.");
+            params.put("copyright", "© Demo layout only. Not the real tourism.gov.za website.");
+        } else {
+            params.put("pageTitle", "National government · Portal demo");
+            params.put("departmentName", "National Department of Example Affairs");
+            params.put("tagline", "Citizen-centred information and services — demo content.");
+            params.put("kicker", "Republic · Official portal (demo)");
+            params.put("heroTitle", "Welcome to our online services");
+            params.put("heroLead",
+                "Use this theme from the CMS by setting the site front-end theme to “government”. "
+                    + "Styles live under static/government/css/; Thymeleaf under templates/themes/government/.");
+            params.put("copyright", "© Demo government portal template.");
+        }
+        params.put("heroCtaText", "Quick access below");
+        params.put("heroCtaHref", "#content");
+
+        List<Map<String, String>> quickLinks = Arrays.asList(
+            Map.of("title", "About the department", "desc", "Mandate, leadership, and organisational structure.", "href", "#"),
+            Map.of("title", "Programmes & incentives", "desc", "Funds, grants, and sector support (demo).", "href", "#"),
+            Map.of("title", "Publications", "desc", "Strategies, annual reports, and legislation.", "href", "#"),
+            Map.of("title", "Contact & feedback", "desc", "Hotlines, offices, and service standards.", "href", "#")
+        );
+        params.put("quickLinks", quickLinks);
+
+        model.addAttribute("parameters", params);
+        model.addAttribute("continents", DEMO_CONTINENTS);
     }
 
     @RequestMapping("/welcome")

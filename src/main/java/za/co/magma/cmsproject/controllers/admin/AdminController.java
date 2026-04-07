@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import za.co.magma.cmsproject.domain.Page;
 import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
+import za.co.magma.cmsproject.cms.CmsTemplateCatalog;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
 import za.co.magma.cmsproject.domain.forms.SectionForm;
 import za.co.magma.cmsproject.domain.sections.SectionGeneric;
@@ -162,7 +163,7 @@ public class AdminController {
     params.put("slider", "true");
 
     model.addAttribute("parameters", params);
-    return params.get("theme") + "/index";
+    return CmsTemplateCatalog.themeView((String) params.get("theme"), "index");
   }
 
   @GetMapping("/sites")
@@ -179,6 +180,7 @@ public class AdminController {
     params.put("pageTitle", "New site");
     model.addAttribute("parameters", params);
     model.addAttribute("siteEntity", new Site());
+    model.addAttribute("siteThemes", CmsTemplateCatalog.siteThemes());
     return "admin/admin_edit_site";
   }
 
@@ -190,43 +192,76 @@ public class AdminController {
       ra.addFlashAttribute("error", "Site not found");
       return "redirect:/admin/sites";
     }
+    site.setTemplate(CmsTemplateCatalog.normalizeSiteTheme(site.getTemplate()));
     params.put("pageTitle", "Edit site");
     model.addAttribute("parameters", params);
     model.addAttribute("siteEntity", site);
+    model.addAttribute("siteThemes", CmsTemplateCatalog.siteThemes());
     return "admin/admin_edit_site";
   }
 
   @PostMapping("/site/save")
-  public String saveSite(@ModelAttribute Site siteEntity, RedirectAttributes ra) {
+  public String saveSite(@ModelAttribute Site siteEntity,
+                         @RequestParam(value = "seedDefaultPages", required = false) String seedDefaultPages,
+                         RedirectAttributes ra) {
+    Long incomingId = siteEntity.getId();
     if (siteEntity.getName() == null || siteEntity.getName().isBlank()) {
       ra.addFlashAttribute("error", "Site name is required");
-      if (siteEntity.getId() != null) {
-        return "redirect:/admin/site/edit?id=" + siteEntity.getId();
+      if (incomingId != null && incomingId > 0) {
+        return "redirect:/admin/site/edit?id=" + incomingId;
       }
       return "redirect:/admin/site/new";
     }
-    if (siteEntity.getId() != null && siteRepository.existsById(siteEntity.getId())) {
-      Site existing = siteRepository.findById(siteEntity.getId()).get();
+    boolean updateExisting =
+        incomingId != null && incomingId > 0 && siteRepository.existsById(incomingId);
+    if (updateExisting) {
+      Site existing = siteRepository.findById(incomingId).get();
       existing.setName(siteEntity.getName().trim());
       existing.setPhone(siteEntity.getPhone());
       existing.setEmail(siteEntity.getEmail());
       existing.setHost(siteEntity.getHost());
       existing.setLanguage(siteEntity.getLanguage());
-      existing.setTemplate(siteEntity.getTemplate() != null ? siteEntity.getTemplate() : "cms1");
+      existing.setTemplate(CmsTemplateCatalog.normalizeSiteTheme(siteEntity.getTemplate()));
       siteRepository.save(existing);
       ra.addFlashAttribute("message", "Site updated");
       return "redirect:/admin/site/edit?id=" + existing.getId();
     }
     Site created = new Site();
+    created.setId(null);
     created.setName(siteEntity.getName().trim());
     created.setPhone(siteEntity.getPhone());
     created.setEmail(siteEntity.getEmail());
     created.setHost(siteEntity.getHost());
     created.setLanguage(siteEntity.getLanguage() != null && !siteEntity.getLanguage().isBlank() ? siteEntity.getLanguage() : "en");
-    created.setTemplate(siteEntity.getTemplate() != null ? siteEntity.getTemplate() : "cms1");
+    created.setTemplate(CmsTemplateCatalog.normalizeSiteTheme(siteEntity.getTemplate()));
     siteRepository.save(created);
-    ra.addFlashAttribute("message", "Site created");
+    if (isTruthyFormFlag(seedDefaultPages)) {
+      seedDefaultPagesForNewSite(created);
+      ra.addFlashAttribute("message", "Site created with Home, Contact, and About starter pages (where URLs were free)");
+    } else {
+      ra.addFlashAttribute("message", "Site created");
+    }
     return "redirect:/admin/site/edit?id=" + created.getId();
+  }
+
+  private static boolean isTruthyFormFlag(String value) {
+    return "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value) || "1".equals(value);
+  }
+
+  private void seedDefaultPagesForNewSite(Site site) {
+    for (String key : new String[] {"home", "contact", "about"}) {
+      final String starterKey = key;
+      CmsTemplateCatalog.findPageStarter(starterKey).ifPresent(starter -> {
+        if (pageRepository.findFirstBySiteAndUrlIgnoreCase(site, starter.getUrlSlug()).isPresent()) {
+          return;
+        }
+        Page p = new Page();
+        p.setSite(site);
+        p.setOnline(true);
+        CmsTemplateCatalog.applyPageStarter(p, starterKey, site.getName());
+        pageRepository.save(p);
+      });
+    }
   }
 
   @GetMapping("/site")
@@ -247,12 +282,29 @@ public class AdminController {
     params.put("slider", "true");
 
     model.addAttribute("parameters", params);
+    model.addAttribute("siteThemes", CmsTemplateCatalog.siteThemes());
     return "admin/admin_pages";
+  }
+
+  @PostMapping("/site/theme")
+  public String updateSiteTheme(@RequestParam("id") long siteId,
+                                @RequestParam("template") String template,
+                                RedirectAttributes ra) {
+    Site site = siteRepository.findById(siteId).orElse(null);
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site not found");
+      return "redirect:/admin/sites";
+    }
+    site.setTemplate(CmsTemplateCatalog.normalizeSiteTheme(template));
+    siteRepository.save(site);
+    ra.addFlashAttribute("message", "Front-end theme updated to \"" + site.getTemplate() + "\"");
+    return "redirect:/admin/site?id=" + siteId;
   }
 
   @GetMapping("/edit/page")
   public String viewADMINEditPage(@RequestParam(value = "id", required = false) Long id,
                                   @RequestParam(value = "siteId", required = false) Long siteId,
+                                  @RequestParam(value = "starter", required = false) String starter,
                                   Model model,
                                   RedirectAttributes ra) {
     params = setGlobalVariables();
@@ -280,6 +332,10 @@ public class AdminController {
       cmsPage = new Page();
       cmsPage.setSite(site);
       cmsPage.setOnline(true);
+      if (starter != null && !starter.isBlank()) {
+        CmsTemplateCatalog.applyPageStarter(cmsPage, starter, site.getName());
+        model.addAttribute("appliedStarter", starter.trim().toLowerCase(Locale.ROOT));
+      }
       sections = Collections.emptyList();
       params.put("pageTitle", "New page · " + site.getName());
     }
@@ -288,6 +344,7 @@ public class AdminController {
     params.put("sections", sections);
     model.addAttribute("parameters", params);
     model.addAttribute("cmsPage", cmsPage);
+    model.addAttribute("pageStarters", CmsTemplateCatalog.pageStartersForPicker());
     return "admin/admin_edit_page";
   }
 
@@ -308,6 +365,12 @@ public class AdminController {
 
     if (form.getId() != null && pageRepository.existsById(form.getId())) {
       Page persisted = pageRepository.findById(form.getId()).get();
+      Optional<Page> urlTaken =
+          pageRepository.findFirstBySiteAndUrlIgnoreCase(persisted.getSite(), slug);
+      if (urlTaken.isPresent() && !urlTaken.get().getId().equals(persisted.getId())) {
+        ra.addFlashAttribute("error", "Another page in this site already uses that URL");
+        return "redirect:/admin/edit/page?id=" + persisted.getId();
+      }
       persisted.setTitle(form.getTitle().trim());
       persisted.setBody(form.getBody());
       persisted.setUrl(slug);

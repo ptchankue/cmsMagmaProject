@@ -27,15 +27,29 @@
             Interface
         </div>
 
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/sites}">
+                <i class="fas fa-fw fa-globe"></i>
+                <span>All sites</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/site/new}">
+                <i class="fas fa-fw fa-plus-circle"></i>
+                <span>New site</span></a>
+        </li>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <div class="nav-link collapsed">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sites
-                </button>
-                <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" th:each="site: ${parameters['sites']}"
-                       th:href="@{|/admin/site?id=${site.id}|}" th:text="${site.name}">Default Site</a>
+            <div class="nav-link collapsed py-2">
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Jump to site
+                    </button>
+                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" th:each="site: ${parameters['sites']}"
+                           th:href="@{/admin/site(id=${site.id})}" th:text="${site.name}">Default Site</a>
+                        <div class="dropdown-divider" th:if="${#lists.isEmpty(parameters['sites'])}"></div>
+                        <span class="dropdown-item-text text-muted small" th:if="${#lists.isEmpty(parameters['sites'])}">No sites yet</span>
+                    </div>
                 </div>
             </div>
         </li>

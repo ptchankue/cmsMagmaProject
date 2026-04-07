@@ -16,9 +16,23 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4 flex-wrap" th:if="${parameters.containsKey('site') and parameters.site != null}">
           <h1 class="h3 mb-0 text-gray-800" th:text="|Pages · ${parameters.site.name}|">Pages</h1>
           <div class="mt-2 mt-sm-0">
-            <a th:href="@{/admin/edit/page(siteId=${parameters.site.id})}" class="btn btn-sm btn-primary shadow-sm">
-              <i class="fas fa-plus fa-sm text-white-50"></i> New page
-            </a>
+            <div class="btn-group shadow-sm" role="group">
+              <a th:href="@{/admin/edit/page(siteId=${parameters.site.id},starter=blank)}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus fa-sm text-white-50"></i> New blank
+              </a>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+                  <span class="sr-only">Templates</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <h6 class="dropdown-header">New page from template</h6>
+                  <a class="dropdown-item" th:href="@{/admin/edit/page(siteId=${parameters.site.id},starter=home)}">Home</a>
+                  <a class="dropdown-item" th:href="@{/admin/edit/page(siteId=${parameters.site.id},starter=contact)}">Contact</a>
+                  <a class="dropdown-item" th:href="@{/admin/edit/page(siteId=${parameters.site.id},starter=about)}">About</a>
+                  <a class="dropdown-item" th:href="@{/admin/edit/page(siteId=${parameters.site.id},starter=services)}">Services</a>
+                </div>
+              </div>
+            </div>
             <a th:href="@{/public/site/{id}(id=${parameters.site.id})}" class="btn btn-sm btn-outline-info" target="_blank" rel="noopener">View site</a>
             <a th:href="@{/admin/site/edit(id=${parameters.site.id})}" class="btn btn-sm btn-outline-secondary">Edit site</a>
             <a th:href="@{/admin/sites}" class="btn btn-sm btn-link">All sites</a>
@@ -76,11 +90,31 @@
                 <h6 class="m-0 font-weight-bold text-primary">Site</h6>
               </div>
               <div class="card-body">
-                <p><strong>Template:</strong> <span th:text="${parameters.site.template}">cms1</span></p>
+                <form th:action="@{/admin/site/theme}" method="post" class="mb-3" th:if="${siteThemes != null}">
+                  <input type="hidden" name="id" th:value="${parameters.site.id}"/>
+                  <label class="small font-weight-bold text-gray-700 d-block" for="siteThemeSelect">Front-end theme</label>
+                  <p class="small text-muted mb-2"><strong>CMS1</strong> = full themed site; <strong>minimal</strong> = plain content wrapper. Templates: <code>templates/themes/&lt;theme&gt;/</code>. Public <code>/view/…</code> uses this theme.</p>
+                  <div class="input-group input-group-sm">
+                    <select class="form-control" id="siteThemeSelect" name="template" required>
+                      <option th:each="t : ${siteThemes}"
+                              th:value="${t.id}"
+                              th:text="${t.label}"
+                              th:selected="${#strings.equals(t.id, parameters.site.template)}">Theme</option>
+                    </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit">Apply</button>
+                    </div>
+                  </div>
+                </form>
+                <p th:if="${siteThemes == null}"><strong>Template:</strong> <span th:text="${parameters.site.template}">cms1</span></p>
+                <hr class="my-3" th:if="${siteThemes != null}"/>
                 <p th:if="${parameters.site.host != null and !#strings.isEmpty(parameters.site.host)}">
                   <strong>Host:</strong> <span th:text="${parameters.site.host}">—</span>
                 </p>
                 <p class="mb-0"><strong>Language:</strong> <span th:text="${parameters.site.language}">en</span></p>
+                <p class="mb-0 mt-2 small">
+                  <a th:href="@{/admin/site/edit(id=${parameters.site.id})}">All site fields (name, email, …)</a>
+                </p>
               </div>
             </div>
           </div>

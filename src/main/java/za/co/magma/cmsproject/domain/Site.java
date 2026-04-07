@@ -3,19 +3,18 @@ package za.co.magma.cmsproject.domain;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.Map;
 
 @Entity
 public class Site {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String phone;
     private String email;
     private String host;
     private String language;
-    private String template="default";
+    private String template = "cms1";
     private String colors; // key=v;...
 
     private int maximumNumberOfDocumentPerPage;

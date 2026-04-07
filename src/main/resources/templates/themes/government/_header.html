@@ -1,0 +1,39 @@
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+    <div class="gov-utility">
+        <div class="gov-utility-inner">
+            <span th:if="${parameters['utilityNote'] != null}" th:text="${parameters['utilityNote']}">Official information</span>
+            <span th:unless="${parameters['utilityNote'] != null}">Official government information</span>
+            <a th:href="${parameters['contactHref'] != null ? parameters['contactHref'] : '#'}" th:text="${parameters['contactLabel'] != null ? parameters['contactLabel'] : 'Contact'}">Contact</a>
+            <a th:href="${parameters['faqHref'] != null ? parameters['faqHref'] : '#'}" th:text="${parameters['faqLabel'] != null ? parameters['faqLabel'] : 'FAQs'}">FAQs</a>
+        </div>
+    </div>
+    <div class="gov-masthead">
+        <div class="gov-masthead-inner">
+            <div class="gov-crest" role="img" aria-hidden="true"></div>
+            <div class="gov-titles">
+                <p class="gov-kicker" th:text="${parameters['kicker'] != null ? parameters['kicker'] : 'Republic · National department'}">Republic</p>
+                <h1 class="gov-dept-name"
+                    th:text="${parameters['departmentName'] != null ? parameters['departmentName'] : (parameters['site'] != null ? parameters['site'].name : 'Government department')}">Department</h1>
+                <p class="gov-tagline" th:if="${parameters['tagline'] != null}" th:text="${parameters['tagline']}">Tagline</p>
+            </div>
+        </div>
+        <nav class="gov-nav-wrap" aria-label="Primary">
+            <ul class="gov-nav">
+                <li th:if="${parameters['headerMenu'] != null}" th:each="link : ${parameters['headerMenu']}">
+                    <a th:if="${parameters['site'] != null}"
+                       th:href="@{/site/{sid}/view(sid=${parameters['site'].id},page=${link.page.id})}"
+                       th:text="${link.title}">Nav</a>
+                    <a th:unless="${parameters['site'] != null}" href="#" th:text="${link.title}">Nav</a>
+                </li>
+                <th:block th:if="${parameters['headerMenu'] == null}">
+                    <li><a href="/government" class="gov-nav-active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Publications</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contact</a></li>
+                </th:block>
+            </ul>
+        </nav>
+    </div>
+</header>

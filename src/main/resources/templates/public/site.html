@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${site.name}">Site</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; color: #1e293b; }
+        h1 { font-size: 1.75rem; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 0.5rem 0; }
+        a { color: #4f46e5; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body>
+<h1 th:text="${site.name}">Site name</h1>
+<p class="meta">Public index — pick a page to open.</p>
+<p th:if="${homePage != null}">
+    <a th:href="@{/view/{id}(id=${homePage.id})}">Open home →</a>
+</p>
+<ul>
+    <li th:each="p : ${pages}">
+        <a th:href="@{/view/{id}(id=${p.id})}" th:text="${p.title}">Page</a>
+        <span th:if="${!p.online}" style="color:#b45309;font-size:0.8rem;"> (draft)</span>
+    </li>
+</ul>
+<p th:if="${#lists.isEmpty(pages)}" class="meta">No pages in this site yet.</p>
+</body>
+</html>

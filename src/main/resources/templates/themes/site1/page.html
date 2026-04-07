@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-ZA" class="shortpoint-mobile-menu-off" xmlns:th="http://www.thymeleaf.org">
+<head th:include="themes/site1/fragments/headerfiles :: headerfiles"></head>
+<body class="new-imp">
+<div id="s4-workspace" class="ms-core-overlay s4-nosetwidth">
+    <div class="header s4-notdlg">
+        <a th:href="@{/}">
+            <img class="header-logo" alt="Site logo" title="Home" th:src="@{/site1/img/tourlogo.png}">
+        </a>
+    </div>
+    <div id="s4-bodyContainer">
+        <header th:include="themes/site1/header :: header"></header>
+
+        <div class="main-crumb s4-notdlg">
+            <div class="breadcrumb">
+                <span th:text="${parameters['page'] != null ? parameters['page'].title : 'Page'}">Page</span>
+            </div>
+        </div>
+
+        <th:block th:if="${parameters['page'] != null and parameters['page'].url == 'home'}">
+            <div th:include="themes/site1/slides :: sliders"></div>
+            <script>//<![CDATA[
+            var myIndex = 0;
+            carousel();
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                if (!x || x.length === 0) return;
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {
+                    myIndex = 1;
+                }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 4000);
+            }
+            //]]></script>
+        </th:block>
+
+        <div id="contentRow">
+            <div id="contentBox" aria-live="polite" aria-relevant="all" style="margin:0 auto;max-width:1200px;padding:1rem 1.25rem 2.5rem;">
+                <div id="DeltaPlaceHolderMain">
+                    <a id="mainContent" name="mainContent" tabindex="-1"></a>
+                    <div class="ms-rtestate-field site1-cms-body" th:utext="${parameters['body']}">Body</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <footer th:include="themes/site1/footer :: footer"></footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<footer xmlns:th="http://www.thymeleaf.org" th:fragment="footer" class="gov-footer">
+    <div class="gov-footer-inner">
+        <div class="gov-footer-grid">
+            <div class="gov-footer-col">
+                <h4 th:text="${parameters['footerCol1Title'] != null ? parameters['footerCol1Title'] : 'Department'}">Department</h4>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Ministry</a></li>
+                    <li><a href="#">Branches</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="gov-footer-col">
+                <h4 th:text="${parameters['footerCol2Title'] != null ? parameters['footerCol2Title'] : 'Resources'}">Resources</h4>
+                <ul>
+                    <li><a href="#">Strategies &amp; plans</a></li>
+                    <li><a href="#">Legislation</a></li>
+                    <li><a href="#">Tenders</a></li>
+                    <li><a href="#">PAIA</a></li>
+                </ul>
+            </div>
+            <div class="gov-footer-col">
+                <h4 th:text="${parameters['footerCol3Title'] != null ? parameters['footerCol3Title'] : 'Information'}">Information</h4>
+                <ul>
+                    <li><a href="#">Government links</a></li>
+                    <li><a href="#">Media releases</a></li>
+                    <li><a href="#">Statistics</a></li>
+                </ul>
+            </div>
+            <div class="gov-footer-col">
+                <h4 th:text="${parameters['footerCol4Title'] != null ? parameters['footerCol4Title'] : 'Help'}">Help</h4>
+                <ul>
+                    <li><a href="#">Contact centre</a></li>
+                    <li><a href="#">Complaints</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="gov-footer-bottom">
+            <span th:text="${parameters['copyright'] != null ? parameters['copyright'] : '© Government portal demo · Replace with your legal notice.'}">©</span>
+        </div>
+    </div>
+</footer>
