@@ -1,16 +1,10 @@
 package za.co.magma.cmsproject.utils;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -19,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import za.co.magma.cmsproject.domain.forms.SectionForm;
 
 
-import static za.co.magma.cmsproject.constants.Constants.*;
+import static za.co.magma.cmsproject.utils.Constants.*;
 
 public class CMSUtils {
 

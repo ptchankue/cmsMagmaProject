@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import static za.co.magma.cmsproject.constants.Constants.UPLOAD_FOLDER;
+import static za.co.magma.cmsproject.utils.Constants.UPLOAD_FOLDER;
 
 @Controller
 public class ExampleController {
@@ -111,5 +111,11 @@ public class ExampleController {
         model.addAttribute("values", map.get(templateName));
         String temp = "xtests/" + templateName;
         return temp;
+    }
+
+    @GetMapping("/")
+    public String homePage(Model model) {
+        model.addAttribute("message", "Welcome to the Home Page!");
+        return "index";
     }
 }

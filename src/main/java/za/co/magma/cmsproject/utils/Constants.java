@@ -1,4 +1,4 @@
-package za.co.magma.cmsproject.constants;
+package za.co.magma.cmsproject.utils;
 
 public class Constants {
   public static final String CSS_LOCATION="static/cms1/css/_style.css";

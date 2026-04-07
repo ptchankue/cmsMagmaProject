@@ -33,7 +33,7 @@ public class AllocationController {
 
         return params;
     }
-    @RequestMapping("/home")
+    @RequestMapping({"/home", ""})
     public String home(Model model) {
 
         Map<String, Map<String, String>> map = new HashMap<>();

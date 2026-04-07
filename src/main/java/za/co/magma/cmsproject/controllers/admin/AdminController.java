@@ -58,7 +58,7 @@ public class AdminController {
     return params;
   }
 
-  @RequestMapping("/home")
+  @RequestMapping({"/home", ""})
   public String home(Model model) {
     logger.info("adminHome");
 
