@@ -1,47 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Tiny MCE integration</title>
-
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/demo-shell :: head(pageTitle='TinyMCE')}">
+    <title>TinyMCE</title>
 </head>
-<body>
-<h1>Tiny MCE integration</h1>
-<!--<form th:action="@{/addPerson}" th:object="${person}" method="post">-->
-<form th:action="@{/hello}" th:object="${person}" method="post">
-
-    <div>
-        <label>Name:</label>
-        <input type="text" th:field="*{name}" placeholder="Vuyo" />
+<body class="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-slate-200 text-slate-800 antialiased">
+<div th:replace="~{fragments/demo-shell :: mainNav(active='tinymce')}"></div>
+<main class="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-14">
+    <div class="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-300/30">
+        <div class="border-b border-slate-100 bg-slate-50 px-8 py-6 md:px-10">
+            <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">Rich text</p>
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-slate-900">TinyMCE integration</h1>
+            <p class="mt-2 max-w-2xl text-sm text-slate-600">Same hello endpoint as the simple form, with a WYSIWYG area for the message field.</p>
+        </div>
+        <form th:action="@{/hello}" th:object="${person}" method="post" class="space-y-6 px-8 py-8 md:px-10">
+            <div>
+                <label for="person-name" class="mb-2 block text-sm font-medium text-slate-700">Name</label>
+                <input id="person-name" type="text" th:field="*{name}" placeholder="e.g. Vuyo" autocomplete="name"
+                       class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/15"/>
+            </div>
+            <div>
+                <label for="myTextarea" class="mb-2 block text-sm font-medium text-slate-700">Message</label>
+                <div class="overflow-hidden rounded-xl border border-slate-300 bg-slate-50 shadow-inner">
+                    <textarea id="myTextarea" class="min-h-[320px] w-full" rows="12"></textarea>
+                </div>
+            </div>
+            <button type="submit"
+                    class="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 active:scale-[0.99] md:w-auto md:px-8">
+                Submit
+            </button>
+        </form>
     </div>
-    <div>
-        <label>Message:</label>
-        <textarea id="myTextarea">
-
-        </textarea>
-    </div>
-
-    <input type="submit" value="Submit"/>
-</form>
-
+</main>
 <script th:src="@{/js/tinymce/js/tinymce/tinymce.min.js}"></script>
-
-<script type="text/javascript">
-tinymce.init({
-    selector: '#myTextarea',
-    height: 300,
-    theme: 'modern',
-    plugins: [
-      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      'searchreplace wordcount visualblocks visualchars code fullscreen',
-      'insertdatetime media nonbreaking save table contextmenu directionality',
-      'emoticons template paste textcolor colorpicker textpattern imagetools'
-    ],
-    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-    toolbar2: 'print preview media | forecolor backcolor emoticons',
-    image_advtab: true
-});
+<script>
+    tinymce.init({
+        selector: '#myTextarea',
+        height: 360,
+        menubar: false,
+        branding: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen',
+            'insertdatetime media nonbreaking save table contextmenu directionality',
+            'emoticons template paste textcolor colorpicker textpattern imagetools'
+        ].join(' '),
+        toolbar1: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons | code',
+        image_advtab: true,
+        skin: 'oxide',
+        content_css: 'default',
+        content_style: 'body { font-family: system-ui,-apple-system,sans-serif; font-size: 16px; line-height: 1.5; }'
+    });
 </script>
 </body>
 </html>

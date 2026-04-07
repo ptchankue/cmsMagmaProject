@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface PageSectionRepository extends JpaRepository<PageSection, Long> {
   List<PageSection> findByPage(Page page);
+
+  List<PageSection> findByPageOrderByPositionAscIdAsc(Page page);
 }

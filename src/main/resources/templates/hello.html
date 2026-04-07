@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/demo-shell :: head(pageTitle='Hello')}">
+    <title>Hello</title>
 </head>
-<body>
-<h1>Spring boot</h1>
-<h3>Thymeleaf</h3>
-<h3>Create customer</h3>
-
-<!--<form th:action="@{/addPerson}" th:object="${person}" method="post">-->
-<form th:action="@{/hello}" th:object="${person}" method="post">
-
-    <div>
-        <label>Name:</label>
-        <input type="text" th:field="*{name}" placeholder="Vuyo" />
+<body class="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-slate-200 text-slate-800 antialiased">
+<div th:replace="~{fragments/demo-shell :: mainNav(active='hello')}"></div>
+<main class="mx-auto max-w-lg px-4 py-10 md:px-6 md:py-14">
+    <div class="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-300/30">
+        <div class="border-b border-slate-100 bg-slate-50 px-8 py-6 md:px-10">
+            <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">Thymeleaf</p>
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-slate-900">Create customer</h1>
+            <p class="mt-2 text-sm text-slate-600">POSTs to the same route and logs the bound <code class="rounded bg-slate-200/80 px-1.5 py-0.5 text-xs">Person</code> on the server.</p>
+        </div>
+        <form th:action="@{/hello}" th:object="${person}" method="post" class="space-y-6 px-8 py-8 md:px-10">
+            <div>
+                <label for="name" class="mb-2 block text-sm font-medium text-slate-700">Name</label>
+                <input id="name" type="text" th:field="*{name}" placeholder="e.g. Vuyo" autocomplete="name"
+                       class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/15"/>
+            </div>
+            <button type="submit"
+                    class="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 active:scale-[0.99]">
+                Submit
+            </button>
+        </form>
     </div>
-
-    <input type="submit" value="Submit"/>
-</form>
-
+</main>
 </body>
 </html>

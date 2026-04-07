@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--/*/ <th:block th:include="admin/_head :: head" th:with="parameters=${parameters}"></th:block>/*/-->
+
+<body id="page-top">
+<div id="wrapper">
+  <!--/*/ <th:block th:include="admin/_sidebar :: sidebar" th:with="pageTitle=${pageTitle}"></th:block>/*/-->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <!--/*/ <th:block th:include="admin/_topbar :: topbar" th:with="pageTitle=${pageTitle}"></th:block>/*/-->
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Sites</h1>
+          <a th:href="@{/admin/site/new}" class="btn btn-primary btn-sm shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> New site
+          </a>
+        </div>
+        <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">All sites</h6>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Template</th>
+                  <th>Language</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(parameters['sites'])}">
+                  <td colspan="5" class="text-center text-muted">No sites yet. Create one to get started.</td>
+                </tr>
+                <tr th:each="s : ${parameters['sites']}">
+                  <td th:text="${s.id}">1</td>
+                  <td th:text="${s.name}">Name</td>
+                  <td th:text="${s.template}">cms1</td>
+                  <td th:text="${s.language}">en</td>
+                  <td class="text-nowrap">
+                    <a th:href="@{/admin/site(id=${s.id})}" class="btn btn-sm btn-info">Pages</a>
+                    <a th:href="@{/admin/site/edit(id=${s.id})}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a th:href="@{/public/site/{id}(id=${s.id})}" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener">View</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/*/ <th:block th:include="admin/_footer :: footer"></th:block>/*/-->
+  </div>
+</div>
+<!--/*/ <th:block th:include="admin/_footer :: modals"></th:block>/*/-->
+<!--/*/ <th:block th:include="admin/_scripts :: scripts"></th:block>/*/-->
+</body>
+</html>

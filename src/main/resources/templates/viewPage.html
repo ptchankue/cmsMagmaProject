@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${page.title}">Page</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 48rem; margin: 2rem auto; padding: 0 1rem; color: #0f172a; line-height: 1.6; }
+        .crumb { font-size: 0.875rem; color: #64748b; margin-bottom: 0.5rem; }
+        .crumb a { color: #4f46e5; text-decoration: none; }
+        h1 { font-size: 2rem; margin: 0 0 1rem; }
+        .draft { background: #fef3c7; color: #92400e; padding: 0.35rem 0.6rem; border-radius: 0.35rem; font-size: 0.8rem; display: inline-block; margin-bottom: 1rem; }
+        .body { margin-top: 1rem; }
+    </style>
 </head>
 <body>
-<h1>Test view Page</h1>
+<div class="crumb" th:if="${site != null}">
+    <a th:href="@{/public/site/{id}(id=${site.id})}" th:text="|${site.name} · index|">Site</a>
+</div>
+<span class="draft" th:if="${page != null and !page.online}">Draft — not published</span>
+<h1 th:text="${page.title}">Title</h1>
+<div class="body" th:utext="${page.body}">Body</div>
+<p style="margin-top:2rem;font-size:0.875rem;color:#64748b;" th:if="${site != null}">
+    <a th:href="@{/admin/edit/page(id=${page.id})}">Edit in admin</a>
+</p>
 </body>
 </html>

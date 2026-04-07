@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head (pageTitle)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle}">CMS Magma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<nav th:fragment="mainNav (active)"
+     class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 md:px-6">
+        <a href="/" class="text-lg font-semibold tracking-tight text-slate-900">CMS Magma</a>
+        <div class="flex flex-wrap items-center gap-1 text-sm font-medium">
+            <a href="/"
+               th:classappend="${active == 'home'} ? ' bg-indigo-600 text-white shadow-md shadow-indigo-600/25' : ' text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+               class="rounded-lg px-3 py-2 transition">Home</a>
+            <a href="/hello"
+               th:classappend="${active == 'hello'} ? ' bg-indigo-600 text-white shadow-md shadow-indigo-600/25' : ' text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+               class="rounded-lg px-3 py-2 transition">Hello</a>
+            <a href="/upload"
+               th:classappend="${active == 'upload'} ? ' bg-indigo-600 text-white shadow-md shadow-indigo-600/25' : ' text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+               class="rounded-lg px-3 py-2 transition">Upload</a>
+            <a href="/tinymce"
+               th:classappend="${active == 'tinymce'} ? ' bg-indigo-600 text-white shadow-md shadow-indigo-600/25' : ' text-slate-600 hover:bg-slate-100 hover:text-slate-900'"
+               class="rounded-lg px-3 py-2 transition">TinyMCE</a>
+        </div>
+    </div>
+</nav>
+</html>

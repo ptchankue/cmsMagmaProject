@@ -3,3 +3,4 @@ target
 cmsProject.iml
 .vscode
 sqlitesample.db
+src/main/resources/static/uploaded

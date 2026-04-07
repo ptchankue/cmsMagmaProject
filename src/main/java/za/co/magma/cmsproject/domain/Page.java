@@ -24,6 +24,18 @@ public class Page {
     private Date created;
     private Date updated;
 
+    @PrePersist
+    protected void onCreate() {
+        Date now = new Date();
+        this.created = now;
+        this.updated = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated = new Date();
+    }
+
     public Long getId() {
         return id;
     }

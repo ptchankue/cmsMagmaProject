@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/demo-shell :: head(pageTitle='Home')}">
+    <title>Home</title>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-slate-200 text-slate-800 antialiased">
+<div th:replace="~{fragments/demo-shell :: mainNav(active='home')}"></div>
+<main class="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
+    <div class="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-300/30">
+        <div class="border-b border-indigo-500/20 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 px-8 py-10 text-white md:px-10 md:py-12">
+            <p class="text-sm font-semibold uppercase tracking-widest text-indigo-200">Spring Boot · Thymeleaf</p>
+            <h1 class="mt-3 text-3xl font-bold tracking-tight md:text-4xl" th:text="${message}">Welcome to the Home Page!</h1>
+            <p class="mt-4 max-w-2xl text-indigo-100/90">Explore the demo routes: a simple form, file upload, and a rich text editor.</p>
+        </div>
+        <div class="px-8 py-10 md:px-10">
+            <h2 class="text-lg font-semibold text-slate-900">Quick links</h2>
+            <p class="mt-1 text-slate-600">Each page uses the same Tailwind layout and navigation.</p>
+            <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <li>
+                    <a href="/hello"
+                       class="group flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50/80 p-5 transition hover:border-indigo-200 hover:bg-white hover:shadow-lg hover:shadow-indigo-100/40">
+                        <span class="text-xs font-bold uppercase tracking-wide text-indigo-600">Form</span>
+                        <span class="mt-2 text-base font-semibold text-slate-900">Hello</span>
+                        <span class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">Thymeleaf form binding with a <code class="rounded bg-slate-200/80 px-1 py-0.5 text-xs">Person</code> model.</span>
+                        <span class="mt-4 text-sm font-semibold text-indigo-600 group-hover:underline">Open →</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/upload"
+                       class="group flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50/80 p-5 transition hover:border-indigo-200 hover:bg-white hover:shadow-lg hover:shadow-indigo-100/40">
+                        <span class="text-xs font-bold uppercase tracking-wide text-indigo-600">Files</span>
+                        <span class="mt-2 text-base font-semibold text-slate-900">Upload</span>
+                        <span class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">Multipart upload into the static <code class="rounded bg-slate-200/80 px-1 py-0.5 text-xs">uploaded</code> folder.</span>
+                        <span class="mt-4 text-sm font-semibold text-indigo-600 group-hover:underline">Open →</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/tinymce"
+                       class="group flex h-full flex-col rounded-xl border border-slate-200 bg-slate-50/80 p-5 transition hover:border-indigo-200 hover:bg-white hover:shadow-lg hover:shadow-indigo-100/40 sm:col-span-2 lg:col-span-1">
+                        <span class="text-xs font-bold uppercase tracking-wide text-indigo-600">Editor</span>
+                        <span class="mt-2 text-base font-semibold text-slate-900">TinyMCE</span>
+                        <span class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">WYSIWYG editor alongside the same hello form fields.</span>
+                        <span class="mt-4 text-sm font-semibold text-indigo-600 group-hover:underline">Open →</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

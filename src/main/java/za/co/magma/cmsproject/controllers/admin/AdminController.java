@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import za.co.magma.cmsproject.domain.Link;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import za.co.magma.cmsproject.domain.Page;
 import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
@@ -72,6 +72,8 @@ public class AdminController {
     params.put("pageTitle", "MyCMS - Dashboard");
     model.addAttribute("parameters", params);
     model.addAttribute("sites", siteRepository.findAll());
+    model.addAttribute("siteCount", siteRepository.count());
+    model.addAttribute("pageCount", pageRepository.count());
 
     return "admin/index";
   }
@@ -163,21 +165,84 @@ public class AdminController {
     return params.get("theme") + "/index";
   }
 
+  @GetMapping("/sites")
+  public String listSites(Model model) {
+    params = setGlobalVariables();
+    params.put("pageTitle", "Sites");
+    model.addAttribute("parameters", params);
+    return "admin/admin_sites";
+  }
+
+  @GetMapping("/site/new")
+  public String newSiteForm(Model model) {
+    params = setGlobalVariables();
+    params.put("pageTitle", "New site");
+    model.addAttribute("parameters", params);
+    model.addAttribute("siteEntity", new Site());
+    return "admin/admin_edit_site";
+  }
+
+  @GetMapping("/site/edit")
+  public String editSiteForm(@RequestParam("id") long id, Model model, RedirectAttributes ra) {
+    params = setGlobalVariables();
+    Site site = siteRepository.findById(id).orElse(null);
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site not found");
+      return "redirect:/admin/sites";
+    }
+    params.put("pageTitle", "Edit site");
+    model.addAttribute("parameters", params);
+    model.addAttribute("siteEntity", site);
+    return "admin/admin_edit_site";
+  }
+
+  @PostMapping("/site/save")
+  public String saveSite(@ModelAttribute Site siteEntity, RedirectAttributes ra) {
+    if (siteEntity.getName() == null || siteEntity.getName().isBlank()) {
+      ra.addFlashAttribute("error", "Site name is required");
+      if (siteEntity.getId() != null) {
+        return "redirect:/admin/site/edit?id=" + siteEntity.getId();
+      }
+      return "redirect:/admin/site/new";
+    }
+    if (siteEntity.getId() != null && siteRepository.existsById(siteEntity.getId())) {
+      Site existing = siteRepository.findById(siteEntity.getId()).get();
+      existing.setName(siteEntity.getName().trim());
+      existing.setPhone(siteEntity.getPhone());
+      existing.setEmail(siteEntity.getEmail());
+      existing.setHost(siteEntity.getHost());
+      existing.setLanguage(siteEntity.getLanguage());
+      existing.setTemplate(siteEntity.getTemplate() != null ? siteEntity.getTemplate() : "cms1");
+      siteRepository.save(existing);
+      ra.addFlashAttribute("message", "Site updated");
+      return "redirect:/admin/site/edit?id=" + existing.getId();
+    }
+    Site created = new Site();
+    created.setName(siteEntity.getName().trim());
+    created.setPhone(siteEntity.getPhone());
+    created.setEmail(siteEntity.getEmail());
+    created.setHost(siteEntity.getHost());
+    created.setLanguage(siteEntity.getLanguage() != null && !siteEntity.getLanguage().isBlank() ? siteEntity.getLanguage() : "en");
+    created.setTemplate(siteEntity.getTemplate() != null ? siteEntity.getTemplate() : "cms1");
+    siteRepository.save(created);
+    ra.addFlashAttribute("message", "Site created");
+    return "redirect:/admin/site/edit?id=" + created.getId();
+  }
+
   @GetMapping("/site")
-  public String viewADMINSite(@RequestParam("id") long id,  Model model) {
+  public String viewADMINSite(@RequestParam("id") long id, Model model, RedirectAttributes ra) {
     logger.info("viewADMINSite id=" + id);
     params = setGlobalVariables();
 
     Site site = siteRepository.findById(id).orElse(null);
-    System.out.println(">> SITE NAME: " + site!=null?site.getName():"No site loaded");
-    if(null!=site){
-      // Check if all needed variables exists
-      List<Page> pageList = pageRepository.findBySite(site);
-      params.put("pages", pageList);
-      params.put("site", site);
-
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site not found");
+      return "redirect:/admin/sites";
     }
-    params.put("pageTitle", "CMS Admin Pages");
+    List<Page> pageList = pageRepository.findBySiteOrderByTitleAsc(site);
+    params.put("pages", pageList);
+    params.put("site", site);
+    params.put("pageTitle", "Pages · " + site.getName());
     params.put("theme", "cms1");
     params.put("slider", "true");
 
@@ -186,23 +251,116 @@ public class AdminController {
   }
 
   @GetMapping("/edit/page")
-  public String viewADMINEditPage(@RequestParam("id") long id,  Model model) {
-    logger.info("viewADMINEditPage id=" + id);
+  public String viewADMINEditPage(@RequestParam(value = "id", required = false) Long id,
+                                  @RequestParam(value = "siteId", required = false) Long siteId,
+                                  Model model,
+                                  RedirectAttributes ra) {
     params = setGlobalVariables();
+    Page cmsPage;
+    List<PageSection> sections;
 
-    Page page = pageRepository.findById(id).orElse(null);
-    if(null!=page){
-      // Check if all needed variables exists
-      params.put("page", page);
-      // GEt sections
-      List<PageSection> pageSectionList = pageSectionRepository.findByPage(page);
-      params.put("sections", pageSectionList);
-
+    if (id != null) {
+      cmsPage = pageRepository.findById(id).orElse(null);
+      if (cmsPage == null) {
+        ra.addFlashAttribute("error", "Page not found");
+        return "redirect:/admin/sites";
+      }
+      sections = pageSectionRepository.findByPageOrderByPositionAscIdAsc(cmsPage);
+      params.put("pageTitle", "Edit page · " + cmsPage.getTitle());
+    } else {
+      if (siteId == null) {
+        ra.addFlashAttribute("error", "Choose a site before creating a page");
+        return "redirect:/admin/sites";
+      }
+      Site site = siteRepository.findById(siteId).orElse(null);
+      if (site == null) {
+        ra.addFlashAttribute("error", "Site not found");
+        return "redirect:/admin/sites";
+      }
+      cmsPage = new Page();
+      cmsPage.setSite(site);
+      cmsPage.setOnline(true);
+      sections = Collections.emptyList();
+      params.put("pageTitle", "New page · " + site.getName());
     }
-    params.put("pageTitle", "CMS Admin Edit Page");
 
+    params.put("page", cmsPage);
+    params.put("sections", sections);
     model.addAttribute("parameters", params);
+    model.addAttribute("cmsPage", cmsPage);
     return "admin/admin_edit_page";
+  }
+
+  @PostMapping("/edit/page")
+  public String savePage(@ModelAttribute("cmsPage") Page form,
+                         @RequestParam(value = "siteId", required = false) Long siteId,
+                         RedirectAttributes ra) {
+    if (form.getTitle() == null || form.getTitle().isBlank()) {
+      ra.addFlashAttribute("error", "Title is required");
+      return redirectAfterPageError(form, siteId);
+    }
+    if (form.getUrl() == null || form.getUrl().isBlank()) {
+      ra.addFlashAttribute("error", "URL slug is required (e.g. home, contact)");
+      return redirectAfterPageError(form, siteId);
+    }
+
+    String slug = form.getUrl().trim().replaceAll("\\s+", "-");
+
+    if (form.getId() != null && pageRepository.existsById(form.getId())) {
+      Page persisted = pageRepository.findById(form.getId()).get();
+      persisted.setTitle(form.getTitle().trim());
+      persisted.setBody(form.getBody());
+      persisted.setUrl(slug);
+      persisted.setOnline(form.isOnline());
+      pageRepository.save(persisted);
+      ra.addFlashAttribute("message", "Page saved");
+      return "redirect:/admin/edit/page?id=" + persisted.getId();
+    }
+
+    Site site = resolveSiteForNewPage(form, siteId);
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site is required");
+      return "redirect:/admin/sites";
+    }
+
+    Optional<Page> duplicate = pageRepository.findFirstBySiteAndUrlIgnoreCase(site, slug);
+    if (duplicate.isPresent()) {
+      ra.addFlashAttribute("error", "A page with this URL already exists for this site");
+      return "redirect:/admin/edit/page?siteId=" + site.getId();
+    }
+
+    Page created = new Page();
+    created.setSite(site);
+    created.setTitle(form.getTitle().trim());
+    created.setBody(form.getBody());
+    created.setUrl(slug);
+    created.setOnline(form.isOnline());
+    pageRepository.save(created);
+    ra.addFlashAttribute("message", "Page created");
+    return "redirect:/admin/edit/page?id=" + created.getId();
+  }
+
+  private String redirectAfterPageError(Page form, Long siteId) {
+    if (form.getId() != null) {
+      return "redirect:/admin/edit/page?id=" + form.getId();
+    }
+    if (siteId != null) {
+      return "redirect:/admin/edit/page?siteId=" + siteId;
+    }
+    if (form.getSite() != null && form.getSite().getId() != null) {
+      return "redirect:/admin/edit/page?siteId=" + form.getSite().getId();
+    }
+    return "redirect:/admin/sites";
+  }
+
+  private Site resolveSiteForNewPage(Page form, Long siteId) {
+    if (form.getSite() != null && form.getSite().getId() != null) {
+      return siteRepository.findById(form.getSite().getId()).orElse(null);
+    }
+    if (siteId != null) {
+      return siteRepository.findById(siteId).orElse(null);
+    }
+    return null;
   }
 
   @GetMapping("/edit/section")
