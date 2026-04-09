@@ -47,7 +47,7 @@
             <nav class="site-nav-menu">
                 <ul>
                     <li th:each="menu: ${parameters['headerMenu']}"
-                        th:class="${menu.page != null and parameters['page'] != null and menu.page.id == parameters['page'].id} ? 'active' : ''">
+                        th:class="${@navMenu.linkTargetsPage(menu, parameters != null ? parameters.get('activeNavPageId') : null)} ? 'active' : ''">
                         <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${menu}, activeClass='')}"></th:block>
                     </li>
                 </ul>

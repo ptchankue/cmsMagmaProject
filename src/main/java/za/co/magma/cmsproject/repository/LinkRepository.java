@@ -1,5 +1,6 @@
 package za.co.magma.cmsproject.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.co.magma.cmsproject.domain.Link;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface LinkRepository extends JpaRepository<Link, Long> {
 
+  @EntityGraph(attributePaths = "page")
   List<Link> findByPage(Page page);
 
   List<Link> findByPageIdIn(List<Long> ids);
@@ -20,8 +22,10 @@ public interface LinkRepository extends JpaRepository<Link, Long> {
 
   List<Link> findBySiteOrderBySortOrderAscIdAsc(Site site);
 
+  @EntityGraph(attributePaths = "page")
   List<Link> findBySiteAndHeaderTrueAndEnabledTrueOrderBySortOrderAscIdAsc(Site site);
 
+  @EntityGraph(attributePaths = "page")
   List<Link> findBySiteAndFooterTrueAndEnabledTrueOrderBySortOrderAscIdAsc(Site site);
 
   Optional<Link> findFirstBySiteOrderBySortOrderDescIdDesc(Site site);

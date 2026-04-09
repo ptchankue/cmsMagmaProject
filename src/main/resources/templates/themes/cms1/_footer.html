@@ -79,7 +79,7 @@
                     <div class="col-lg-7 order-1 order-lg-2 p-0">
                         <ul class="footer-menu">
                             <li th:each="menu: ${parameters['footerMenu']}"
-                                th:class="${menu.page != null and parameters['page'] != null and menu.page.id == parameters['page'].id} ? 'active' : ''">
+                                th:class="${@navMenu.linkTargetsPage(menu, parameters != null ? parameters.get('activeNavPageId') : null)} ? 'active' : ''">
                                 <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${menu}, activeClass='')}"></th:block>
                             </li>
                         </ul>

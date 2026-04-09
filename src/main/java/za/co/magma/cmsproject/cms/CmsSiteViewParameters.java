@@ -73,6 +73,7 @@ public final class CmsSiteViewParameters {
     params.put("footerMenu", footerMenu != null ? footerMenu : List.of());
     params.put("sections", pageSections != null ? pageSections : List.of());
     params.put("navUseViewPath", Boolean.FALSE);
+    params.put("activeNavPageId", page != null ? page.getId() : null);
     if (site != null) {
       params.put("departmentName", site.getName());
     }

@@ -117,4 +117,17 @@ public class Link {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    /**
+     * Used by Thymeleaf menus to mark the active item without fragile {@code page.id} comparisons in SpEL.
+     */
+    public boolean targetsPage(Long currentPageId) {
+        if (currentPageId == null) {
+            return false;
+        }
+        if (page == null || page.getId() == null) {
+            return false;
+        }
+        return currentPageId.equals(page.getId());
+    }
 }

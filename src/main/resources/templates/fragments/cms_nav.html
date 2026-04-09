@@ -3,13 +3,13 @@
 <body>
 <!-- Anchor only; wrap in <li> in parent. activeClass e.g. gov-nav-active; use '' for cms1 (active stays on li). -->
 <th:block th:fragment="navAnchor (link, activeClass)">
-    <a th:if="${link.page != null and parameters['site'] != null and parameters['navUseViewPath'] == true}"
+    <a th:if="${link.page != null and parameters != null and parameters.get('site') != null and parameters.get('navUseViewPath') == true}"
        th:href="@{/view/{pid}(pid=${link.page.id})}"
-       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and parameters['page'] != null and link.page != null and parameters['page'].id == link.page.id} ? ${activeClass} : null"
+       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and @navMenu.linkTargetsPage(link, parameters != null ? parameters.get('activeNavPageId') : null)} ? ${activeClass} : null"
        th:text="${link.title}">Nav</a>
-    <a th:if="${link.page != null and parameters['site'] != null and (parameters['navUseViewPath'] == null or parameters['navUseViewPath'] == false)}"
-       th:href="@{/site/{sid}/view(sid=${parameters['site'].id},page=${link.page.id})}"
-       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and parameters['page'] != null and link.page != null and parameters['page'].id == link.page.id} ? ${activeClass} : null"
+    <a th:if="${link.page != null and parameters != null and parameters.get('site') != null and (parameters.get('navUseViewPath') == null or parameters.get('navUseViewPath') == false)}"
+       th:href="@{/site/{sid}/view(sid=${parameters.get('site').id},page=${link.page.id})}"
+       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and @navMenu.linkTargetsPage(link, parameters != null ? parameters.get('activeNavPageId') : null)} ? ${activeClass} : null"
        th:text="${link.title}">Nav</a>
     <a th:if="${link.page == null and link.pageUrl != null and !#strings.isEmpty(link.pageUrl) and #strings.startsWith(link.pageUrl,'http')}"
        th:href="${link.pageUrl}"
