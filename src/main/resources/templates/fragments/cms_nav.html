@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Anchor only; wrap in <li> in parent. activeClass e.g. gov-nav-active; use '' for cms1 (active stays on li). -->
+<th:block th:fragment="navAnchor (link, activeClass)">
+    <a th:if="${link.page != null and parameters['site'] != null and parameters['navUseViewPath'] == true}"
+       th:href="@{/view/{pid}(pid=${link.page.id})}"
+       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and parameters['page'] != null and link.page != null and parameters['page'].id == link.page.id} ? ${activeClass} : null"
+       th:text="${link.title}">Nav</a>
+    <a th:if="${link.page != null and parameters['site'] != null and (parameters['navUseViewPath'] == null or parameters['navUseViewPath'] == false)}"
+       th:href="@{/site/{sid}/view(sid=${parameters['site'].id},page=${link.page.id})}"
+       th:classappend="${activeClass != null and !#strings.isEmpty(activeClass) and parameters['page'] != null and link.page != null and parameters['page'].id == link.page.id} ? ${activeClass} : null"
+       th:text="${link.title}">Nav</a>
+    <a th:if="${link.page == null and link.pageUrl != null and !#strings.isEmpty(link.pageUrl) and #strings.startsWith(link.pageUrl,'http')}"
+       th:href="${link.pageUrl}"
+       target="_blank"
+       rel="noopener noreferrer"
+       th:text="${link.title}">Nav</a>
+    <a th:if="${link.page == null and link.pageUrl != null and !#strings.isEmpty(link.pageUrl) and !#strings.startsWith(link.pageUrl,'http')}"
+       th:href="${link.pageUrl}"
+       th:text="${link.title}">Nav</a>
+    <a th:if="${link.page == null and (link.pageUrl == null or #strings.isEmpty(link.pageUrl))}"
+       href="#"
+       th:text="${link.title}">Nav</a>
+</th:block>
+</body>
+</html>

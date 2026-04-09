@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="primaryNav" id="DeltaTopNavigation" class="ms-displayInline"
+     th:with="menuItems=${parameters == null or parameters.get('headerMenu') == null ? T(java.util.Collections).emptyList() : parameters.get('headerMenu')}">
+    <a name="startNavigation"></a>
+    <div id="zz1_TopNavigationMenu" class="noindex ms-core-listMenu-horizontalBox">
+        <ul id="zz2_RootAspMenu" class="root ms-core-listMenu-root static">
+            <li th:each="link : ${menuItems}"
+                th:replace="~{themes/site1/fragments/cms_site1_nav :: cmsSite1MenuItem(link=${link})}"></li>
+        </ul>
+    </div>
+</div>
+</html>

@@ -9,6 +9,14 @@
 </div>
 
 <main id="content" class="gov-main gov-prose">
+    <section class="gov-panel gov-home-block"
+             th:if="${parameters['page'] != null and parameters['page'].url == 'home' and parameters['gov_quick_access'] != null}">
+        <div th:utext="${parameters['gov_quick_access']}"></div>
+    </section>
+    <section class="gov-panel gov-home-block"
+             th:if="${parameters['page'] != null and parameters['page'].url == 'home' and parameters['gov_gallery'] != null}">
+        <div th:utext="${parameters['gov_gallery']}"></div>
+    </section>
     <article class="gov-panel">
         <div th:utext="${parameters['body']}">Page body</div>
     </article>

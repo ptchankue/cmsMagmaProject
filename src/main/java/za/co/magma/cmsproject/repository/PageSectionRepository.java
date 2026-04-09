@@ -12,4 +12,6 @@ public interface PageSectionRepository extends JpaRepository<PageSection, Long> 
   List<PageSection> findByPage(Page page);
 
   List<PageSection> findByPageOrderByPositionAscIdAsc(Page page);
+
+  boolean existsByPageAndTitle(Page page, String title);
 }

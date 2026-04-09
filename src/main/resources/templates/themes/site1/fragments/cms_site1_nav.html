@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- SharePoint-style single top-level row; same URL rules as fragments/cms_nav.html -->
+<li th:fragment="cmsSite1MenuItem(link)"
+    class="static"
+    th:with="cmsPage=${parameters != null ? parameters.get('page') : null},
+             cmsSite=${parameters != null ? parameters.get('site') : null},
+             navView=${parameters != null and parameters.get('navUseViewPath') == true}"
+    th:classappend="${cmsPage != null and link.page != null and cmsPage.id == link.page.id} ? 'selected'">
+    <a th:if="${link.page != null and cmsSite != null and navView}"
+       class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"
+       th:classappend="${cmsPage != null and link.page != null and cmsPage.id == link.page.id} ? 'ms-core-listMenu-selected selected'"
+       th:href="@{/view/{pid}(pid=${link.page.id})}"
+       th:title="${link.title}">
+        <span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text" th:text="${link.title}">Nav</span></span>
+    </a>
+    <a th:if="${link.page != null and cmsSite != null and !navView}"
+       class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"
+       th:classappend="${cmsPage != null and link.page != null and cmsPage.id == link.page.id} ? 'ms-core-listMenu-selected selected'"
+       th:href="@{/site/{sid}/view(sid=${cmsSite.id},page=${link.page.id})}"
+       th:title="${link.title}">
+        <span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text" th:text="${link.title}">Nav</span></span>
+    </a>
+    <a th:if="${link.page == null and link.pageUrl != null and !#strings.isEmpty(link.pageUrl) and #strings.startsWith(link.pageUrl,'http')}"
+       class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"
+       th:href="${link.pageUrl}"
+       target="_blank"
+       rel="noopener noreferrer"
+       th:title="${link.title}">
+        <span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text" th:text="${link.title}">Nav</span></span>
+    </a>
+    <a th:if="${link.page == null and link.pageUrl != null and !#strings.isEmpty(link.pageUrl) and !#strings.startsWith(link.pageUrl,'http')}"
+       class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"
+       th:href="${link.pageUrl}"
+       th:title="${link.title}">
+        <span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text" th:text="${link.title}">Nav</span></span>
+    </a>
+    <a th:if="${link.page == null and (link.pageUrl == null or #strings.isEmpty(link.pageUrl))}"
+       class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"
+       href="#"
+       th:title="${link.title}">
+        <span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text" th:text="${link.title}">Nav</span></span>
+    </a>
+</li>
+</html>

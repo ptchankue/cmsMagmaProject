@@ -19,20 +19,9 @@
         </div>
         <nav class="gov-nav-wrap" aria-label="Primary">
             <ul class="gov-nav">
-                <li th:if="${parameters['headerMenu'] != null}" th:each="link : ${parameters['headerMenu']}">
-                    <a th:if="${parameters['site'] != null}"
-                       th:href="@{/site/{sid}/view(sid=${parameters['site'].id},page=${link.page.id})}"
-                       th:text="${link.title}">Nav</a>
-                    <a th:unless="${parameters['site'] != null}" href="#" th:text="${link.title}">Nav</a>
+                <li th:each="link : ${parameters['headerMenu']}">
+                    <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${link}, activeClass='gov-nav-active')}"></th:block>
                 </li>
-                <th:block th:if="${parameters['headerMenu'] == null}">
-                    <li><a href="/government" class="gov-nav-active">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Publications</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Contact</a></li>
-                </th:block>
             </ul>
         </nav>
     </div>

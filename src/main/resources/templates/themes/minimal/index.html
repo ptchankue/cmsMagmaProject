@@ -6,11 +6,37 @@
     <title th:text="${parameters.pageTitle != null ? parameters.pageTitle : 'Home'}">Home</title>
     <style>
         body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.55; color: #0f172a; }
+        .minimal-nav { margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e2e8f0; }
+        .minimal-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+        .minimal-nav li { margin: 0; }
+        .minimal-nav a { color: #2563eb; text-decoration: none; font-size: 0.9375rem; }
+        .minimal-nav a:hover { text-decoration: underline; }
+        .minimal-nav a.minimal-nav-active { font-weight: 600; color: #1e3a8a; }
+        .minimal-footer-nav { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.875rem; }
+        .minimal-footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+        .minimal-footer-nav a { color: #64748b; text-decoration: none; }
+        .minimal-footer-nav a:hover { color: #2563eb; text-decoration: underline; }
     </style>
 </head>
 <body>
 <h1 th:text="${parameters.site != null ? parameters.site.name : 'Site'}">Site</h1>
-<p class="text-muted">Minimal theme — content-focused pages only (no cms1 chrome). Edit <code>templates/themes/minimal/index.html</code>.</p>
+<nav class="minimal-nav" aria-label="Primary"
+     th:if="${parameters['headerMenu'] != null and !#lists.isEmpty(parameters['headerMenu'])}">
+    <ul>
+        <li th:each="link : ${parameters['headerMenu']}">
+            <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${link}, activeClass='minimal-nav-active')}"></th:block>
+        </li>
+    </ul>
+</nav>
+<p class="text-muted">Minimal theme — content-focused with optional DB-driven header/footer menus.</p>
 <div th:if="${parameters['body'] != null}" th:utext="${parameters['body']}"></div>
+<nav class="minimal-footer-nav" aria-label="Footer links"
+     th:if="${parameters['footerMenu'] != null and !#lists.isEmpty(parameters['footerMenu'])}">
+    <ul>
+        <li th:each="menu : ${parameters['footerMenu']}">
+            <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${menu}, activeClass='')}"></th:block>
+        </li>
+    </ul>
+</nav>
 </body>
 </html>

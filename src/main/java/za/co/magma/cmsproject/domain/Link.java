@@ -4,24 +4,31 @@ import jakarta.persistence.*;
 
 @Entity
 public class Link {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
- 
+
     private String title;
- 
+
     private String body;
     private boolean footer;
     private boolean header;
     private String icon;
-    // Page to be opened by this link, external?
-    // internal: id=202, external: http://google.com
+    /** When {@link #page} is null: external URL (http…) or site-relative path (e.g. /path). */
     private String pageUrl;
 
-    @JoinColumn
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Site site;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Page page;
+
+    @Column(nullable = false)
+    private int sortOrder;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     public Long getId() {
         return id;
@@ -79,11 +86,35 @@ public class Link {
         this.pageUrl = pageUrl;
     }
 
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
+
     public Page getPage() {
         return page;
     }
 
     public void setPage(Page page) {
         this.page = page;
+    }
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

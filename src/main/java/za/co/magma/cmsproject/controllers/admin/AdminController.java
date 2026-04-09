@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import za.co.magma.cmsproject.domain.Link;
 import za.co.magma.cmsproject.domain.Page;
 import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.cms.CmsTemplateCatalog;
+import za.co.magma.cmsproject.cms.GovernmentThemeContent;
 import za.co.magma.cmsproject.domain.forms.LoginForm;
 import za.co.magma.cmsproject.domain.forms.SectionForm;
 import za.co.magma.cmsproject.domain.sections.SectionGeneric;
@@ -248,8 +250,103 @@ public class AdminController {
     return "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value) || "1".equals(value);
   }
 
+  private static final Map<String, Integer> GOVERNMENT_SLUG_SORT_ORDER = Map.of(
+      "home", 0,
+      "about", 1,
+      "services", 2,
+      "publications", 3,
+      "news", 4,
+      "contact", 5
+  );
+
   private void seedDefaultPagesForNewSite(Site site) {
-    for (String key : new String[] {"home", "contact", "about"}) {
+    String[] keys = governmentTheme(site)
+        ? new String[] {"home", "about", "services", "publications", "news", "contact"}
+        : new String[] {"home", "contact", "about"};
+    for (String starterKey : keys) {
+      final String key = starterKey;
+      CmsTemplateCatalog.findPageStarter(key).ifPresent(starter -> {
+        if (pageRepository.findFirstBySiteAndUrlIgnoreCase(site, starter.getUrlSlug()).isPresent()) {
+          return;
+        }
+        Page p = new Page();
+        p.setSite(site);
+        p.setOnline(true);
+        CmsTemplateCatalog.applyPageStarter(p, key, site.getName());
+        pageRepository.save(p);
+        ensureNavigationLink(p);
+      });
+    }
+    seedGovernmentHomeIfNeeded(site);
+  }
+
+  private static boolean governmentTheme(Site site) {
+    return "government".equals(CmsTemplateCatalog.normalizeSiteTheme(site.getTemplate()));
+  }
+
+  private void seedGovernmentHomeIfNeeded(Site site) {
+    if (!"government".equals(CmsTemplateCatalog.normalizeSiteTheme(site.getTemplate()))) {
+      return;
+    }
+    pageRepository.findFirstBySiteAndUrlIgnoreCase(site, "home").ifPresent(this::seedGovernmentHomeSections);
+  }
+
+  private void seedGovernmentHomeSections(Page home) {
+    int pos = 1;
+    for (GovernmentThemeContent.SeededSection def : GovernmentThemeContent.defaultHomeSections()) {
+      if (!pageSectionRepository.existsByPageAndTitle(home, def.title())) {
+        PageSection s = new PageSection();
+        s.setPage(home);
+        s.setTitle(def.title());
+        s.setHtml(def.html());
+        s.setPosition(pos);
+        s.setOnline(true);
+        pageSectionRepository.save(s);
+      }
+      pos++;
+    }
+  }
+
+  private void ensureNavigationLink(Page page) {
+    if (page == null || page.getId() == null) {
+      return;
+    }
+    if (linkRepository.existsByPage(page)) {
+      return;
+    }
+    Link link = new Link();
+    link.setSite(page.getSite());
+    link.setPage(page);
+    link.setTitle(page.getTitle());
+    link.setHeader(true);
+    link.setFooter(true);
+    link.setEnabled(true);
+    link.setSortOrder(resolveSortOrderForNewAutoLink(page));
+    linkRepository.save(link);
+  }
+
+  private int resolveSortOrderForNewAutoLink(Page page) {
+    Site site = page.getSite();
+    if (site == null) {
+      return 0;
+    }
+    int max = linkRepository.findFirstBySiteOrderBySortOrderDescIdDesc(site)
+        .map(Link::getSortOrder)
+        .orElse(-1);
+    if (governmentTheme(site) && page.getUrl() != null) {
+      Integer fixed = GOVERNMENT_SLUG_SORT_ORDER.get(page.getUrl().toLowerCase(Locale.ROOT));
+      if (fixed != null) {
+        return fixed;
+      }
+    }
+    return max + 1;
+  }
+
+  private void seedGovernmentStarterPagesIfMissing(Site site) {
+    if (!governmentTheme(site)) {
+      return;
+    }
+    for (String key : new String[] {"home", "about", "services", "publications", "news", "contact"}) {
       final String starterKey = key;
       CmsTemplateCatalog.findPageStarter(starterKey).ifPresent(starter -> {
         if (pageRepository.findFirstBySiteAndUrlIgnoreCase(site, starter.getUrlSlug()).isPresent()) {
@@ -260,8 +357,10 @@ public class AdminController {
         p.setOnline(true);
         CmsTemplateCatalog.applyPageStarter(p, starterKey, site.getName());
         pageRepository.save(p);
+        ensureNavigationLink(p);
       });
     }
+    seedGovernmentHomeIfNeeded(site);
   }
 
   @GetMapping("/site")
@@ -295,8 +394,12 @@ public class AdminController {
       ra.addFlashAttribute("error", "Site not found");
       return "redirect:/admin/sites";
     }
+    String themeBefore = CmsTemplateCatalog.normalizeSiteTheme(site.getTemplate());
     site.setTemplate(CmsTemplateCatalog.normalizeSiteTheme(template));
     siteRepository.save(site);
+    if ("government".equals(site.getTemplate()) && !"government".equals(themeBefore)) {
+      seedGovernmentStarterPagesIfMissing(site);
+    }
     ra.addFlashAttribute("message", "Front-end theme updated to \"" + site.getTemplate() + "\"");
     return "redirect:/admin/site?id=" + siteId;
   }
@@ -399,6 +502,7 @@ public class AdminController {
     created.setUrl(slug);
     created.setOnline(form.isOnline());
     pageRepository.save(created);
+    ensureNavigationLink(created);
     ra.addFlashAttribute("message", "Page created");
     return "redirect:/admin/edit/page?id=" + created.getId();
   }
@@ -490,5 +594,127 @@ public class AdminController {
 //    return "admin/admin_edit_section";
   }
 
+  @GetMapping("/site/links")
+  public String siteNavigationLinks(@RequestParam("siteId") long siteId, Model model, RedirectAttributes ra) {
+    Site site = siteRepository.findById(siteId).orElse(null);
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site not found");
+      return "redirect:/admin/sites";
+    }
+    params = setGlobalVariables();
+    params.put("site", site);
+    params.put("pages", pageRepository.findBySiteOrderByTitleAsc(site));
+    params.put("navLinks", linkRepository.findBySiteOrderBySortOrderAscIdAsc(site));
+    String pt = "Navigation · " + site.getName();
+    params.put("pageTitle", pt);
+    model.addAttribute("parameters", params);
+    model.addAttribute("pageTitle", pt);
+    return "admin/admin_site_links";
+  }
+
+  @PostMapping("/site/links/save")
+  public String saveNavigationLink(@RequestParam("siteId") long siteId,
+                                   @RequestParam(value = "id", required = false) Long id,
+                                   @RequestParam("title") String title,
+                                   @RequestParam(value = "pageId", required = false) String pageIdParam,
+                                   @RequestParam(value = "pageUrl", required = false) String pageUrl,
+                                   @RequestParam(value = "showHeader", required = false) String showHeader,
+                                   @RequestParam(value = "showFooter", required = false) String showFooter,
+                                   @RequestParam("enabled") boolean enabled,
+                                   @RequestParam("sortOrder") int sortOrder,
+                                   RedirectAttributes ra) {
+    Site site = siteRepository.findById(siteId).orElse(null);
+    if (site == null) {
+      ra.addFlashAttribute("error", "Site not found");
+      return "redirect:/admin/sites";
+    }
+    if (title == null || title.isBlank()) {
+      ra.addFlashAttribute("error", "Title is required");
+      return "redirect:/admin/site/links?siteId=" + siteId;
+    }
+    boolean header = isTruthyFormFlag(showHeader);
+    boolean footer = isTruthyFormFlag(showFooter);
+
+    Long pageId = null;
+    if (pageIdParam != null && !pageIdParam.isBlank()) {
+      try {
+        pageId = Long.parseLong(pageIdParam.trim());
+      } catch (NumberFormatException e) {
+        ra.addFlashAttribute("error", "Invalid page selection");
+        return "redirect:/admin/site/links?siteId=" + siteId;
+      }
+    }
+
+    Page targetPage = null;
+    if (pageId != null) {
+      targetPage = pageRepository.findById(pageId).orElse(null);
+      if (targetPage == null || targetPage.getSite() == null || !targetPage.getSite().getId().equals(siteId)) {
+        ra.addFlashAttribute("error", "Choose a page that belongs to this site");
+        return "redirect:/admin/site/links?siteId=" + siteId;
+      }
+    }
+    String url = pageUrl != null ? pageUrl.trim() : "";
+    if (targetPage == null && url.isEmpty()) {
+      ra.addFlashAttribute("error", "Select a site page or enter a URL (for external or custom links)");
+      return "redirect:/admin/site/links?siteId=" + siteId;
+    }
+
+    Link link;
+    if (id != null) {
+      link = linkRepository.findById(id).orElse(null);
+      if (link == null || link.getSite() == null || !link.getSite().getId().equals(siteId)) {
+        ra.addFlashAttribute("error", "Link not found");
+        return "redirect:/admin/site/links?siteId=" + siteId;
+      }
+    } else {
+      link = new Link();
+      link.setSite(site);
+    }
+    link.setTitle(title.trim());
+    link.setHeader(header);
+    link.setFooter(footer);
+    link.setEnabled(enabled);
+    link.setSortOrder(sortOrder);
+    if (targetPage != null) {
+      link.setPage(targetPage);
+      link.setPageUrl(null);
+    } else {
+      link.setPage(null);
+      link.setPageUrl(url);
+    }
+    linkRepository.save(link);
+    ra.addFlashAttribute("message", id != null ? "Navigation link updated" : "Navigation link added");
+    return "redirect:/admin/site/links?siteId=" + siteId;
+  }
+
+  @PostMapping("/site/links/delete")
+  public String deleteNavigationLink(@RequestParam("siteId") long siteId,
+                                     @RequestParam("linkId") long linkId,
+                                     RedirectAttributes ra) {
+    Link link = linkRepository.findById(linkId).orElse(null);
+    if (link == null || link.getSite() == null || !link.getSite().getId().equals(siteId)) {
+      ra.addFlashAttribute("error", "Link not found");
+      return "redirect:/admin/site/links?siteId=" + siteId;
+    }
+    linkRepository.delete(link);
+    ra.addFlashAttribute("message", "Navigation link deleted");
+    return "redirect:/admin/site/links?siteId=" + siteId;
+  }
+
+  @PostMapping("/site/links/toggle")
+  public String toggleNavigationLink(@RequestParam("siteId") long siteId,
+                                     @RequestParam("linkId") long linkId,
+                                     @RequestParam("enabled") boolean enabled,
+                                     RedirectAttributes ra) {
+    Link link = linkRepository.findById(linkId).orElse(null);
+    if (link == null || link.getSite() == null || !link.getSite().getId().equals(siteId)) {
+      ra.addFlashAttribute("error", "Link not found");
+      return "redirect:/admin/site/links?siteId=" + siteId;
+    }
+    link.setEnabled(enabled);
+    linkRepository.save(link);
+    ra.addFlashAttribute("message", enabled ? "Link enabled in menus" : "Link hidden from menus");
+    return "redirect:/admin/site/links?siteId=" + siteId;
+  }
 
 }

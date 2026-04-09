@@ -6,10 +6,36 @@
     <title th:text="${parameters.page != null ? parameters.page.title : 'Page'}">Page</title>
     <style>
         body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 1.5rem auto; padding: 0 1rem; line-height: 1.55; color: #0f172a; }
+        .minimal-nav { margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e2e8f0; }
+        .minimal-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+        .minimal-nav li { margin: 0; }
+        .minimal-nav a { color: #2563eb; text-decoration: none; font-size: 0.9375rem; }
+        .minimal-nav a:hover { text-decoration: underline; }
+        .minimal-nav a.minimal-nav-active { font-weight: 600; color: #1e3a8a; }
+        .minimal-footer-nav { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.875rem; }
+        .minimal-footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+        .minimal-footer-nav a { color: #64748b; text-decoration: none; }
+        .minimal-footer-nav a:hover { color: #2563eb; text-decoration: underline; }
     </style>
 </head>
 <body>
+<nav class="minimal-nav" aria-label="Primary"
+     th:if="${parameters['headerMenu'] != null and !#lists.isEmpty(parameters['headerMenu'])}">
+    <ul>
+        <li th:each="link : ${parameters['headerMenu']}">
+            <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${link}, activeClass='minimal-nav-active')}"></th:block>
+        </li>
+    </ul>
+</nav>
 <main th:utext="${parameters['body']}">Body</main>
+<nav class="minimal-footer-nav" aria-label="Footer links"
+     th:if="${parameters['footerMenu'] != null and !#lists.isEmpty(parameters['footerMenu'])}">
+    <ul>
+        <li th:each="menu : ${parameters['footerMenu']}">
+            <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${menu}, activeClass='')}"></th:block>
+        </li>
+    </ul>
+</nav>
 <p class="small text-muted" style="margin-top:2rem;" th:if="${parameters.site != null}">
     <span th:text="${parameters.site.name}">Site</span> — minimal theme (<code>templates/themes/minimal/</code>)
 </p>

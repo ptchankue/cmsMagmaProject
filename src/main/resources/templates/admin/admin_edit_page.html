@@ -81,6 +81,12 @@
                 <h6 class="m-0 font-weight-bold text-primary">Sections</h6>
               </div>
               <div class="card-body">
+                <p class="small text-muted"
+                   th:if="${cmsPage.site != null and cmsPage.site.template == 'government' and cmsPage.url != null and cmsPage.url.equalsIgnoreCase('home')}">
+                  <strong>Government theme:</strong> layout blocks use exact section titles
+                  <code>gov_quick_access</code>, <code>gov_gallery</code>, <code>gov_footer_col1</code>–<code>gov_footer_col4</code>
+                  (seeded on new government sites or when switching a site to this theme). Footer columns apply site-wide from the home page.
+                </p>
                 <p class="small text-muted" th:if="${#lists.isEmpty(parameters['sections'])}">No sections on this page yet.</p>
                 <ul class="list-group list-group-flush" th:if="${!#lists.isEmpty(parameters['sections'])}">
                   <li class="list-group-item d-flex justify-content-between align-items-center px-0"

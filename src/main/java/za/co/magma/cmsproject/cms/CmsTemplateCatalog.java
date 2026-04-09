@@ -173,6 +173,26 @@ public final class CmsTemplateCatalog {
             + "<div class=\"col-md-4\"><h4>Service three</h4><p>Short description.</p></div>"
             + "</div>"
     ));
+    m.put("publications", new PageStarter(
+        "publications",
+        "Publications",
+        "Policies, reports, and documents placeholder.",
+        "Publications",
+        "publications",
+        "<h2>Publications</h2>"
+            + "<p>Listing for <strong>%s</strong>: add PDFs, annual reports, and policy documents here.</p>"
+            + "<ul><li>Annual report (draft)</li><li>Strategic plan (draft)</li></ul>"
+    ));
+    m.put("news", new PageStarter(
+        "news",
+        "News",
+        "News and notices starter.",
+        "News and notices",
+        "news",
+        "<h2>News and notices</h2>"
+            + "<p>Latest updates for <strong>%s</strong>.</p>"
+            + "<article class=\"mb-3\"><h3>Sample headline</h3><p>Replace with real releases or consultations.</p></article>"
+    ));
     PAGE_STARTERS = Collections.unmodifiableMap(m);
   }
 

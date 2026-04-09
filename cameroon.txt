@@ -15,3 +15,8 @@ douala-nkongsamba-149
 nkongsamba-kekem-27
 kekem-bafang-22
 bafang-bafoussam-60
+douala-tiko-55
+tiko-buea-18
+tiko-limbe-22
+buea-kumba-74
+kumba-mamfe-173

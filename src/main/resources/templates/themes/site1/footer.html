@@ -1,5 +1,18 @@
 <footer xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="footer">
     <!--START FOOTER-->
+    <div class="site1-cms-footer-nav s4-notdlg"
+         th:if="${parameters['footerMenu'] != null and !#lists.isEmpty(parameters['footerMenu'])}"
+         style="background:#1a1a1a;padding:10px 12px;text-align:center;border-bottom:1px solid #333;">
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem 1.25rem;">
+            <li th:each="menu : ${parameters['footerMenu']}" style="display:inline;">
+                <th:block th:replace="~{fragments/cms_nav :: navAnchor(link=${menu}, activeClass='')}"></th:block>
+            </li>
+        </ul>
+    </div>
+    <style>
+        .site1-cms-footer-nav a { color: #e2e8f0; text-decoration: none; font-size: 0.875rem; }
+        .site1-cms-footer-nav a:hover { text-decoration: underline; color: #fff; }
+    </style>
     <div class="footer s4-notdlg">
         <div class="footercontainer s4-notdlg">
             <div class="footer-center-top s4-notdlg">

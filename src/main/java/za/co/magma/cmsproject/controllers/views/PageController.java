@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import za.co.magma.cmsproject.cms.CmsSiteViewParameters;
 import za.co.magma.cmsproject.cms.CmsTemplateCatalog;
+import za.co.magma.cmsproject.cms.GovernmentLayoutParameters;
 import za.co.magma.cmsproject.domain.Link;
 import za.co.magma.cmsproject.domain.Page;
+import za.co.magma.cmsproject.domain.PageSection;
 import za.co.magma.cmsproject.domain.Site;
 import za.co.magma.cmsproject.repository.LinkRepository;
 import za.co.magma.cmsproject.repository.PageRepository;
+import za.co.magma.cmsproject.repository.PageSectionRepository;
 import za.co.magma.cmsproject.repository.SiteRepository;
 
 import java.util.List;
@@ -24,11 +27,14 @@ public class PageController {
     private final PageRepository pageRepository;
     private final SiteRepository siteRepository;
     private final LinkRepository linkRepository;
+    private final PageSectionRepository pageSectionRepository;
 
-    public PageController(PageRepository pageRepository, SiteRepository siteRepository, LinkRepository linkRepository) {
+    public PageController(PageRepository pageRepository, SiteRepository siteRepository, LinkRepository linkRepository,
+                          PageSectionRepository pageSectionRepository) {
         this.pageRepository = pageRepository;
         this.siteRepository = siteRepository;
         this.linkRepository = linkRepository;
+        this.pageSectionRepository = pageSectionRepository;
     }
 
     @GetMapping("/view/{pageId}")
@@ -39,8 +45,16 @@ public class PageController {
         }
         Site site = page.getSite();
         List<Link> headerMenu = CmsSiteViewParameters.headerMenuForSite(pageRepository, linkRepository, site);
-        Map<String, Object> parameters = CmsSiteViewParameters.forSitePageView(page, headerMenu);
+        List<Link> footerMenu = CmsSiteViewParameters.footerMenuForSite(pageRepository, linkRepository, site);
+        List<PageSection> pageSections = pageSectionRepository.findByPageOrderByPositionAscIdAsc(page);
+        Map<String, Object> parameters = CmsSiteViewParameters.forSitePageView(page, headerMenu, footerMenu, pageSections);
+        parameters.put("navUseViewPath", Boolean.TRUE);
         String theme = (String) parameters.get("theme");
+        if ("government".equals(theme) && site != null) {
+            pageRepository.findFirstBySiteAndUrlIgnoreCase(site, "home").ifPresent(home ->
+                GovernmentLayoutParameters.applyHomeSectionParams(
+                    parameters, pageSectionRepository.findByPageOrderByPositionAscIdAsc(home)));
+        }
 
         model.addAttribute("parameters", parameters);
         model.addAttribute("page", page);
